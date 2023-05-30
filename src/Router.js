@@ -7,7 +7,7 @@ import Footer from './components/Footer/Footer';
 import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
-import ProductList from './pages/ProductList/ProductList';
+import Plants from './pages/Plants/Plants';
 import Signup from './pages/Signup/Signup';
 
 const Router = () => {
@@ -20,7 +20,7 @@ const Router = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/productdetail" element={<ProductDetail />} />
-        <Route path="/productlist" element={<ProductList />} />
+        <Route path="/plants" element={<Plants />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
       <Footer />
