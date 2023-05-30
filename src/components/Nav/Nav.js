@@ -17,6 +17,14 @@ const Nav = () => {
         <li onClick={() => navigate('/pots')}>화분</li>
         <li onClick={() => navigate('/tools')}>관리상품</li>
       </ul>
+      <div className="search">
+        <img
+          className="search-icon"
+          src="./images/Nav/search.png"
+          alt="search-icon"
+        />
+        <input />
+      </div>
       <div className="icons">
         <img className="icon" src="./images/Nav/like.png" alt="like-icon" />
         <img
