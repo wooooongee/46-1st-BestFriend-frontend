@@ -11,6 +11,9 @@
 
   .logo {
     height: 30px;
+    &:hover {
+      cursor: pointer;
+    }
   }
   .menus {
     @include textStyle(18px, 500);
@@ -34,6 +37,9 @@
 
   .icon {
     height: 27px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .login-btn {
