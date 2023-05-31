@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProductDetail.scss';
+import Recommend from './component/Recommend';
 
 const ProductDetail = () => {
+  const [productList, setProductList] = useState([]);
   const [count, setCount] = useState(1);
-  const [hover, setHover] = useState(false);
+
+  useEffect(() => {
+    fetch('/data/productDetail.json')
+      .then(res => res.json())
+      .then(data => {
+        setProductList(data);
+      });
+  }, []);
   return (
     <>
       <main className="product-detail">
@@ -45,9 +54,9 @@ const ProductDetail = () => {
       <section className="product-recommend">
         <p>이런 식물은 어때요?</p>
         <div className="recommend-container">
-          <Recommend />
-          <Recommend />
-          <Recommend />
+          {productList.map(product => {
+            return <Recommend key={product.id} product={product} />;
+          })}
         </div>
       </section>
     </>
@@ -55,17 +64,3 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
-
-const Recommend = () => {
-  return (
-    <div className="recommend">
-      <img
-        src="/images/ProductDetail/plant-21.jpg"
-        alt="product-img"
-        className="img"
-      />
-      <p className="title">몬스테라</p>
-      <p>10,000원</p>
-    </div>
-  );
-};

@@ -1,9 +1,9 @@
 @import '../../styles/mixin';
 
 .product-detail {
+  @include textStyle(20px, 500);
   display: flex;
   padding: 40px;
-  @include textStyle(20px, 500);
 
   .img {
     width: 100%;
@@ -64,29 +64,6 @@
       background-color: black;
       color: white;
       font-size: 20px;
-    }
-  }
-}
-
-.product-recommend {
-  padding: 40px;
-  @include textStyle(20px, 500);
-
-  .img {
-    width: 100%;
-  }
-
-  .recommend-container {
-    display: flex;
-    margin-top: 20px;
-
-    .recommend {
-      width: 30%;
-      margin-right: 20px;
-
-      .title {
-        margin: 10px 0;
-      }
     }
   }
 }
