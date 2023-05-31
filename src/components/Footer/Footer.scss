@@ -1,1 +1,22 @@
-//q
+@import '../../styles/mixin';
+@import '../../styles/variables';
+
+.footer {
+  @include flexCenter;
+  flex-direction: column;
+  height: 130px;
+  background-color: #111111;
+
+  .logo {
+    width: 30px;
+    margin-bottom: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .copyright {
+    @include textStyle(20px, 200);
+    color: $secondary-color;
+  }
+}
