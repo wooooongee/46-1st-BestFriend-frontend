@@ -1,38 +1,41 @@
 @import '../../styles/mixin';
 
-img {
-  width: 100%;
-}
-
-.p-tag {
-  margin-bottom: 30%;
-  font-size: 10px;
-}
-
-.title {
-  margin-bottom: 10%;
-}
-
 .product-detail {
   display: flex;
   padding: 40px;
+  @include textStyle(20px, 500);
+
+  .img {
+    width: 100%;
+  }
 
   .product-img {
     width: 65%;
     margin-right: 40px;
   }
 
+  .p-tag {
+    margin-bottom: 70px;
+  }
+
   .product-content {
     width: 40%;
+    margin-top: 20px;
 
     .count-container {
       display: flex;
       align-items: center;
+      margin-top: 110px;
+    }
+
+    .title {
+      margin: 100px 0 40px 0;
+      font-size: 25px;
     }
 
     .btn {
-      width: 18px;
-      height: 18px;
+      width: 35px;
+      height: 35px;
       border: none;
       border-radius: 50%;
 
@@ -43,8 +46,8 @@ img {
 
     .count-box {
       @include flexCenter;
-      width: 50px;
-      height: 25px;
+      width: 100px;
+      height: 35px;
       margin: 0 5px;
       border: 1px solid #e3e3e3;
       border-radius: 5px;
@@ -52,27 +55,38 @@ img {
     }
 
     .cart-btn {
-      display: block;
+      @include flexCenter;
       width: 100%;
-      height: 35px;
       margin: 40px auto;
+      padding: 35px;
       border: none;
       border-radius: 40px;
       background-color: black;
       color: white;
+      font-size: 20px;
     }
   }
 }
 
 .product-recommend {
   padding: 40px;
+  @include textStyle(20px, 500);
+
+  .img {
+    width: 100%;
+  }
 
   .recommend-container {
     display: flex;
     margin-top: 20px;
 
     .recommend {
+      width: 30%;
       margin-right: 20px;
+
+      .title {
+        margin: 10px 0;
+      }
     }
   }
 }
