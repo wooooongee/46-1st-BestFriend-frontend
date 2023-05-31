@@ -20,7 +20,7 @@
     .menus {
       @include textStyle(18px, 500);
       @include flexSpaceBetween;
-      gap: 80px;
+      gap: 100px;
 
       .menu:hover {
         cursor: pointer;
@@ -53,7 +53,7 @@
 
     .icons {
       @include flexSpaceBetween;
-      min-width: 200px;
+      min-width: 170px;
 
       .icon {
         height: 27px;

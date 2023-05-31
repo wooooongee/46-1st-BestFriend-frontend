@@ -28,13 +28,14 @@ const Nav = () => {
                 className="menu"
                 key={menu.id}
                 onMouseOver={() => {
-                  setIsMenuOpen(prev => !prev);
+                  setIsMenuOpen(true);
                 }}
               >
                 {menu.name}
               </li>
             );
           })}
+          {isMenuOpen && <Dropdown setIsMenuOpen={setIsMenuOpen} />}
         </ul>
         <div className="search">
           <img
@@ -61,7 +62,6 @@ const Nav = () => {
           </button>
         </div>
       </nav>
-      {isMenuOpen && <Dropdown />}
     </div>
   );
 };

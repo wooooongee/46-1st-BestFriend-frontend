@@ -7,10 +7,10 @@ import {
 } from '../Subcategory/Subcategory';
 import './Dropdown.scss';
 
-const Dropdown = () => {
+const Dropdown = ({ setIsMenuOpen }) => {
   const navigate = useNavigate();
   return (
-    <div className="dropdown">
+    <div className="dropdown" onMouseLeave={() => setIsMenuOpen(false)}>
       <ul className="dropdown-sub plants">
         {PLANTS_SUBCATEGORY.map(sub => {
           return (

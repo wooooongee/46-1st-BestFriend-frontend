@@ -2,12 +2,15 @@
 @import '../../styles/variables';
 
 .dropdown {
-  display: flex;
+  @include flexCenter;
   position: absolute;
   z-index: 1;
+  top: 60px;
+  left: 0;
   width: 100%;
+  min-width: 500px;
   padding: 30px;
-  gap: 60px;
+  gap: 50px;
   background-color: white;
 
   .dropdown-sub {
