@@ -1,8 +1,8 @@
 @import '../../../styles/mixin';
 
 .product-recommend {
-  padding: 40px;
   @include textStyle(20px, 500);
+  padding: 40px;
 
   .img {
     width: 100%;

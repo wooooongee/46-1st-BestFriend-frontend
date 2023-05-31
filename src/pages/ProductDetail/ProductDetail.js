@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './ProductDetail.scss';
 import Recommend from './component/Recommend';
+import './ProductDetail.scss';
 
 const ProductDetail = () => {
   const [productList, setProductList] = useState([]);
