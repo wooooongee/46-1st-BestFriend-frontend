@@ -1,1 +1,11 @@
-//q
+@import '../../styles/mixin';
+.product-list {
+  @include flexSpaceBetween;
+  flex-wrap: wrap;
+  padding: 50px;
+  gap: 20px;
+
+  img {
+    width: 300px;
+  }
+}
