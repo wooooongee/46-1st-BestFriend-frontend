@@ -17,9 +17,17 @@ const Nav = () => {
           onClick={() => navigate('/')}
         />
         <ul className="menus">
-          <li onClick={() => navigate('/plants')}>식물</li>
-          <li onClick={() => navigate('/pots')}>화분</li>
-          <li onClick={() => navigate('/tools')}>관리상품</li>
+          {NAV_MENU.map(menu => {
+            return (
+              <li
+                className="menu"
+                key={menu.id}
+                onClick={() => navigate(`${menu.url}`)}
+              >
+                {menu.name}
+              </li>
+            );
+          })}
         </ul>
         <div className="search">
           <img
@@ -27,7 +35,7 @@ const Nav = () => {
             src="./images/Nav/search.png"
             alt="search-icon"
           />
-          <input />
+          <input className="search-input" />
         </div>
         <div className="icons">
           <img className="icon" src="./images/Nav/like.png" alt="like-icon" />
@@ -48,28 +56,40 @@ const Nav = () => {
       </div>
 
       <div className="dropdown-menu">
-        <ul className="plants-sub">
+        <ul className="dropdown-sub plants">
           {PLANTS_SUBCATEGORY.map(plantsSub => {
             return (
-              <li key={plantsSub.id} onClick={() => navigate('/plants')}>
+              <li
+                className="subcategory"
+                key={plantsSub.id}
+                onClick={() => navigate('/plants')}
+              >
                 {plantsSub.subcategoryName}
               </li>
             );
           })}
         </ul>
-        <ul className="pots-sub">
+        <ul className="dropdown-sub pots">
           {POTS_SUBCATEGORY.map(potsSub => {
             return (
-              <li key={potsSub.id} onClick={() => navigate('/pots')}>
+              <li
+                className="subcategory"
+                key={potsSub.id}
+                onClick={() => navigate('/pots')}
+              >
                 {potsSub.subcategoryName}
               </li>
             );
           })}
         </ul>
-        <ul className="tools-sub">
+        <ul className="dropdown-sub tools">
           {TOOLS_SUBCATEGORY.map(toolsSub => {
             return (
-              <li key={toolsSub.id} onClick={() => navigate('/tools')}>
+              <li
+                className="subcategory"
+                key={toolsSub.id}
+                onClick={() => navigate('/tools')}
+              >
                 {toolsSub.subcategoryName}
               </li>
             );
@@ -81,3 +101,9 @@ const Nav = () => {
 };
 
 export default Nav;
+
+const NAV_MENU = [
+  { id: '1', url: '/plants', name: '식물' },
+  { id: '2', url: '/pots', name: '화분' },
+  { id: '3', url: '/tools', name: '관리상품' },
+];
