@@ -4,65 +4,135 @@
 .main {
   display: flex;
   flex-direction: column;
-  padding: 0 50px;
+  padding: 0 50px 100px 50px;
 
-  h1 {
-    @include textStyle(40px, 900);
-  }
-
-  p {
-    @include textStyle(18px, 300);
-  }
-
-  .plant-video img {
+  .main-video {
     width: 100%;
+    aspect-ratio: 2/1;
+    object-fit: cover;
   }
 
-  .plants-container {
-    .plants-message {
-      display: flex;
-      background-color: aqua;
+  .message {
+    @include flexCenter;
+    flex-direction: column;
+    gap: 30px;
+    margin: 100px 0 50px 0;
+  }
 
-      .message {
-        margin: auto;
+  .title {
+    @include textStyle(60px, 900);
+  }
+
+  .description {
+    @include textStyle(18px, 400);
+    width: 60%;
+    line-height: normal;
+    text-align: center;
+  }
+
+  .message-cta {
+    @include textStyle(18px, 500);
+    @include flexCenter;
+    width: 160px;
+    height: 40px;
+    border-radius: 50px;
+    background-color: $primary-color;
+    color: $secondary-color;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .carousel-btn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-bottom: 15px;
+    &:hover {
+      cursor: pointer;
+    }
+
+    .left-btn,
+    .right-btn {
+      @include flexCenter;
+      width: 40px;
+      height: 40px;
+      border-radius: 50px;
+      background-color: #e5e5e5;
+      .arrow-left,
+      .arrow-right {
+        width: 8px;
       }
     }
+  }
+  .plant-cards {
+    display: flex;
 
-    .plants-cards {
-      display: flex;
+    .plant-card {
+      width: 350px;
+      min-width: 350px;
+      margin-right: 20px;
 
-      .plant-card {
-        width: 300px;
-        height: 400px;
-        margin-right: 20px;
-        background-color: yellow;
+      .plant-image {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .card-cta-primary {
+        @include textStyle(18px, 500);
+        @include flexCenter;
+        bottom: 20px;
+        left: 20px;
+        width: 130px;
+        height: 40px;
+        border-radius: 50px;
+        background-color: $primary-color;
+        color: $secondary-color;
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }
 
-  .interior-container {
-    img {
-      width: 100%;
-    }
-    .interior-message {
-      height: 200px;
-      background-color: aqua;
+  .main-interior-image {
+    width: 100%;
+    aspect-ratio: 2/1;
+    object-fit: cover;
+    &:hover {
+      cursor: pointer;
+      filter: brightness(70%);
     }
   }
-  .pots-container {
-    margin-bottom: 100px;
 
-    .pots-message {
-      height: 200px;
-      background-color: aqua;
-    }
-    .pots-cards {
-      display: flex;
-      .pot-card {
-        width: 300px;
-        height: 400px;
-        margin-right: 20px;
-        background-color: yellow;
+  .pot-cards {
+    @include flexCenter;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    .pot-card {
+      position: relative;
+      width: 420px;
+      min-width: 420px;
+      aspect-ratio: 3/4;
+
+      .pot-image {
+        width: 100%;
+      }
+
+      .card-cta-secondary {
+        @include textStyle(18px, 500);
+        @include flexCenter;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        width: 130px;
+        height: 40px;
+        border-radius: 50px;
+        background-color: $secondary-color;
+        color: $primary-color;
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }
