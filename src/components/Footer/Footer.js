@@ -7,6 +7,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <img
+        className="logo"
         src="./images/Footer/gron-symbol-white.png"
         alt="gron-logo-white"
         onClick={() => navigate('/')}
