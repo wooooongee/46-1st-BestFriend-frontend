@@ -1,8 +1,9 @@
 import React from 'react';
 import './Checkout.scss';
+
 const Checkout = () => {
   return (
-    <main className="main-checkout">
+    <main className="checkout">
       <article className="article-checkout">
         <h1 className="checkout-article-h1">결제 하기</h1>
         <section className="section-delivery-infomation">
@@ -59,7 +60,7 @@ const Checkout = () => {
       <aside className="aside-checkout">
         <h2 className="checkout-h2">결제 금액</h2>
         <div className="product-prices">
-          상품 금액 <span className="product-prices-value">40,000원</span>
+          상품 금액 <span>40,000원</span>
         </div>
         <div className="delivery-fees">
           배송비 <span className="delivery-fees-value">무료</span>

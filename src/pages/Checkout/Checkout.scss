@@ -1,13 +1,14 @@
 @import '../../styles/mixin';
 @import '../../styles/variables';
 
-.main-checkout {
+.checkout {
+  @include textStyle(1em, 500);
   display: flex;
   justify-content: center;
   width: 100vw;
   height: 100vh;
   padding: 40px;
-  @include textStyle(1em, 500);
+
   .article-checkout {
     display: flex;
     flex-direction: column;
@@ -19,6 +20,7 @@
       margin-bottom: 2em;
       font-size: 1.7em;
     }
+
     .section-delivery-infomation {
       display: flex;
       flex-direction: column;
@@ -27,21 +29,26 @@
         margin-bottom: 0.7em;
         font-size: 1.4em;
       }
+
       .user-information-values {
         display: flex;
         flex-direction: column;
         font-size: 0.9em;
+
         .user-name-value {
           margin: 0.4em 0em;
         }
+
         .user-address-value {
           margin: 0em 0em 0.4em 0em;
         }
+
         .user-phonenumber-value {
           margin: 0em 0em 0.4em 0em;
         }
       }
     }
+
     .section-payment-point {
       display: flex;
       flex-direction: column;
@@ -51,37 +58,46 @@
         margin: 0em 0em 0.8em 0em;
         font-size: 1.4em;
       }
+
       .remaining-point-value {
         margin-bottom: 0em 0em 0.4em 0em;
         font-size: 0.9em;
       }
     }
+
     .section-order-list {
       margin-top: 2em;
 
       .order-list-h2 {
         font-size: 1.4em;
       }
+
       .order-list-ul {
         width: 100%;
+
         .order-list-li {
           display: flex;
           padding: 0.7em;
           border-bottom: 3px solid $primary-color;
+
           .order-list-img {
             width: 6vw;
             height: 16vh;
           }
+
           .order-list-spans {
             display: flex;
             flex-direction: column;
             width: 100%;
+
             .order-list-name {
               margin: 0.4em 0em 0.4em 2em;
             }
+
             .order-list-count {
               margin: 0.4em 0em 0.4em 2em;
             }
+
             .order-list-totalprices {
               margin: 0.4em 0em 0.4em 2em;
             }
@@ -102,20 +118,21 @@
       margin-bottom: 0.7em;
       font-size: 1.4em;
     }
+
     .product-prices {
       display: flex;
       justify-content: space-between;
       margin-bottom: 1em;
       font-size: 0.9em;
-      .product-prices-value {
-      }
     }
+
     .delivery-fees {
       display: flex;
       justify-content: space-between;
       margin-bottom: 1em;
       font-size: 0.9em;
     }
+
     .total-prices {
       display: flex;
       justify-content: space-between;
@@ -124,6 +141,7 @@
       border-top: 3px solid $primary-color;
       font-size: 0.9em;
     }
+
     .checkout-btn {
       width: 100%;
       height: 3em;
