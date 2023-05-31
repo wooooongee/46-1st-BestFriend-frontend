@@ -5,18 +5,19 @@ import {
   POTS_SUBCATEGORY,
   TOOLS_SUBCATEGORY,
 } from '../Subcategory/Subcategory';
+import './Dropdown.scss';
 
-const Dropdown = props => {
+const Dropdown = () => {
   const navigate = useNavigate();
   return (
-    <>
+    <div className="dropdown">
       <ul className="dropdown-sub plants">
-        {props.sub.map(sub => {
+        {PLANTS_SUBCATEGORY.map(sub => {
           return (
             <li
               className="subcategory"
               key={sub.id}
-              onClick={() => navigate(sub.path)}
+              onClick={() => navigate(`${sub.path}`)}
             >
               {sub.name}
             </li>
@@ -24,32 +25,32 @@ const Dropdown = props => {
         })}
       </ul>
       <ul className="dropdown-sub pots">
-        {POTS_SUBCATEGORY.map(potsSub => {
+        {POTS_SUBCATEGORY.map(sub => {
           return (
             <li
               className="subcategory"
-              key={potsSub.id}
-              onClick={() => navigate('/pots')}
+              key={sub.id}
+              onClick={() => navigate(`${sub.path}`)}
             >
-              {potsSub.name}
+              {sub.name}
             </li>
           );
         })}
       </ul>
       <ul className="dropdown-sub tools">
-        {TOOLS_SUBCATEGORY.map(toolsSub => {
+        {TOOLS_SUBCATEGORY.map(sub => {
           return (
             <li
               className="subcategory"
-              key={toolsSub.id}
-              onClick={() => navigate('/tools')}
+              key={sub.id}
+              onClick={() => navigate(`${sub.path}`)}
             >
-              {toolsSub.name}
+              {sub.name}
             </li>
           );
         })}
       </ul>
-    </>
+    </div>
   );
 };
 

@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   PLANTS_SUBCATEGORY,
   POTS_SUBCATEGORY,
   TOOLS_SUBCATEGORY,
 } from '../Subcategory/Subcategory';
+import Dropdown from '../Dropdown/Dropdown';
 
 import './Nav.scss';
 const Nav = () => {
   const navigate = useNavigate();
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <div className="nav">
       <nav className="navbar">
@@ -25,7 +27,9 @@ const Nav = () => {
               <li
                 className="menu"
                 key={menu.id}
-                onClick={() => navigate(`${menu.path}`)}
+                onMouseOver={() => {
+                  setIsMenuOpen(prev => !prev);
+                }}
               >
                 {menu.name}
               </li>
@@ -57,21 +61,7 @@ const Nav = () => {
           </button>
         </div>
       </nav>
-      <div className="dropdown">
-        <ul className="dropdown-sub">
-          {PLANTS_SUBCATEGORY.map(sub => {
-            return (
-              <li
-                className="subcategory"
-                key={sub.id}
-                onClick={() => navigate(`${sub.path}`)}
-              >
-                {sub.name}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      {isMenuOpen && <Dropdown />}
     </div>
   );
 };
