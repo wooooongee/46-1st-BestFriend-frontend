@@ -1,32 +1,38 @@
 import React from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import './Plants.scss';
+import { PLANTS_SUBCATEGORY } from '../../components/Subcategory/Subcategory';
 
-const Plants = () => {
+import './ProductList.scss';
+
+const ProductList = () => {
   return (
-    <div className="plants">
-      <aside>
-        <h1>식물</h1>
-        <ul className="subcategory">
-          {PLANTS_SUBCATEGORY.map(subcategory => {
-            return <li key={subcategory.id}>{subcategory.subcategoryName}</li>;
+    <div className="product-list">
+      <aside className="side-menu">
+        <h1 className="category-title">식물</h1>
+        <ul className="subcategories">
+          {PLANTS_SUBCATEGORY.map(sub => {
+            return (
+              <li className="subcategory" key={sub.id}>
+                {sub.name}
+              </li>
+            );
           })}
         </ul>
-        <h2>필터</h2>
+        <h2 className="filter-title">필터</h2>
         <ul className="filters">
           {PLANTS_FILTER.map(filter => {
             return (
-              <li key={filter.id}>
-                <input type="checkbox" />
+              <li className="filter" key={filter.id}>
+                <input className="filter-checkbox" type="checkbox" />
                 {filter.filterName}
               </li>
             );
           })}
         </ul>
       </aside>
-      <main>
+      <main className="main-product-list">
         <div className="sorting">
-          <h2>정렬 기준</h2>
+          <h2 className="sorting-btn">정렬 기준</h2>
         </div>
         <div className="product-cards">
           <ProductCard />
@@ -41,14 +47,7 @@ const Plants = () => {
   );
 };
 
-export default Plants;
-
-const PLANTS_SUBCATEGORY = [
-  { id: '초보자', subcategoryName: '초보자도 키우기 쉬워요' },
-  { id: '선물', subcategoryName: '선물하기 좋아요' },
-  { id: '공기', subcategoryName: '공기를 정화해줘요' },
-  { id: '어둠', subcategoryName: '어두운 곳에서도 잘 자라요' },
-];
+export default ProductList;
 
 const PLANTS_FILTER = [
   { id: '꽃', filterName: '꽃이 피는 식물' },

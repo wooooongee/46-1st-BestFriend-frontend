@@ -1,25 +1,26 @@
 @import '../../styles/mixin';
-.plants {
+.product-list {
   display: flex;
   padding: 20px 50px;
 
-  h1 {
+  .category-title {
     @include textStyle(30px, 500);
   }
 
-  h2 {
-    @include textStyle(20px, 600);
+  .filter-title,
+  .sorting-btn {
+    @include textStyle(20px, 500);
   }
 
-  aside {
+  .side-menu {
     min-width: 250px;
   }
 
-  .subcategory {
+  .subcategories {
     margin: 50px 0;
 
-    li {
-      @include textStyle(18px, 300);
+    .subcategory {
+      @include textStyle(18px, 400);
       margin-bottom: 20px;
       &:hover {
         cursor: pointer;
@@ -30,19 +31,17 @@
   .filters {
     margin-top: 20px;
 
-    li {
+    .filter {
       @include textStyle(18px, 400);
       margin-bottom: 10px;
-      &:hover {
-        cursor: pointer;
-      }
-      input {
+
+      .filter-checkbox {
         width: 30px;
       }
     }
   }
 
-  main {
+  .main-product-list {
     min-width: 695px;
   }
 
