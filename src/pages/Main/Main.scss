@@ -1,1 +1,69 @@
-//q
+@import '../../styles/mixin';
+@import '../../styles/variables';
+
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 50px;
+
+  h1 {
+    @include textStyle(40px, 900);
+  }
+
+  p {
+    @include textStyle(18px, 300);
+  }
+
+  .plant-video img {
+    width: 100%;
+  }
+
+  .plants-container {
+    .plants-message {
+      display: flex;
+      background-color: aqua;
+
+      .message {
+        margin: auto;
+      }
+    }
+
+    .plants-cards {
+      display: flex;
+
+      .plant-card {
+        width: 300px;
+        height: 400px;
+        margin-right: 20px;
+        background-color: yellow;
+      }
+    }
+  }
+
+  .interior-container {
+    img {
+      width: 100%;
+    }
+    .interior-message {
+      height: 200px;
+      background-color: aqua;
+    }
+  }
+  .pots-container {
+    margin-bottom: 100px;
+
+    .pots-message {
+      height: 200px;
+      background-color: aqua;
+    }
+    .pots-cards {
+      display: flex;
+      .pot-card {
+        width: 300px;
+        height: 400px;
+        margin-right: 20px;
+        background-color: yellow;
+      }
+    }
+  }
+}
