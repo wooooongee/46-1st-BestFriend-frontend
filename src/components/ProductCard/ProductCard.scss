@@ -1,0 +1,20 @@
+@import '../../styles/mixin';
+
+.product-card {
+  display: inline-block;
+  width: fit-content;
+  margin: 10px 10px 30px 10px;
+
+  .product-image {
+    width: 320px;
+  }
+
+  .product-name {
+    @include textStyle(22px, 500);
+    margin: 10px 0;
+  }
+
+  .product-price {
+    @include textStyle(18px, 400);
+  }
+}
