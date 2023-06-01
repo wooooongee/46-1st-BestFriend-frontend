@@ -1,1 +1,54 @@
-//q
+@import '../../styles/mixin';
+@import '../../styles/variables';
+
+.cart {
+  padding: 40px;
+  @include textStyle(20px, 500);
+
+  .title {
+    margin-bottom: 50px;
+    font-size: 30px;
+  }
+
+  .cart-container {
+    display: flex;
+    margin-top: 10px;
+  }
+
+  .cart-main {
+    width: 60%;
+    margin-right: 40px;
+  }
+
+  .cart-aside {
+    width: 40%;
+    padding-top: 25px;
+
+    .price {
+      padding: 10px 0;
+      border-bottom: 1px solid #dfdfdf;
+    }
+
+    .price-sort {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin: 15px 0;
+    }
+
+    .total-price {
+      padding: 10px 0 10px 0;
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 30px;
+      padding: 15px;
+      border: none;
+      border-radius: 25px;
+      background-color: $primary-color;
+      color: $secondary-color;
+      font-size: 20px;
+    }
+  }
+}
