@@ -1,4 +1,7 @@
 import React from 'react';
+import MainMessage from '../../components/MainMessage/MainMessage';
+import MainPlantCard from '../../components/MainPlantCard/MainPlantCard';
+import MainPotCard from '../../components/MainPotCard/MainPotCard';
 import './Main.scss';
 
 const Main = () => {
@@ -11,16 +14,9 @@ const Main = () => {
           type="video/mp4"
         />
       </video>
-      <section className="message-container">
-        <div className="message">
-          <h1 className="title">식물사세요.</h1>
-          <div className="description">
-            식물 기르는 것은 집안의 미세 먼지와 실내 공기를 깨끗하게 정화
-            시켜주는데 좋아요. 식물은 산소, 음이온 및 향기를 배출해서 집안의
-            공기를 깨끗하게 해주고 습도를 조절하여 기분을 좋게 해줘요.
-          </div>
-          <div className="message-cta">식물 살펴보기</div>
-        </div>
+      <section className="plant-container">
+        <MainMessage />
+        <div className="message-cta">식물 살펴보기</div>
         <div className="carousel">
           <div className="carousel-btn">
             <div className="left-btn">
@@ -34,58 +30,15 @@ const Main = () => {
             </div>
           </div>
           <div className="plant-cards">
-            <div className="plant-card">
-              <img
-                className="plant-image"
-                src="https://github.com/pmpaca/test/blob/main/plant-15.jpg?raw=true"
-                alt="plant-image"
-              />
-              <div className="card-cta-primary">더 알아보기</div>
-            </div>
-            <div className="plant-card">
-              <img
-                className="plant-image"
-                src="https://github.com/pmpaca/test/blob/main/plant-15.jpg?raw=true"
-                alt="plant-image"
-              />
-              <div className="card-cta-primary">더 알아보기</div>
-            </div>
-            <div className="plant-card">
-              <img
-                className="plant-image"
-                src="https://github.com/pmpaca/test/blob/main/plant-15.jpg?raw=true"
-                alt="plant-image"
-              />
-              <div className="card-cta-primary">더 알아보기</div>
-            </div>
-            <div className="plant-card">
-              <img
-                className="plant-image"
-                src="https://github.com/pmpaca/test/blob/main/plant-15.jpg?raw=true"
-                alt="plant-image"
-              />
-              <div className="card-cta-primary">더 알아보기</div>
-            </div>
-            <div className="plant-card">
-              <img
-                className="plant-image"
-                src="https://github.com/pmpaca/test/blob/main/plant-15.jpg?raw=true"
-                alt="plant-image"
-              />
-              <div className="card-cta-primary">더 알아보기</div>
-            </div>
+            <MainPlantCard />
+            <MainPlantCard />
+            <MainPlantCard />
+            <MainPlantCard />
           </div>
         </div>
       </section>
       <section className="interior-container">
-        <div className="message">
-          <h1 className="title">플랜테리어.</h1>
-          <p className="description">
-            식물 기르는 것은 집안의 미세 먼지와 실내 공기를 깨끗하게 정화
-            시켜주는데 좋아요. 식물은 산소, 음이온 및 향기를 배출해서 집안의
-            공기를 깨끗하게 해주고 습도를 조절하여 기분을 좋게 해줘요.
-          </p>
-        </div>
+        <MainMessage />
         <img
           className="main-interior-image"
           src="https://github.com/pmpaca/test/blob/main/plant-lands.jpg?raw=true"
@@ -93,39 +46,11 @@ const Main = () => {
         />
       </section>
       <section className="pots-container">
-        <div className="message">
-          <h1 className="title">화분사세요.</h1>
-          <p className="description">
-            식물 기르는 것은 집안의 미세 먼지와 실내 공기를 깨끗하게 정화
-            시켜주는데 좋아요. 식물은 산소, 음이온 및 향기를 배출해서 집안의
-            공기를 깨끗하게 해주고 습도를 조절하여 기분을 좋게 해줘요.
-          </p>
-        </div>
+        <MainMessage />
         <div className="pot-cards">
-          <div className="pot-card">
-            <img
-              className="pot-image"
-              src="https://github.com/pmpaca/test/blob/main/plant-15.jpg?raw=true"
-              alt="plant-image"
-            />
-            <div className="card-cta-secondary">더 알아보기</div>
-          </div>
-          <div className="pot-card">
-            <img
-              className="pot-image"
-              src="https://github.com/pmpaca/test/blob/main/plant-15.jpg?raw=true"
-              alt="plant-image"
-            />
-            <div className="card-cta-secondary">더 알아보기</div>
-          </div>
-          <div className="pot-card">
-            <img
-              className="pot-image"
-              src="https://github.com/pmpaca/test/blob/main/plant-15.jpg?raw=true"
-              alt="plant-image"
-            />
-            <div className="card-cta-secondary">더 알아보기</div>
-          </div>
+          <MainPotCard />
+          <MainPotCard />
+          <MainPotCard />
         </div>
       </section>
     </main>
