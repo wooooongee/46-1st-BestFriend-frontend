@@ -1,10 +1,10 @@
 import React from 'react';
 import './CheckoutList.scss';
 
-const CheckoutList = ({ mockDataList }) => {
+const CheckoutList = ({ productList }) => {
   return (
     <>
-      {mockDataList.map(list => (
+      {productList.map(list => (
         <li className="order-list-li" key={list.id}>
           <img
             className="order-list-img"

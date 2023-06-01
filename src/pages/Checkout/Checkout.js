@@ -3,24 +3,24 @@ import CheckoutList from './CheckoutList';
 import './Checkout.scss';
 
 const Checkout = () => {
-  const [mockData, setMockData] = useState({});
-  const [mockDataList, setMockDataList] = useState([]);
-  const remainingPoint = parseInt(mockData.remainingPoint);
-  const totalprices = mockDataList.reduce(
+  const [userInfo, setUserInfo] = useState({});
+  const [productList, setProductList] = useState([]);
+  const remainingPoint = parseInt(userInfo.remainingPoint);
+  const totalprices = productList.reduce(
     (acc, cur) => acc + cur.prices * cur.count,
     0
   );
 
   useEffect(() => {
-    fetch('/data/checkout.json')
+    fetch('/data/userInfo.json')
       .then(res => res.json())
-      .then(data => setMockData(data));
+      .then(data => setUserInfo(data));
   }, []);
 
   useEffect(() => {
-    fetch('/data/checkoutList.json')
+    fetch('/data/productList.json')
       .then(res => res.json())
-      .then(data => setMockDataList(data));
+      .then(data => setProductList(data));
   }, []);
 
   return (
@@ -30,10 +30,10 @@ const Checkout = () => {
         <section className="section-delivery-infomation">
           <h2 className="user-information-h2">배송 정보</h2>
           <div className="user-information-values">
-            <span className="user-name-value">{mockData.name}</span>
-            <span className="user-address-value">{mockData.address}</span>
+            <span className="user-name-value">{userInfo.name}</span>
+            <span className="user-address-value">{userInfo.address}</span>
             <span className="user-phonenumber-value">
-              {mockData.phoneNumber}
+              {userInfo.phoneNumber}
             </span>
           </div>
         </section>
@@ -49,7 +49,7 @@ const Checkout = () => {
         <section className="section-order-list">
           <h2 className="order-list-h2">주문 내역</h2>
           <ul className="order-list-ul">
-            <CheckoutList mockDataList={mockDataList} />
+            <CheckoutList productList={productList} />
           </ul>
         </section>
       </article>
