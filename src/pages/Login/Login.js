@@ -4,15 +4,15 @@ import './Login.scss';
 
 const Login = () => {
   const [userInputs, setUserInputs] = useState({
-    userId: '',
-    userPassword: '',
+    email: '',
+    password: '',
   });
 
   const navigate = useNavigate();
 
-  const { userId, userPassword } = userInputs;
+  const { email, password } = userInputs;
 
-  const isValid = userId.includes('@') && userPassword.length >= 5;
+  const isValid = email.includes('@') && password.length >= 5;
 
   const handleLoginBtn = () => {
     if (!isValid) {
@@ -26,10 +26,7 @@ const Login = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        email: userId,
-        password: userPassword,
-      }),
+      body: JSON.stringify(userInputs),
     })
       .then(res => res.json())
       .then(data => {
@@ -44,10 +41,7 @@ const Login = () => {
 
   const handleUserInputs = e => {
     const { name, value } = e.target;
-    setUserInputs({
-      ...userInputs,
-      [name]: value,
-    });
+    setUserInputs(prev => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -59,20 +53,20 @@ const Login = () => {
       />
       <input
         type="email"
-        className="id-input"
-        name="userId"
+        className="email-input"
+        name="email"
         placeholder="이메일"
         required
-        value={userId}
+        value={email}
         onChange={handleUserInputs}
       />
 
       <input
         type="password"
         className="password-input"
-        name="userPassword"
+        name="password"
         placeholder="비밀번호"
-        value={userPassword}
+        value={password}
         onChange={handleUserInputs}
       />
       <button className="login-btn" onClick={handleLoginBtn}>
