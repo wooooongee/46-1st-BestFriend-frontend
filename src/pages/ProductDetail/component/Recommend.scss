@@ -1,0 +1,45 @@
+@import '../../../styles/mixin';
+
+.product-recommend {
+  @include textStyle(20px, 500);
+  padding: 40px;
+
+  .img-box {
+    position: relative;
+    padding: 0;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .img {
+    width: 100%;
+  }
+
+  .hidden {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+
+    &:hover {
+      transition: all 1s;
+      opacity: 1;
+    }
+  }
+
+  .recommend-container {
+    display: flex;
+    margin-top: 20px;
+
+    .recommend {
+      width: 30%;
+      margin-right: 60px;
+
+      .title {
+        margin: 10px 0;
+      }
+    }
+  }
+}
