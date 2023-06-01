@@ -7,7 +7,7 @@ const ProductDetail = () => {
   const [recommendList, setRecommendList] = useState([]);
   const [productList, setProductList] = useState({});
   const [count, setCount] = useState(1);
-  const [modal, setModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const ProductDetail = () => {
           <button
             className="btn cart-btn"
             onClick={() => {
-              setModal(true);
+              setIsModalOpen(true);
             }}
           >
             장바구니 담기
@@ -73,7 +73,7 @@ const ProductDetail = () => {
           })}
         </div>
       </section>
-      <section className={modal ? 'modal-box hidden' : 'modal-box'}>
+      <section className={isModalOpen ? 'modal-box visible' : 'modal-box'}>
         <div className="modal">
           <div className="img-box">
             <img src="/images/Nav/gron-logo.png" alt="logo-img" />
@@ -84,7 +84,7 @@ const ProductDetail = () => {
               <button
                 className="btn"
                 onClick={() => {
-                  setModal(false);
+                  setIsModalOpen(false);
                 }}
               >
                 계속 쇼핑하기
