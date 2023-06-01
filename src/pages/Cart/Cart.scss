@@ -1,8 +1,5 @@
 @import '../../styles/mixin';
-
-button:hover {
-  cursor: pointer;
-}
+@import '../../styles/variables';
 
 .cart {
   padding: 40px;
@@ -49,8 +46,8 @@ button:hover {
       padding: 15px;
       border: none;
       border-radius: 25px;
-      background-color: black;
-      color: white;
+      background-color: $primary-color;
+      color: $secondary-color;
       font-size: 20px;
     }
   }
