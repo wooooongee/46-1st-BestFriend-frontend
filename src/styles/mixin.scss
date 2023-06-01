@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
 @mixin flexCenter {
   display: flex;
@@ -10,4 +10,10 @@
   font-family: 'Noto Sans KR', sans-serif;
   font-size: $fontSize;
   font-weight: $fontWeight;
+}
+
+@mixin flexSpaceBetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
