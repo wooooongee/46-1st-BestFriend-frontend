@@ -69,11 +69,11 @@ const Nav = () => {
 export default Nav;
 
 const NAV_MENU = [
-  { id: '1', path: '/products', name: '식물', subcategory: PLANTS_SUBCATEGORY },
-  { id: '2', path: '/products', name: '화분', subcategory: POTS_SUBCATEGORY },
+  { id: '1', path: '/list', name: '식물', subcategory: PLANTS_SUBCATEGORY },
+  { id: '2', path: '/list', name: '화분', subcategory: POTS_SUBCATEGORY },
   {
     id: '3',
-    path: '/products',
+    path: '/list',
     name: '관리상품',
     subcategory: TOOLS_SUBCATEGORY,
   },
