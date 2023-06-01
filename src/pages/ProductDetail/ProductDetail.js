@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Recommend from './component/Recommend';
 import './ProductDetail.scss';
 
@@ -7,8 +7,18 @@ const ProductDetail = () => {
   const [recommendList, setRecommendList] = useState([]);
   const [productList, setProductList] = useState({});
   const [count, setCount] = useState(1);
+  const [products, setProducts] = useState([{}]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const params = useParams();
+  const productsId = params.id;
+
+  useEffect(() => {
+    fetch(`http://10.58.52.136:3000/products/${productsId}`)
+      .then(res => res.json())
+      .then(data => setProducts(data.product));
+  }, [productsId]);
+  const [{ description, image_url, name, price, sub_category_name }] = products;
 
   useEffect(() => {
     fetch('/data/recommend.json')
@@ -25,21 +35,28 @@ const ProductDetail = () => {
         setProductList(data);
       });
   }, []);
+
+  const handleButtonPlus = () => {
+    setCount(count + 1);
+  };
+
+  const handleButtonMinus = () => {
+    count === 1 ? setCount(1) : setCount(count - 1);
+  };
+
   return (
     <>
       <main className="product-detail">
         <figure className="product-img">
-          <img src={productList.img_url} alt="product-img" className="img" />
+          <img src={image_url} alt="product-img" className="img" />
         </figure>
         <section className="product-content">
-          <p className="p-tag">{productList.title}</p>
-          <h1 className="title">{productList.name}</h1>
-          <p className="p-tag">
-            {Number(productList.price).toLocaleString('en')}원
-          </p>
-          <p className="p-tag">{productList.detail}</p>
+          <p className="p-tag">{sub_category_name}</p>
+          <h1 className="title">{name}</h1>
+          <p className="p-tag">{Number(price).toLocaleString('en')}원</p>
+          <p className="p-tag">{description}</p>
           <div className="count-container">
-            <button className="btn">
+            <button className="btn" onClick={handleButtonMinus}>
               <img
                 src="/images/ProductDetail/arrow-down.png"
                 alt="arrow-img"
@@ -47,7 +64,7 @@ const ProductDetail = () => {
               />
             </button>
             <div className="count-box">{count}</div>
-            <button className="btn">
+            <button className="btn" onClick={handleButtonPlus}>
               <img
                 src="/images/ProductDetail/arrow-up.png"
                 alt="arrow-img"
