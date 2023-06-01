@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Recommend from './component/Recommend';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
-  const [productList, setProductList] = useState([]);
+  const [recommendList, setRecommendList] = useState([]);
+  const [productList, setProductList] = useState({});
   const [count, setCount] = useState(1);
+  const [modal, setModal] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch('/data/recommend.json')
+      .then(res => res.json())
+      .then(data => {
+        setRecommendList(data);
+      });
+  }, []);
 
   useEffect(() => {
     fetch('/data/productDetail.json')
@@ -17,20 +29,15 @@ const ProductDetail = () => {
     <>
       <main className="product-detail">
         <figure className="product-img">
-          <img
-            src="/images/ProductDetail/plant-21.jpg"
-            alt="product-img"
-            className="img"
-          />
+          <img src={productList.img_url} alt="product-img" className="img" />
         </figure>
         <section className="product-content">
-          <p className="p-tag">#초보자도 키우기 쉬워요</p>
-          <h1 className="title">몬스테라</h1>
-          <p className="p-tag">10,000원</p>
+          <p className="p-tag">{productList.title}</p>
+          <h1 className="title">{productList.name}</h1>
           <p className="p-tag">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
-            magnam aut sunt nulla nobis nesciunt eos voluptas
+            {Number(productList.price).toLocaleString('en')}원
           </p>
+          <p className="p-tag">{productList.detail}</p>
           <div className="count-container">
             <button className="btn">
               <img
@@ -48,15 +55,50 @@ const ProductDetail = () => {
               />
             </button>
           </div>
-          <button className="btn cart-btn">장바구니 담기</button>
+          <button
+            className="btn cart-btn"
+            onClick={() => {
+              setModal(true);
+            }}
+          >
+            장바구니 담기
+          </button>
         </section>
       </main>
       <section className="product-recommend">
         <p>이런 식물은 어때요?</p>
         <div className="recommend-container">
-          {productList.map(product => {
+          {recommendList.map(product => {
             return <Recommend key={product.id} product={product} />;
           })}
+        </div>
+      </section>
+      <section className={modal ? 'modal-box hidden' : 'modal-box'}>
+        <div className="modal">
+          <div className="img-box">
+            <img src="/images/Nav/gron-logo.png" alt="logo-img" />
+          </div>
+          <div>
+            <p>선택하신 상품이 장바구니에 담겼습니다.</p>
+            <div className="btn-box">
+              <button
+                className="btn"
+                onClick={() => {
+                  setModal(false);
+                }}
+              >
+                계속 쇼핑하기
+              </button>
+              <button
+                className="btn"
+                onClick={() => {
+                  navigate('/cart');
+                }}
+              >
+                장바구니보기
+              </button>
+            </div>
+          </div>
         </div>
       </section>
     </>

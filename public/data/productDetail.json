@@ -1,23 +1,8 @@
-[
-  {
-    "id": 1,
-    "img_url": "/images/ProductDetail/plant-21.jpg",
-    "img_alt": "plant-21",
-    "name": "몬스테라",
-    "price": "10,000원"
-  },
-  {
-    "id": 2,
-    "img_url": "/images/ProductDetail/plant-21.jpg",
-    "img_alt": "plant-21",
-    "name": "몬스테라",
-    "price": "20,000원"
-  },
-  {
-    "id": 3,
-    "img_url": "/images/ProductDetail/plant-21.jpg",
-    "img_alt": "plant-21",
-    "name": "몬스테라",
-    "price": "30,000원"
-  }
-]
+{
+  "id": 1,
+  "img_url": "/images/ProductDetail/plant-21.jpg",
+  "title": "#초보자도 키우기 쉬워요",
+  "name": "몬스테라",
+  "price": 10000,
+  "detail": "습한 곳에서 잘 자라는 식물입니다. 금방 자라기 때문에 넉넉한 화분에 심어주세요. 직사광선을 피해주세요.습한 곳에서 잘 자라는 식물입니다. 금방 자라기 때문에 넉넉한 화분에 심어주세요. 직사광선을 피해주세요."
+}
