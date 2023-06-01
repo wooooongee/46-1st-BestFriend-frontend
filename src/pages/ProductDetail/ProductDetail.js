@@ -76,7 +76,11 @@ const ProductDetail = () => {
       <section className={isModalOpen ? 'modal-box visible' : 'modal-box'}>
         <div className="modal">
           <div className="img-box">
-            <img src="/images/Nav/gron-logo.png" alt="logo-img" />
+            <img
+              src="/images/Nav/gron-logo.png"
+              alt="logo-img"
+              className="logo-img"
+            />
           </div>
           <div>
             <p>선택하신 상품이 장바구니에 담겼습니다.</p>
