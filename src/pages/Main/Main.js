@@ -10,7 +10,7 @@ const Main = () => {
       <video loop autoPlay muted>
         <source
           className="main-video"
-          src="./videos/main-video.mp4"
+          src="https://vod-progressive.akamaized.net/exp=1685618559~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F2674%2F20%2F513373978%2F2375646382.mp4~hmac=eeec08dc177f158ced4a3d7a60f20d9b0a5cd713041a716e53543882f8649f65/vimeo-prod-skyfire-std-us/01/2674/20/513373978/2375646382.mp4"
           type="video/mp4"
         />
       </video>
