@@ -51,7 +51,7 @@ const Login = () => {
   };
 
   return (
-    <main className="login-container">
+    <main className="login">
       <img
         className="gron-logo"
         src="/images/Login/gron-logo.png"
