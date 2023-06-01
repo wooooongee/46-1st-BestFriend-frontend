@@ -2,8 +2,8 @@
 @import '../../styles/variables';
 
 .cart {
-  padding: 40px;
   @include textStyle(20px, 500);
+  padding: 40px;
 
   .title {
     margin-bottom: 50px;

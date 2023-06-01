@@ -1,22 +1,36 @@
 import './CartBox.scss';
-const CartBox = () => {
+
+const CartBox = ({ product, setProductList, id }) => {
+  let totalPrice = Number(product.price * product.quantity).toLocaleString(
+    'en'
+  );
+  const deleteCart = id => {
+    setProductList(prev => prev.filter(product => product.id !== id));
+  };
+  const { img_url, img_alt, name, quantity } = product;
   return (
     <section className="cart-box">
       <div className="cart-img">
-        <img
-          src="/images/ProductDetail/plant-21.jpg"
-          alt="product-img"
-          className="img"
-        />
+        <img src={img_url} alt={img_alt} className="img" />
       </div>
       <div className="cart-content">
         <div className="content">
-          <h1 className="title">몬스테라</h1>
-          <p>수량 : 2개</p>
-          <button className="btn">삭제</button>
+          <h1 className="title">{name}</h1>
+          <p>수량 : {quantity}개</p>
+          <button
+            className="btn"
+            onClick={() => {
+              deleteCart(id);
+            }}
+          >
+            삭제
+          </button>
         </div>
         <div className="total">
-          <p>총 가격:20,000원</p>
+          <p>
+            총 가격:
+            {totalPrice}원
+          </p>
         </div>
       </div>
     </section>
