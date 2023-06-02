@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+
+.order-list-li {
+  display: flex;
+  padding: 0.7em;
+  border-bottom: 3px solid $primary-color;
+
+  .order-list-img {
+    width: 6vw;
+    height: 16vh;
+  }
+
+  .order-list-spans {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .order-list-name {
+      margin: 0.4em 0em 0.4em 2em;
+    }
+
+    .order-list-count {
+      margin: 0.4em 0em 0.4em 2em;
+    }
+
+    .order-list-totalprices {
+      margin: 0.4em 0em 0.4em 2em;
+    }
+  }
+}
