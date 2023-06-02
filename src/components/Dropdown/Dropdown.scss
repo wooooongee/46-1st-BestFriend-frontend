@@ -2,29 +2,34 @@
 @import '../../styles/variables';
 
 .dropdown {
-  @include flexCenter;
+  display: flex;
   position: absolute;
   z-index: 1;
   top: 60px;
   left: 0;
+  justify-content: flex-start;
   width: 100%;
   min-width: 500px;
-  padding: 30px;
-  gap: 50px;
-  background-color: white;
+  padding: 30px 30px 30px 240px;
+  border-top: 1px solid rgb(219, 219, 219);
+  background-color: $secondary-color;
+  gap: 80px;
 
   .dropdown-sub {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .main-category-all {
+    @include textStyle(15px, 500);
   }
 
   .subcategory {
     @include textStyle(15px, 400);
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 }

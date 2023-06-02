@@ -1,6 +1,8 @@
 @import '../../styles/mixin';
+
 .product-list {
   display: flex;
+  justify-content: space-between;
   padding: 40px 50px;
 
   .main-category {
@@ -56,7 +58,6 @@
   .product-cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     margin-top: 30px;
   }
 }

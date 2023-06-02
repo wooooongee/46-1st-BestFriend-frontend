@@ -20,7 +20,7 @@
     .menus {
       @include textStyle(18px, 500);
       @include flexSpaceBetween;
-      gap: 100px;
+      gap: 120px;
 
       .menu:hover {
         cursor: pointer;

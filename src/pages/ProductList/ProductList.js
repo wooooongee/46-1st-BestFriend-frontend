@@ -1,30 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import { MAIN_CATEGORIES } from '../../components/Category/Category';
 import './ProductList.scss';
 
 const ProductList = () => {
-  const [main, setMain] = useState([]);
-  const [sub, setSub] = useState([]);
+  const navigate = useNavigate();
   const [card, setCard] = useState([]);
 
-  useEffect(() => {
-    fetch('/data/mainCategory.json')
-      .then(res => res.json())
-      .then(data => {
-        setMain(data);
-      }, []);
-  });
+  // API 통신
+  // useEffect(() => {
+  //   fetch('http://10.58.52.112:3000/products?sub-category-ids=1,2,3,4')
+  //     .then(res => res.json())
+  //     .then(data => setCard(data));
+  // }, []);
 
   useEffect(() => {
-    fetch('/data/subcategory.json')
-      .then(res => res.json())
-      .then(data => {
-        setSub(data);
-      }, []);
-  });
-
-  useEffect(() => {
-    fetch('http://10.58.52.112:3000/products')
+    fetch('/data.productList.json')
       .then(res => res.json())
       .then(data => setCard(data));
   }, []);
@@ -32,12 +24,16 @@ const ProductList = () => {
   return (
     <div className="product-list">
       <aside className="side-menu">
-        <h1 className="main-category">식물(하드코딩)</h1>
+        <h1 className="main-category">{MAIN_CATEGORIES.plants.title}</h1>
         <ul className="subcategories">
-          {sub.map(sub => {
+          {MAIN_CATEGORIES.plants.subCategories.map(sub => {
             return (
-              <li className="subcategory" key={sub.id}>
-                {sub.name}
+              <li
+                className="subcategory"
+                key={sub.id}
+                onClick={() => navigate(`/list?category=${sub.id}`)}
+              >
+                {sub.title}
               </li>
             );
           })}
@@ -48,7 +44,7 @@ const ProductList = () => {
             return (
               <li className="filter" key={filter.id}>
                 <input className="filter-checkbox" type="checkbox" />
-                {filter.filterName}
+                {filter.title}
               </li>
             );
           })}
@@ -78,6 +74,6 @@ const ProductList = () => {
 export default ProductList;
 
 const PLANTS_FILTER = [
-  { id: '꽃', filterName: '꽃이 피는 식물(상수)' },
-  { id: '열매', filterName: '열매가 열리는 식물(상수)' },
+  { id: '1', title: '꽃이 피는 식물(상수)' },
+  { id: '2', title: '열매가 열리는 식물(상수)' },
 ];

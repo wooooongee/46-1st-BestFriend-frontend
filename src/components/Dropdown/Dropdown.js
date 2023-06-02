@@ -1,55 +1,34 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  PLANTS_SUBCATEGORY,
-  POTS_SUBCATEGORY,
-  TOOLS_SUBCATEGORY,
-} from '../Subcategory/Subcategory';
+import { MAIN_CATEGORIES } from '../Category/Category';
 import './Dropdown.scss';
+
+const NAV_MENU = Object.values(MAIN_CATEGORIES);
 
 const Dropdown = ({ setIsMenuOpen }) => {
   const navigate = useNavigate();
   return (
     <div className="dropdown" onMouseLeave={() => setIsMenuOpen(false)}>
-      <ul className="dropdown-sub plants">
-        {PLANTS_SUBCATEGORY.map(sub => {
-          return (
-            <li
-              className="subcategory"
-              key={sub.id}
-              onClick={() => navigate(`${sub.path}`)}
-            >
-              {sub.name}
+      {NAV_MENU.map(({ title, path, subCategories }) => {
+        return (
+          <ul key={title} className="dropdown-sub">
+            <li className="main-category-all" onClick={() => navigate(path)}>
+              전체보기
             </li>
-          );
-        })}
-      </ul>
-      <ul className="dropdown-sub pots">
-        {POTS_SUBCATEGORY.map(sub => {
-          return (
-            <li
-              className="subcategory"
-              key={sub.id}
-              onClick={() => navigate(`${sub.path}`)}
-            >
-              {sub.name}
-            </li>
-          );
-        })}
-      </ul>
-      <ul className="dropdown-sub tools">
-        {TOOLS_SUBCATEGORY.map(sub => {
-          return (
-            <li
-              className="subcategory"
-              key={sub.id}
-              onClick={() => navigate(`${sub.path}`)}
-            >
-              {sub.name}
-            </li>
-          );
-        })}
-      </ul>
+            {subCategories.map(({ id, title }) => {
+              return (
+                <li
+                  className="subcategory"
+                  key={id}
+                  onClick={() => navigate(`/list?category=${id}`)}
+                >
+                  {title}
+                </li>
+              );
+            })}
+          </ul>
+        );
+      })}
     </div>
   );
 };
