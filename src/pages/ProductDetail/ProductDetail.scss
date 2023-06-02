@@ -11,8 +11,8 @@
   }
 
   .product-img {
-    width: 65%;
-    margin-right: 40px;
+    width: 50%;
+    margin-right: 70px;
   }
 
   .p-tag {
@@ -31,7 +31,7 @@
 
     .title {
       margin: 100px 0 40px 0;
-      font-size: 25px;
+      font-size: 30px;
     }
 
     .btn {
@@ -48,7 +48,7 @@
     .count-box {
       @include flexCenter;
       width: 100px;
-      height: 35px;
+      height: 50px;
       margin: 0 5px;
       border: 1px solid #e3e3e3;
       border-radius: 5px;
