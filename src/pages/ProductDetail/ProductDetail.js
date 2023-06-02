@@ -14,7 +14,7 @@ const ProductDetail = () => {
   const productsId = params.id;
 
   useEffect(() => {
-    fetch(`http://10.58.52.136:3000/products/${productsId}`)
+    fetch(`http://10.58.52.112:3000/products/${productsId}`)
       .then(res => res.json())
       .then(data => setProducts(data.product));
   }, [productsId]);
@@ -38,6 +38,27 @@ const ProductDetail = () => {
 
   const handleButtonPlus = () => {
     setCount(count + 1);
+  };
+
+  const shoppingBasket = () => {
+    fetch(`http://10.58.52.112:3000/carts`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        productId: productsId,
+        quantity: count,
+      }),
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('에러 발생!');
+      })
+      .catch(error => console.log(error));
   };
 
   const handleButtonMinus = () => {
@@ -76,6 +97,7 @@ const ProductDetail = () => {
             className="btn cart-btn"
             onClick={() => {
               setIsModalOpen(true);
+              shoppingBasket();
             }}
           >
             장바구니 담기
