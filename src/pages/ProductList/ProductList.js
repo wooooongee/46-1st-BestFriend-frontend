@@ -10,16 +10,16 @@ const ProductList = () => {
 
   // API 통신
   // useEffect(() => {
-  //   fetch('http://10.58.52.112:3000/products?sub-category-ids=1,2,3,4')
+  //   fetch('http://10.58.52.112:3000/products?sub-category-ids=8')
   //     .then(res => res.json())
   //     .then(data => setCard(data));
   // }, []);
 
-  useEffect(() => {
-    fetch('/data.productList.json')
-      .then(res => res.json())
-      .then(data => setCard(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch('/data.productList.json')
+  //     .then(res => res.json())
+  //     .then(data => setCard(data));
+  // }, []);
 
   return (
     <div className="product-list">
