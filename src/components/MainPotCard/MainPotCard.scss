@@ -1,0 +1,29 @@
+@import '../../styles/mixin';
+@import '../../styles/variables';
+
+.main-pot-card {
+  position: relative;
+  width: 420px;
+  min-width: 420px;
+  aspect-ratio: 3/4;
+
+  .pot-image {
+    width: 100%;
+  }
+
+  .card-cta-secondary {
+    @include textStyle(18px, 500);
+    @include flexCenter;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 130px;
+    height: 40px;
+    border-radius: 50px;
+    background-color: $secondary-color;
+    color: $primary-color;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

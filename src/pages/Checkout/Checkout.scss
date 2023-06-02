@@ -1,1 +1,125 @@
-//q
+@import '../../styles/mixin';
+@import '../../styles/variables';
+
+.checkout {
+  @include textStyle(1em, 500);
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  padding: 40px;
+
+  .article-checkout {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 60%;
+    padding: 40px;
+
+    .checkout-article-h1 {
+      margin-bottom: 2em;
+      font-size: 1.7em;
+    }
+
+    .section-delivery-infomation {
+      display: flex;
+      flex-direction: column;
+
+      .user-information-h2 {
+        margin-bottom: 0.7em;
+        font-size: 1.4em;
+      }
+
+      .user-information-values {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.9em;
+
+        .user-name-value {
+          margin: 0.4em 0em;
+        }
+
+        .user-address-value {
+          margin-bottom: 0.4em;
+        }
+
+        .user-phonenumber-value {
+          margin-bottom: 0.4em;
+        }
+      }
+    }
+
+    .section-payment-point {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2em;
+
+      .remaining-point-h2 {
+        margin-bottom: 0.8em;
+        font-size: 1.4em;
+      }
+
+      .remaining-point-value {
+        margin-bottom: 0.4em;
+        font-size: 0.9em;
+      }
+    }
+
+    .section-order-list {
+      margin-top: 2em;
+
+      .order-list-h2 {
+        font-size: 1.4em;
+      }
+
+      .order-list-ul {
+        width: 100%;
+      }
+    }
+  }
+
+  .aside-checkout {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-top: 6em;
+    padding: 40px;
+
+    .checkout-h2 {
+      margin-bottom: 0.7em;
+      font-size: 1.4em;
+    }
+
+    .product-prices {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1em;
+      font-size: 0.9em;
+    }
+
+    .delivery-fees {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1em;
+      font-size: 0.9em;
+    }
+
+    .total-prices {
+      display: flex;
+      justify-content: space-between;
+      margin: 1em 0em;
+      padding-top: 1em;
+      border-top: 3px solid $primary-color;
+      font-size: 0.9em;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      height: 3em;
+      margin-top: 2em;
+      border-radius: 3em;
+      background-color: $primary-color;
+      color: $secondary-color;
+    }
+  }
+}
