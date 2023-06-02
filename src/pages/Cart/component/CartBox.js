@@ -15,8 +15,8 @@ const CartBox = ({ product, setProductList, id }) => {
       </div>
       <div className="cart-content">
         <div className="content">
-          <h1 className="title">{name}</h1>
-          <p>수량 : {quantity}개</p>
+          <h1>{name}</h1>
+          <p className="content-text">수량 : {quantity}개</p>
           <button
             className="btn"
             onClick={() => {
@@ -27,7 +27,7 @@ const CartBox = ({ product, setProductList, id }) => {
           </button>
         </div>
         <div className="total">
-          <p>
+          <p className="content-text">
             총 가격:
             {totalPrice}원
           </p>

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import CartBox from './component/CartBox';
 import './Cart.scss';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const [productList, setProductList] = useState([]);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('/data/cartData.json')
@@ -22,7 +25,7 @@ const Cart = () => {
 
   return (
     <div className="cart">
-      <h1 className="title">장바구니</h1>
+      <h1 className="cart-title">장바구니</h1>
       <div className="cart-container">
         <main className="cart-main">
           {productList.map(product => {
@@ -37,7 +40,7 @@ const Cart = () => {
           })}
         </main>
         <aside className="cart-aside">
-          <h1 className="title">주문금액</h1>
+          <h1 className="aside-title">주문금액</h1>
           <div className="price">
             <div className="price-sort">
               <p>상품금액</p>
@@ -54,7 +57,29 @@ const Cart = () => {
               <p>{Number(totalPrice).toLocaleString('en')}원</p>
             </div>
           </div>
-          <button className="btn">주문하기</button>
+          <button
+            className="btn"
+            onClick={() => {
+              productList.length === 0
+                ? setIsAlertOpen(true)
+                : navigate('/checkout');
+            }}
+          >
+            주문하기
+          </button>
+          {isAlertOpen && (
+            <div className="alert-box">
+              <p>장바구니가 비어있습니다.</p>
+              <button
+                className="alert-btn"
+                onClick={() => {
+                  setIsAlertOpen(false);
+                }}
+              >
+                X
+              </button>
+            </div>
+          )}
         </aside>
       </div>
     </div>
