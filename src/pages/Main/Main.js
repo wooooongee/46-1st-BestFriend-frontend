@@ -1,10 +1,13 @@
 import React from 'react';
+import { navigate, useNavigate } from 'react-router-dom';
 import MainMessage from '../../components/MainMessage/MainMessage';
 import MainPlantCard from '../../components/MainPlantCard/MainPlantCard';
 import MainPotCard from '../../components/MainPotCard/MainPotCard';
 import './Main.scss';
 
 const Main = () => {
+  const navigate = useNavigate();
+
   return (
     <main className="main">
       <video loop autoPlay muted>
@@ -66,6 +69,9 @@ const Main = () => {
           className="main-interior-image"
           src="https://ik.imagekit.io/zawntqhuq/interior-01.png?updatedAt=1685718153515"
           alt="plant-interior"
+          onClick={() => {
+            navigate('/list');
+          }}
         />
       </section>
       <section className="pots-container">
