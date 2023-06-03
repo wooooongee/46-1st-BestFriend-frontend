@@ -18,7 +18,7 @@ const Signup = () => {
     passwordMessage: '대문자,특수문자,숫자 중 하나 포함,8자이상',
     confirmpasswordMessage: '비밀번호가 일치하지 않습니다.',
     phoneMessage: '11자이내 숫자여야 합니다.',
-    addressMessage: '한글로 적어야합니다.',
+    addressMessage: '한글만 적어야 합니다',
   });
 
   const { name, email, password, confirmPassword, phone, address } = inputs;
@@ -34,41 +34,76 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
-  // const onClick = () => {
-  //   fetch('http://10.58.52.112:3000/users/signup', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       name: '',
-  //       email: '',
-  //       password: '',
-  //       phone: '',
-  //       address: '',
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       if (data.message === 'user is created') {
-  //         alert('성공');
-  //         navigate('/login');
-  //       }
-  //     });
-  // };
+  const onClick = () => {
+    fetch('http://10.58.52.112:3000/users/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: '',
+        email: '',
+        password: '',
+        phone: '',
+        address: '',
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message === 'user is created') {
+          alert('성공');
+          navigate('/login');
+        }
+      });
+  };
 
   const onChange = e => {
     const { name, value } = e.target;
     setInputs(prev => ({ ...prev, [name]: value }));
     console.log([name], value, ':::::', [name + 'Message']);
 
-    if (nameValidation(value)) {
-      return setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }));
-    } else if (!nameValidation(value)) {
-      return setErrorMessages(prev => ({
-        ...prev,
-        [name + 'Message']: '이름은 2자 이상, 4자 이하',
-      }));
+    if (name === 'name') {
+      nameValidation(value)
+        ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
+        : setErrorMessages(prev => ({
+            ...prev,
+            [name + 'Message']: '이름은 2자 이상, 4자 이하',
+          }));
+    } else if (name === 'email') {
+      emailValidation(value)
+        ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
+        : setErrorMessages(prev => ({
+            ...prev,
+            [name + 'Message']: '이메일 형식을 갖추어야 합니다',
+          }));
+    } else if (name === 'password') {
+      passwordValidation(value)
+        ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
+        : setErrorMessages(prev => ({
+            ...prev,
+            [name + 'Message']: '대문자,특수문자,숫자 중 하나 포함,8자이상',
+          }));
+    } else if (name === 'confirmpassword') {
+      confirmpasswordValidation(value)
+        ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
+        : setErrorMessages(prev => ({
+            ...prev,
+            [name + 'Message']: '비밀번호와 일치하지 않습니다.',
+          }));
+    } else if (name === 'phone') {
+      phoneValidation(value)
+        ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
+        : setErrorMessages(prev => ({
+            ...prev,
+            [name + 'Message']: '11자이내 숫자여야 합니다.',
+          }));
+    } else if (name === 'address') {
+      addressValidation(value)
+        ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
+        : setErrorMessages(prev => ({
+            ...prev,
+            [name + 'Message']: '한글만 적어야 합니다',
+          }));
     }
   };
 
@@ -81,7 +116,7 @@ const Signup = () => {
   const passwordValidation = password => {
     return /^(?=.*[A-Z!@#$%^&*]).{8,}$/.test(password); //TODO 최소8자리,숫,문,특 최소1개
   };
-  const confirmPasswordValidation = confirmPassword => {
+  const confirmpasswordValidation = confirmPassword => {
     return password === confirmPassword;
   };
   const phoneValidation = phone => {
