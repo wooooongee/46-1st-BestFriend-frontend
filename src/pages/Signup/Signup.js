@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Signup.scss';
 
 const Signup = () => {
@@ -7,52 +7,39 @@ const Signup = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    confirmpassword: '',
     phone: '',
     address: '',
   });
 
   const [errorMessages, setErrorMessages] = useState({
-    nameMessage: '이름은 2자 이상, 4자 이하',
-    emailMessage: '이메일 형식을 갖추어야 합니다.',
-    passwordMessage: '대문자,특수문자,숫자 중 하나 포함,8자이상',
-    confirmpasswordMessage: '비밀번호가 일치하지 않습니다.',
-    phoneMessage: '11자이내 숫자여야 합니다.',
-    addressMessage: '한글만 적어야 합니다',
+    nameMessage: '잘못된 이름입니다',
+    emailMessage: '잘못된 이메일 주소입니다',
+    passwordMessage: '대문자를 포함하여 8자이상 입력하세요',
+    confirmpasswordMessage: '비밀번호가 일치하지 않습니다',
+    phoneMessage: '11자리 숫자여야 합니다',
+    addressMessage: '주소를 한글로 입력하세요',
   });
 
-  const { name, email, password, confirmPassword, phone, address } = inputs;
-
-  const {
-    nameMessage,
-    emailMessage,
-    passwordMessage,
-    confirmpasswordMessage,
-    phoneMessage,
-    addressMessage,
-  } = errorMessages;
+  const { password } = inputs;
 
   const navigate = useNavigate();
 
   const onClick = () => {
-    fetch('http://10.58.52.112:3000/users/signup', {
+    fetch('http://10.58.52.117:3000/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        name: '',
-        email: '',
-        password: '',
-        phone: '',
-        address: '',
-      }),
+      body: JSON.stringify(inputs),
     })
       .then(res => res.json())
       .then(data => {
         if (data.message === 'user is created') {
           alert('성공');
           navigate('/login');
+        } else {
+          alert('실패');
         }
       });
   };
@@ -60,52 +47,59 @@ const Signup = () => {
   const onChange = e => {
     const { name, value } = e.target;
     setInputs(prev => ({ ...prev, [name]: value }));
-    console.log([name], value, ':::::', [name + 'Message']);
 
     if (name === 'name') {
       nameValidation(value)
         ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
         : setErrorMessages(prev => ({
             ...prev,
-            [name + 'Message']: '이름은 2자 이상, 4자 이하',
+            [name + 'Message']: '잘못된 이름입니다',
           }));
     } else if (name === 'email') {
       emailValidation(value)
         ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
         : setErrorMessages(prev => ({
             ...prev,
-            [name + 'Message']: '이메일 형식을 갖추어야 합니다',
+            [name + 'Message']: '잘못된 이메일 주소입니다',
           }));
     } else if (name === 'password') {
       passwordValidation(value)
         ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
         : setErrorMessages(prev => ({
             ...prev,
-            [name + 'Message']: '대문자,특수문자,숫자 중 하나 포함,8자이상',
+            [name + 'Message']: '대문자를 포함하여 8자이상 입력하세요',
           }));
     } else if (name === 'confirmpassword') {
       confirmpasswordValidation(value)
         ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
         : setErrorMessages(prev => ({
             ...prev,
-            [name + 'Message']: '비밀번호와 일치하지 않습니다.',
+            [name + 'Message']: '비밀번호가 일치하지 않습니다',
           }));
     } else if (name === 'phone') {
       phoneValidation(value)
         ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
         : setErrorMessages(prev => ({
             ...prev,
-            [name + 'Message']: '11자이내 숫자여야 합니다.',
+            [name + 'Message']: '11자리 숫자여야 합니다',
           }));
     } else if (name === 'address') {
       addressValidation(value)
         ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
         : setErrorMessages(prev => ({
             ...prev,
-            [name + 'Message']: '한글만 적어야 합니다',
+            [name + 'Message']: '주소를 한글로 입력하세요',
           }));
     }
   };
+
+  const [isErrorMessageVisible, setIsErrorMessageVisible] = useState(false);
+
+  useEffect(() => {
+    setIsErrorMessageVisible(true);
+  }, []);
+
+  const AllValidation = ([name]) => {};
 
   const nameValidation = name => {
     return /^[가-힣]{2,4}$/.test(name);
@@ -114,10 +108,10 @@ const Signup = () => {
     return /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/.test(email);
   };
   const passwordValidation = password => {
-    return /^(?=.*[A-Z!@#$%^&*]).{8,}$/.test(password); //TODO 최소8자리,숫,문,특 최소1개
+    return /^(?=.*[A-Z!@#$%^&*]).{8,}$/.test(password);
   };
-  const confirmpasswordValidation = confirmPassword => {
-    return password === confirmPassword;
+  const confirmpasswordValidation = confirmpassword => {
+    return password === confirmpassword;
   };
   const phoneValidation = phone => {
     return /^[0-9]{3}[0-9]{4}[0-9]{4}$/.test(phone);
@@ -142,16 +136,20 @@ const Signup = () => {
             onChange={onChange}
             value={inputs[input.id]}
           />
-          <p className="error-messages-p">
-            {errorMessages[input.id + 'Message']}
-          </p>
+          {isErrorMessageVisible && (
+            <p className="error-messages-p">
+              {errorMessages[input.id + 'Message']}
+            </p>
+          )}
         </React.Fragment>
       ))}
       <div className="privacy-agreement-input">
         <input className="privacy-agreement-checkbox" type="checkBox" />
         <label>grön의 개인정보 처리방침 및 이용약관에 동의합니다.</label>
       </div>
-      <button className="signup-btn">계정 만들기</button>
+      <button className="signup-btn" onClick={onClick}>
+        계정 만들기
+      </button>
     </main>
   );
 };
