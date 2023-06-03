@@ -13,12 +13,12 @@ const Signup = () => {
   });
 
   const [errorMessages, setErrorMessages] = useState({
-    nameMessage: '',
-    emailMessage: '',
-    passwordMessage: '',
-    confirmPasswordMessage: '',
-    phoneMessage: '',
-    addressMessage: '',
+    nameMessage: '이름은 2자 이상, 4자 이하',
+    emailMessage: '이메일 형식을 갖추어야 합니다.',
+    passwordMessage: '대문자,특수문자,숫자 중 하나 포함,8자이상',
+    confirmpasswordMessage: '비밀번호가 일치하지 않습니다.',
+    phoneMessage: '11자이내 숫자여야 합니다.',
+    addressMessage: '한글로 적어야합니다.',
   });
 
   const { name, email, password, confirmPassword, phone, address } = inputs;
@@ -27,7 +27,7 @@ const Signup = () => {
     nameMessage,
     emailMessage,
     passwordMessage,
-    confirmPasswordMessage,
+    confirmpasswordMessage,
     phoneMessage,
     addressMessage,
   } = errorMessages;
@@ -60,6 +60,35 @@ const Signup = () => {
   const onChange = e => {
     const { name, value } = e.target;
     setInputs(prev => ({ ...prev, [name]: value }));
+    console.log([name], value, ':::::', [name + 'Message']);
+
+    if (nameValidation(value)) {
+      return setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }));
+    } else if (!nameValidation(value)) {
+      return setErrorMessages(prev => ({
+        ...prev,
+        [name + 'Message']: '이름은 2자 이상, 4자 이하',
+      }));
+    }
+  };
+
+  const nameValidation = name => {
+    return /^[가-힣]{2,4}$/.test(name);
+  };
+  const emailValidation = email => {
+    return /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/.test(email);
+  };
+  const passwordValidation = password => {
+    return /^(?=.*[A-Z!@#$%^&*]).{8,}$/.test(password); //TODO 최소8자리,숫,문,특 최소1개
+  };
+  const confirmPasswordValidation = confirmPassword => {
+    return password === confirmPassword;
+  };
+  const phoneValidation = phone => {
+    return /^[0-9]{3}[0-9]{4}[0-9]{4}$/.test(phone);
+  };
+  const addressValidation = address => {
+    return /^[가-힣 ]+$/.test(address);
   };
 
   return (
@@ -70,14 +99,18 @@ const Signup = () => {
         alt="gronLogo"
       />
       {USER_INFO_INPUTS.map(input => (
-        <input
-          className="user-input"
-          key={input.id}
-          name={input.id}
-          placeholder={input.placeholder}
-          onChange={onChange}
-          value={inputs[input.id]}
-        />
+        <React.Fragment key={input.id}>
+          <input
+            className="user-input"
+            name={input.id}
+            placeholder={input.placeholder}
+            onChange={onChange}
+            value={inputs[input.id]}
+          />
+          <p className="error-messages-p">
+            {errorMessages[input.id + 'Message']}
+          </p>
+        </React.Fragment>
       ))}
       <div className="privacy-agreement-input">
         <input className="privacy-agreement-checkbox" type="checkBox" />
@@ -87,14 +120,13 @@ const Signup = () => {
     </main>
   );
 };
-
 export default Signup;
 
 const USER_INFO_INPUTS = [
   { id: 'name', placeholder: '이름' },
   { id: 'email', placeholder: '이메일' },
   { id: 'password', placeholder: '비밀번호' },
-  { id: 'confirmPassword', placeholder: '비밀번호 확인' },
+  { id: 'confirmpassword', placeholder: '비밀번호 확인' },
   { id: 'phone', placeholder: '휴대폰 번호' },
   { id: 'address', placeholder: '주소' },
 ];
