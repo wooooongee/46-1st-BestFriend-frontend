@@ -10,26 +10,27 @@ const ProductList = () => {
   const [card, setCard] = useState([]);
 
   // API 통신
-  useEffect(() => {
-    fetch(
-      'http://10.58.52.117:3000/products??subCategoryId=1&limit=20&offset=0'
-    )
-      .then(res => res.json())
-      .then(data => setCard(data));
-  }, []);
-
-  // Mock data 통신
   // useEffect(() => {
-  //   fetch('/data/productList.json')
+  //   fetch(
+  //     'http://10.58.52.117:3000/products??subCategoryId=1&limit=20&offset=0'
+  //   )
   //     .then(res => res.json())
   //     .then(data => setCard(data));
   // }, []);
+
+  // Mock data 통신
+  useEffect(() => {
+    fetch('/data/productList.json')
+      .then(res => res.json())
+      .then(data => setCard(data));
+  }, []);
 
   return (
     <div className="product-list">
       <aside className="side-menu">
         <h1 className="main-category">{MAIN_CATEGORIES.plants.title}</h1>
         <ul className="subcategories">
+          <li className="sub-all">전체보기</li>
           {MAIN_CATEGORIES.plants.subCategories.map(sub => {
             return (
               <li
