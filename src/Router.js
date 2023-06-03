@@ -9,6 +9,7 @@ import Checkout from './pages/Checkout/Checkout';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import ProductList from './pages/ProductList/ProductList';
 import Signup from './pages/Signup/Signup';
+import Wishlist from './pages/Wishlist/Wishlist';
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
         <Route path="/product" element={<ProductDetail />} />
         <Route path="/productlist" element={<ProductList />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
       <Footer />
     </BrowserRouter>

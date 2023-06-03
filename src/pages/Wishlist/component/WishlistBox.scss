@@ -1,0 +1,44 @@
+@import '../../../styles/mixin';
+@import '../../../styles/variables';
+
+.wishlist-box {
+  width: 32%;
+  margin-right: 13px;
+  margin-bottom: 74px;
+}
+
+.img-box {
+  padding: 0;
+  border: none;
+
+  .img {
+    width: 100%;
+  }
+}
+
+.content {
+  @include flexSpaceBetween;
+  margin-top: 21px;
+  margin-bottom: 9px;
+
+  .name {
+    font-size: 22px;
+  }
+
+  .btn {
+    @include textStyle(20px, 500);
+    border: none;
+    background-color: $secondary-color;
+    color: #828282;
+  }
+}
+
+.price {
+  font-size: 18px;
+}
+
+@media screen and (max-width: 1050px) {
+  .wishlist-box {
+    width: 46%;
+  }
+}
