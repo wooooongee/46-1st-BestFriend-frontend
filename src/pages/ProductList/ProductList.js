@@ -17,11 +17,11 @@ const ProductList = () => {
   // }, []);
 
   // Mock data 통신
-  // useEffect(() => {
-  //   fetch('/data.productList.json')
-  //     .then(res => res.json())
-  //     .then(data => setCard(data));
-  // }, []);
+  useEffect(() => {
+    fetch('/data/productList.json')
+      .then(res => res.json())
+      .then(data => setCard(data));
+  }, []);
 
   return (
     <div className="product-list">
