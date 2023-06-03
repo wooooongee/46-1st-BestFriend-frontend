@@ -10,18 +10,20 @@ const ProductList = () => {
   const [card, setCard] = useState([]);
 
   // API 통신
-  // useEffect(() => {
-  //   fetch('http://10.58.52.112:3000/products?sub-category-ids=8')
-  //     .then(res => res.json())
-  //     .then(data => setCard(data));
-  // }, []);
-
-  // Mock data 통신
   useEffect(() => {
-    fetch('/data/productList.json')
+    fetch(
+      'http://10.58.52.117:3000/products??subCategoryId=1&limit=20&offset=0'
+    )
       .then(res => res.json())
       .then(data => setCard(data));
   }, []);
+
+  // Mock data 통신
+  // useEffect(() => {
+  //   fetch('/data/productList.json')
+  //     .then(res => res.json())
+  //     .then(data => setCard(data));
+  // }, []);
 
   return (
     <div className="product-list">
