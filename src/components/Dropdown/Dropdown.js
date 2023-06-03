@@ -2,9 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MAIN_CATEGORIES } from '../Category/Category';
 import './Dropdown.scss';
-
-const NAV_MENU = Object.values(MAIN_CATEGORIES);
-
 const Dropdown = ({ setIsMenuOpen }) => {
   const navigate = useNavigate();
   return (
@@ -20,7 +17,7 @@ const Dropdown = ({ setIsMenuOpen }) => {
                 <li
                   className="subcategory"
                   key={id}
-                  onClick={() => navigate(`/list?category=${id}`)}
+                  onClick={() => navigate(`/list?subCategoryId=${id}`)}
                 >
                   {title}
                 </li>
@@ -34,3 +31,5 @@ const Dropdown = ({ setIsMenuOpen }) => {
 };
 
 export default Dropdown;
+
+const NAV_MENU = Object.values(MAIN_CATEGORIES);

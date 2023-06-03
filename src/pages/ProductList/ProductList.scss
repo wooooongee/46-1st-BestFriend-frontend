@@ -8,10 +8,9 @@
 
   .main-category {
     @include textStyle(30px, 500);
-  }
-
-  .sorting-btn {
-    @include textStyle(20px, 500);
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .side-menu {
@@ -36,19 +35,23 @@
         cursor: pointer;
       }
     }
+  }
 
-    .sorting {
-      display: flex;
-      justify-content: flex-end;
+  .sorting {
+    display: flex;
+    justify-content: flex-end;
+
+    .sorting-btn {
+      @include textStyle(20px, 500);
+
       &:hover {
         cursor: pointer;
       }
     }
-
-    .product-cards {
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
+  }
+  .product-cards {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
   }
 }
