@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Filter from '../../components/Filter/Filter';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { MAIN_CATEGORIES } from '../../components/Category/Category';
 import './ProductList.scss';
@@ -15,6 +16,7 @@ const ProductList = () => {
   //     .then(data => setCard(data));
   // }, []);
 
+  // Mock data 통신
   // useEffect(() => {
   //   fetch('/data.productList.json')
   //     .then(res => res.json())
@@ -38,17 +40,8 @@ const ProductList = () => {
             );
           })}
         </ul>
-        <h2 className="filter-title">필터(하드코딩)</h2>
-        <ul className="filters">
-          {PLANTS_FILTER.map(filter => {
-            return (
-              <li className="filter" key={filter.id}>
-                <input className="filter-checkbox" type="checkbox" />
-                {filter.title}
-              </li>
-            );
-          })}
-        </ul>
+        {/* 필터 조건부 렌더링 */}
+        <Filter />
       </aside>
       <main className="main-product-list">
         <div className="sorting">
@@ -72,8 +65,3 @@ const ProductList = () => {
 };
 
 export default ProductList;
-
-const PLANTS_FILTER = [
-  { id: '1', title: '꽃이 피는 식물(상수)' },
-  { id: '2', title: '열매가 열리는 식물(상수)' },
-];
