@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const [productList, setProductList] = useState([]);
+  const [cartList, setCartList] = useState([]);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -16,9 +17,34 @@ const Cart = () => {
       });
   }, []);
 
-  let calculation = productList.map(
-    product => product.price * product.quantity
-  );
+  // useEffect(() => {
+  //   fetch('http://10.58.52.117:3000/carts', {
+  //     method: 'GET',
+  //     headers: { Authorization: localStorage.getItem('token') },
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setCartList(data.carts);
+  //     });
+  // }, []);
+  useEffect(() => {
+    fetch('http://10.58.52.117:3000/carts', {
+      method: 'GET',
+      headers: { Authorization: localStorage.getItem('token') },
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('통신실패');
+      })
+      .then(data => {
+        setCartList(data.carts);
+      })
+      .catch(error => console.log(error));
+  }, []);
+
+  let calculation = cartList.map(product => product.price * product.quantity);
   let totalPrice = calculation.reduce(function add(sum, currValue) {
     return sum + currValue;
   }, 0);
@@ -28,13 +54,23 @@ const Cart = () => {
       <h1 className="cart-title">장바구니</h1>
       <div className="cart-container">
         <main className="cart-main">
-          {productList.map(product => {
+          {/* {productList.map(product => {
             return (
               <CartBox
                 key={product.id}
                 product={product}
                 setProductList={setProductList}
                 id={product.id}
+              />
+            );
+          })} */}
+          {cartList.map(product => {
+            return (
+              <CartBox
+                key={product.product_id}
+                product={product}
+                setCartList={setCartList}
+                id={product.product_id}
               />
             );
           })}
@@ -60,7 +96,7 @@ const Cart = () => {
           <button
             className="btn"
             onClick={() => {
-              productList.length === 0
+              cartList.length === 0
                 ? setIsAlertOpen(true)
                 : navigate('/checkout');
             }}
