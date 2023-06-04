@@ -6,49 +6,10 @@
   justify-content: space-between;
   padding: 40px 50px;
 
-  .main-category {
-    @include textStyle(30px, 500);
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
   .side-menu {
     min-width: 250px;
   }
 
-  .subcategories {
-    margin: 50px 0;
-
-    .sub-all {
-      @include textStyle(18px, 500);
-      margin-bottom: 20px;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .subcategory {
-      @include textStyle(18px, 400);
-      margin-bottom: 20px;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-
-  .sorting {
-    display: flex;
-    justify-content: flex-end;
-
-    .sorting-btn {
-      @include textStyle(20px, 500);
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
   .product-cards {
     display: flex;
     flex-wrap: wrap;

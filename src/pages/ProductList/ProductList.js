@@ -1,79 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import Category from '../../components/Category/Category';
 import Filter from '../../components/Filter/Filter';
+import Sort from '../../components/Sort/Sort';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { MAIN_CATEGORIES } from '../../components/Category/Category';
+import Pagination from '../../components/Pagination/Pagination';
 import './ProductList.scss';
 
 const ProductList = () => {
-  // const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  // const offset = searchParams.get('offset');
-  // const limit = searchParams.get('limit');
-  const sub = searchParams.getAll('subCategoryId');
-  console.log('sub:', sub);
-
-  const movePage = pageNumber => {
-    searchParams.set('limit', 9);
-    searchParams.set('offset', (pageNumber - 1) * 9);
-    setSearchParams(searchParams);
-  };
-
-  const appendSubString = sub => {
-    searchParams.append('subCategoryId', sub);
-    setSearchParams(searchParams);
-  };
+  const subCategoryId = searchParams.getAll('subCategoryId');
+  const offset = searchParams.get('offset');
+  const limit = searchParams.get('limit');
+  const isBerryIncluded = searchParams.get('isBerryIncluded');
+  const isFlowerIncluded = searchParams.get('isFlowerIncluded');
 
   const [card, setCard] = useState([]);
 
   // API 통신
   // useEffect(() => {
-  //   fetch(`http://10.58.52.117:3000/products?${queryString}`)
+  //   fetch(
+  //     `http://10.58.52.117:3000/products?subCategoryId=${subCategoryId}&limit=${limit}&offset=${offset}&isBerryIncluded=${isBerryIncluded}&isFlowerIncluded=${isFlowerIncluded}`
+  //   )
   //     .then(res => res.json())
   //     .then(data => setCard(data));
   // }, []);
 
   // // Mock data 통신
   useEffect(() => {
-    fetch('/data/productList.json')
+    fetch(
+      `/data/productList.json?subCategoryId=${subCategoryId}&limit=${limit}&offset=${offset}&isBerryIncluded=${isBerryIncluded}&isFlowerIncluded=${isFlowerIncluded}`
+    )
       .then(res => res.json())
       .then(data => setCard(data));
-  }, []);
+  }, [subCategoryId, offset, limit, isBerryIncluded, isFlowerIncluded]);
 
   return (
     <div className="product-list">
       <aside className="side-menu">
-        <h1 className="main-category" onClick={appendSubString}>
-          {MAIN_MENU[0].title}
-        </h1>
-        <ul className="subcategories">
-          <li className="sub-all" onClick={appendSubString}>
-            전체보기
-          </li>
-          {MAIN_MENU[0].subCategories.map(sub => {
-            return (
-              <li
-                className="subcategory"
-                key={sub.id}
-                onClick={appendSubString}
-              >
-                {sub.title}
-              </li>
-            );
-          })}
-        </ul>
-        {/* 필터 조건부 렌더링 */}
+        <Category />
         <Filter />
       </aside>
       <main className="main-product-list">
-        <div className="sorting">
-          <div className="sorting-btn">정렬 기준</div>
-        </div>
+        <Sort />
         <div className="product-cards">
           {card.map(card => {
             return (
               <ProductCard
-                key={card.name}
+                key={card.id}
+                path={card.id}
                 name={card.name}
                 price={card.price}
                 image_url={card.image_url}
@@ -81,16 +56,10 @@ const ProductList = () => {
             );
           })}
         </div>
-        <div className="pagination">
-          <button onClick={() => movePage(1)}>1</button>
-          <button onClick={() => movePage(2)}>2</button>
-          <button onClick={() => movePage(3)}>3</button>
-        </div>
+        <Pagination />
       </main>
     </div>
   );
 };
 
 export default ProductList;
-
-const MAIN_MENU = Object.values(MAIN_CATEGORIES);

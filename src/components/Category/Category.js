@@ -1,4 +1,42 @@
-export const MAIN_CATEGORIES = {
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
+import './Category.scss';
+
+const Category = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectCategory = sub => {
+    searchParams.set('subCategoryId', sub);
+    setSearchParams(searchParams);
+  };
+
+  return (
+    <div className="category">
+      <h1 className="main-category" onClick={() => selectCategory(1)}>
+        {MAIN_MENU[0].title}
+      </h1>
+      <ul className="subcategories">
+        <li className="sub-all" onClick={() => selectCategory(1)}>
+          전체보기
+        </li>
+        {MAIN_MENU[0].subCategories.map(({ id, title }) => {
+          return (
+            <li
+              className="subcategory"
+              key={id}
+              onClick={() => selectCategory(id)}
+            >
+              {title}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+
+export default Category;
+
+export const CATEGORIES = {
   plants: {
     title: '식물',
     path: '/list?subCategoryId=1&subCategoryId=2&subCategoryId=3&subCategoryId=4',
@@ -28,6 +66,8 @@ export const MAIN_CATEGORIES = {
     ],
   },
 };
+
+const MAIN_MENU = Object.values(CATEGORIES);
 
 // export const SUBCATEGORIES = [
 //   { id: 1, title: '초보자도 키우기 쉬워요' },

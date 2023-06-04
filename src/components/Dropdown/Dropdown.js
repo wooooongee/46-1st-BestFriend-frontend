@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MAIN_CATEGORIES } from '../Category/Category';
+import { CATEGORIES } from '../Category/Category';
 import './Dropdown.scss';
 const Dropdown = ({ setIsMenuOpen }) => {
   const navigate = useNavigate();
@@ -32,4 +32,4 @@ const Dropdown = ({ setIsMenuOpen }) => {
 
 export default Dropdown;
 
-const NAV_MENU = Object.values(MAIN_CATEGORIES);
+const NAV_MENU = Object.values(CATEGORIES);

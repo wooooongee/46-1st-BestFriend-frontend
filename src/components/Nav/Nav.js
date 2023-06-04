@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MAIN_CATEGORIES } from '../Category/Category';
+import { CATEGORIES } from '../Category/Category';
 import Dropdown from '../Dropdown/Dropdown';
 import './Nav.scss';
 
-const NAV_MENU = Object.values(MAIN_CATEGORIES);
+const NAV_MENU = Object.values(CATEGORIES);
 
 const Nav = () => {
   const navigate = useNavigate();
