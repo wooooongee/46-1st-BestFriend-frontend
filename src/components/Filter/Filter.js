@@ -8,10 +8,13 @@ const Filter = () => {
     setChecked(e.target.checked);
   };
   const [searchParams, setSearchParams] = useSearchParams();
-  const setFilter = () => {
-    searchParams.set(`is${PLANT_FILTERS.key}Included`, !checked);
+  const setFilter = checked => {
+    searchParams.set(`isBerryIncluded`, checked);
     setSearchParams(searchParams);
   };
+
+  console.log('checked:', checked);
+  console.log('searchParams:', searchParams);
 
   return (
     <div className="filter">
@@ -23,7 +26,7 @@ const Filter = () => {
               <input
                 className="filter-checkbox"
                 type="checkbox"
-                onChange={(handleCheckbox, setFilter)}
+                onChange={handleCheckbox}
               />
               {filter.title}
             </li>

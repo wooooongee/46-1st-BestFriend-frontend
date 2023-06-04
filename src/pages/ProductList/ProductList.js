@@ -6,16 +6,12 @@ import { MAIN_CATEGORIES } from '../../components/Category/Category';
 import './ProductList.scss';
 
 const ProductList = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   // const offset = searchParams.get('offset');
   // const limit = searchParams.get('limit');
   const sub = searchParams.getAll('subCategoryId');
-  const subString = JSON.stringify(sub);
-  const queryString = searchParams.toString();
   console.log('sub:', sub);
-  console.log('substring:', subString);
-  console.log('querystring', queryString);
 
   const movePage = pageNumber => {
     searchParams.set('limit', 9);
@@ -23,8 +19,8 @@ const ProductList = () => {
     setSearchParams(searchParams);
   };
 
-  const appendSubString = () => {
-    searchParams.append('subCategoryId', subString);
+  const appendSubString = sub => {
+    searchParams.append('subCategoryId', sub);
     setSearchParams(searchParams);
   };
 
@@ -35,14 +31,14 @@ const ProductList = () => {
   //   fetch(`http://10.58.52.117:3000/products?${queryString}`)
   //     .then(res => res.json())
   //     .then(data => setCard(data));
-  // }, [queryString]);
+  // }, []);
 
   // // Mock data 통신
-  // useEffect(() => {
-  //   fetch('/data/productList.json')
-  //     .then(res => res.json())
-  //     .then(data => setCard(data));
-  // }, [queryString]);
+  useEffect(() => {
+    fetch('/data/productList.json')
+      .then(res => res.json())
+      .then(data => setCard(data));
+  }, []);
 
   return (
     <div className="product-list">
