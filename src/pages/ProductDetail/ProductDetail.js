@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { AiOutlineHeart, AiTwotoneHeart } from 'react-icons/ai';
 import Recommend from './component/Recommend';
 import './ProductDetail.scss';
 
@@ -9,12 +10,14 @@ const ProductDetail = () => {
   const [count, setCount] = useState(1);
   const [products, setProducts] = useState([{}]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isWishlistAdd, setIsWishlistAdd] = useState(false);
+  const [isWishModalOpen, setIsWishModalOpen] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
   const productsId = params.id;
 
   useEffect(() => {
-    fetch(`http://10.58.52.112:3000/products/${productsId}`)
+    fetch(`http://10.58.52.157:3000/products/${productsId}`)
       .then(res => res.json())
       .then(data => setProducts(data.product));
   }, [productsId]);
@@ -41,7 +44,7 @@ const ProductDetail = () => {
   };
 
   const shoppingBasket = () => {
-    fetch(`http://10.58.52.112:3000/carts`, {
+    fetch(`http://10.58.52.157:3000/carts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -61,6 +64,45 @@ const ProductDetail = () => {
       .catch(error => console.log(error));
   };
 
+  const addToWishList = () => {
+    fetch(`http://10.58.52.157:3000/likes`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        productId: productsId,
+      }),
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('에러 발생!');
+      })
+      .catch(error => console.log(error));
+  };
+
+  const deleteToWishList = () => {
+    fetch(`http://10.58.52.157:3000/likes`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        productId: productsId,
+      }),
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('에러 발생!');
+      })
+      .catch(error => console.log(error));
+  };
   const handleButtonMinus = () => {
     count === 1 ? setCount(1) : setCount(count - 1);
   };
@@ -102,6 +144,25 @@ const ProductDetail = () => {
           >
             장바구니 담기
           </button>
+          <button
+            className="btn wishlist-btn"
+            onClick={() => {
+              setIsWishlistAdd(!isWishlistAdd);
+              isWishlistAdd
+                ? setIsWishModalOpen(false)
+                : setIsWishModalOpen(true);
+              isWishlistAdd === false &&
+                window.scrollTo({ top: 0, behavior: 'auto' });
+              isWishlistAdd ? deleteToWishList() : addToWishList();
+            }}
+          >
+            위시리스트
+            {isWishlistAdd ? (
+              <AiTwotoneHeart className="icon" />
+            ) : (
+              <AiOutlineHeart className="icon" />
+            )}
+          </button>
         </section>
       </main>
       <section className="product-recommend">
@@ -142,6 +203,38 @@ const ProductDetail = () => {
               </button>
             </div>
           </div>
+        </div>
+      </section>
+      <section className={isWishModalOpen ? 'wishlist visible ' : 'wishlist'}>
+        <div className="wishlist-modal">
+          <div className="wishlist-modal-title">
+            <p>위시리스트에 추가되었습니다</p>
+            <button
+              className="close-btn"
+              onClick={() => {
+                setIsWishModalOpen(false);
+              }}
+            >
+              X
+            </button>
+          </div>
+          <div className="wishlist-modal-content">
+            <div className="img-box">
+              <img src={image_url} alt="wishlist-img" className="img" />
+            </div>
+            <div>
+              <p>{name}</p>
+              <p>{Number(price).toLocaleString('en')}원</p>
+            </div>
+          </div>
+          <button
+            className="btn"
+            onClick={() => {
+              navigate('/wishlist');
+            }}
+          >
+            위시리스트 보기
+          </button>
         </div>
       </section>
     </>
