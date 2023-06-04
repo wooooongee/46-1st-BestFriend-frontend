@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainMessage from '../../components/MainMessage/MainMessage';
 import MainPlantCard from '../../components/MainPlantCard/MainPlantCard';
@@ -7,6 +7,14 @@ import './Main.scss';
 
 const Main = () => {
   const navigate = useNavigate();
+
+  const [scroll, setScroll] = useState(0);
+  const handleRight = () => {
+    scroll === -85 ? setScroll(-85) : setScroll(prev => prev - 17);
+  };
+  const handleLeft = () => {
+    scroll === 0 ? setScroll(0) : setScroll(prev => prev + 17);
+  };
 
   return (
     <main className="main">
@@ -30,33 +38,29 @@ const Main = () => {
         </div>
         <div className="carousel">
           <div className="carousel-btn">
-            <div className="left-btn">
+            <div className="left-btn" onClick={handleLeft}>
               <img className="arrow-left" src="./images/Main/arrow-left.png" />
             </div>
-            <div className="right-btn">
+            <div className="right-btn" onClick={handleRight}>
               <img
                 className="arrow-right"
                 src="./images/Main/arrow-right.png"
               />
             </div>
           </div>
-          <div className="plant-cards">
-            <MainPlantCard
-              id={36}
-              image_url="https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-36.jpg?raw=true"
-            />
-            <MainPlantCard
-              id={4}
-              image_url="https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-4.jpg?raw=true"
-            />
-            <MainPlantCard
-              id={23}
-              image_url="https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-23.jpg?raw=true"
-            />
-            <MainPlantCard
-              id={11}
-              image_url="https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-11.jpg?raw=true"
-            />
+          <div
+            className="plant-cards"
+            style={{ transform: `translateX(${scroll}vw)` }}
+          >
+            {PLANT_CARD.map(plant => {
+              return (
+                <MainPlantCard
+                  key={plant.id}
+                  id={plant.id}
+                  image_url={plant.image_url}
+                />
+              );
+            })}
           </div>
         </div>
       </section>
@@ -80,18 +84,9 @@ const Main = () => {
           description={MESSAGE[2].description}
         />
         <div className="pot-cards">
-          <MainPotCard
-            id={62}
-            image_url="https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%ED%99%94%EB%B6%84(10)/pot-62.jpg?raw=true"
-          />
-          <MainPotCard
-            id={65}
-            image_url="https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%ED%99%94%EB%B6%84(10)/pot-65.jpg?raw=true"
-          />
-          <MainPotCard
-            id={68}
-            image_url="https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%ED%99%94%EB%B6%84(10)/pot-68.jpg?raw=true"
-          />
+          {POT_CARD.map(pot => {
+            return <MainPotCard id={pot.id} image_url={pot.image_url} />;
+          })}
         </div>
       </section>
     </main>
@@ -117,5 +112,61 @@ const MESSAGE = [
     title: '식물도 예쁜 집을 좋아해요.',
     description:
       '화분은 식물을 키우는 데 가장 중요한 요소 중 하나입니다. 적절한 크기의 화분은 식물이 잘 자랄 수 있게 도와주죠. 또 화분은 식물과 함께 인테리어에 화려함과 조화를 더해줘요.',
+  },
+];
+
+const PLANT_CARD = [
+  {
+    id: 36,
+    image_url:
+      'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-36.jpg?raw=true',
+  },
+  {
+    id: 4,
+    image_url:
+      'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-4.jpg?raw=true',
+  },
+  {
+    id: 23,
+    image_url:
+      'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-23.jpg?raw=true',
+  },
+  {
+    id: 11,
+    image_url:
+      'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-11.jpg?raw=true',
+  },
+  {
+    id: 15,
+    image_url:
+      'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-15.jpg?raw=true',
+  },
+  {
+    id: 20,
+    image_url:
+      'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-20.jpg?raw=true',
+  },
+  {
+    id: 25,
+    image_url:
+      'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-25.jpg?raw=true',
+  },
+];
+
+const POT_CARD = [
+  {
+    id: 62,
+    image_url:
+      'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%ED%99%94%EB%B6%84(10)/pot-62.jpg?raw=true',
+  },
+  {
+    id: 65,
+    image_url:
+      'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%ED%99%94%EB%B6%84(10)/pot-65.jpg?raw=true',
+  },
+  {
+    id: 68,
+    image_url:
+      'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%ED%99%94%EB%B6%84(10)/pot-68.jpg?raw=true',
   },
 ];
