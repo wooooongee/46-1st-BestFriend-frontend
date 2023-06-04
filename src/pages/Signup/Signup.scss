@@ -33,7 +33,13 @@
     .privacy-agreement-checkbox {
       zoom: 1.6;
       accent-color: $primary-color;
+      transition: all 1s;
     }
+  }
+
+  .scale {
+    transform: scale(1.2);
+    transition: all 1s;
   }
 
   .signup-btn {

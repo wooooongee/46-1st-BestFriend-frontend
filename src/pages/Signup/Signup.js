@@ -142,16 +142,18 @@ const Signup = () => {
       <div className="privacy-agreement-input">
         <input
           type="checkBox"
-          className="privacy-agreement-checkbox"
-          onClick={setCheck}
+          className={
+            check
+              ? 'privacy-agreement-checkbox scale'
+              : 'privacy-agreement-checkbox'
+          }
+          onClick={() => {
+            setCheck(!check);
+          }}
         />
         <label>grön의 개인정보 처리방침 및 이용약관에 동의합니다.</label>
       </div>
-      <button
-        className="signup-btn"
-        onClick={handleSignupBtn}
-        disabled={!check}
-      >
+      <button className="signup-btn" onClick={check ? handleSignupBtn : null}>
         계정 만들기
       </button>
     </main>
