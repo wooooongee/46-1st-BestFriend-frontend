@@ -28,7 +28,7 @@ const Cart = () => {
   //     });
   // }, []);
   useEffect(() => {
-    fetch('http://10.58.52.117:3000/carts', {
+    fetch('http://10.58.52.157:3000/carts', {
       method: 'GET',
       headers: { Authorization: localStorage.getItem('token') },
     })
@@ -43,6 +43,8 @@ const Cart = () => {
       })
       .catch(error => console.log(error));
   }, []);
+
+  console.log(cartList);
 
   let calculation = cartList.map(product => product.price * product.quantity);
   let totalPrice = calculation.reduce(function add(sum, currValue) {
