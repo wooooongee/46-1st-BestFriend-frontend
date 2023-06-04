@@ -13,12 +13,12 @@ const Signup = () => {
   });
 
   const [errorMessages, setErrorMessages] = useState({
-    nameMessage: '잘못된 이름입니다',
-    emailMessage: '잘못된 이메일 주소입니다',
-    passwordMessage: '대문자를 포함하여 8자이상 입력하세요',
-    confirmpasswordMessage: '비밀번호가 일치하지 않습니다',
-    phoneMessage: '11자리 숫자여야 합니다',
-    addressMessage: '주소를 한글로 입력하세요',
+    nameMessage: '',
+    emailMessage: '',
+    passwordMessage: '',
+    confirmpasswordMessage: '',
+    phoneMessage: '',
+    addressMessage: '',
   });
 
   const [check, setCheck] = useState(false);
@@ -54,7 +54,7 @@ const Signup = () => {
         ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
         : setErrorMessages(prev => ({
             ...prev,
-            [name + 'Message']: '잘못된 이름입니다',
+            [name + 'Message']: '한글 2~4글자로 입력하세요',
           }));
     } else if (name === 'email') {
       emailValidation(value)
@@ -68,7 +68,7 @@ const Signup = () => {
         ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
         : setErrorMessages(prev => ({
             ...prev,
-            [name + 'Message']: '대문자를 포함하여 8자이상 입력하세요',
+            [name + 'Message']: '영문 대문자를 포함하여 8자이상 입력하세요',
           }));
     } else if (name === 'confirmpassword') {
       confirmpasswordValidation(value)
@@ -82,14 +82,14 @@ const Signup = () => {
         ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
         : setErrorMessages(prev => ({
             ...prev,
-            [name + 'Message']: '11자리 숫자여야 합니다',
+            [name + 'Message']: '11자리 숫자만 입력하세요',
           }));
     } else if (name === 'address') {
       addressValidation(value)
         ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
         : setErrorMessages(prev => ({
             ...prev,
-            [name + 'Message']: '주소를 한글로 입력하세요',
+            [name + 'Message']: '한글,숫자만 입력하세요',
           }));
     }
   };
@@ -98,10 +98,10 @@ const Signup = () => {
     return /^[가-힣]{2,4}$/.test(name);
   };
   const emailValidation = email => {
-    return /^[a-z0-9\-_]+@([a-z0-9]+\.)+[a-z]{2,6}$/.test(email);
+    return /^[a-z0-9\-_]+@([a-z0-9]+\.com)$/.test(email);
   };
   const passwordValidation = password => {
-    return /^(?=.*[A-Z!@#$%^&*]).{8,}$/.test(password);
+    return /^(?=.*[A-Z]).{8,}$/.test(password);
   };
   const confirmpasswordValidation = confirmpassword => {
     return password === confirmpassword;
@@ -110,7 +110,7 @@ const Signup = () => {
     return /^[0-9]{3}[0-9]{4}[0-9]{4}$/.test(phone);
   };
   const addressValidation = address => {
-    return /^[가-힣 ]+$/.test(address);
+    return /^[가-힣0-9 ]+$/.test(address);
   };
 
   return (
