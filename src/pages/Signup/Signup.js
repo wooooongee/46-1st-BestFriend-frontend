@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Signup.scss';
 
@@ -21,11 +21,12 @@ const Signup = () => {
     addressMessage: '주소를 한글로 입력하세요',
   });
 
+  const [check, setCheck] = useState(false);
   const { password } = inputs;
 
   const navigate = useNavigate();
 
-  const onClick = () => {
+  const handleSignupBtn = () => {
     fetch('http://10.58.52.117:3000/users/signup', {
       method: 'POST',
       headers: {
@@ -93,19 +94,11 @@ const Signup = () => {
     }
   };
 
-  const [isErrorMessageVisible, setIsErrorMessageVisible] = useState(false);
-
-  useEffect(() => {
-    setIsErrorMessageVisible(true);
-  }, []);
-
-  const AllValidation = ([name]) => {};
-
   const nameValidation = name => {
     return /^[가-힣]{2,4}$/.test(name);
   };
   const emailValidation = email => {
-    return /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/.test(email);
+    return /^[a-z0-9\-_]+@([a-z0-9]+\.)+[a-z]{2,6}$/.test(email);
   };
   const passwordValidation = password => {
     return /^(?=.*[A-Z!@#$%^&*]).{8,}$/.test(password);
@@ -135,19 +128,30 @@ const Signup = () => {
             placeholder={input.placeholder}
             onChange={onChange}
             value={inputs[input.id]}
+            type={
+              input.id === 'password' || input.id === 'confirmpassword'
+                ? 'password'
+                : 'text'
+            }
           />
-          {isErrorMessageVisible && (
-            <p className="error-messages-p">
-              {errorMessages[input.id + 'Message']}
-            </p>
-          )}
+          <p className="error-messages-p">
+            {errorMessages[input.id + 'Message']}
+          </p>
         </React.Fragment>
       ))}
       <div className="privacy-agreement-input">
-        <input className="privacy-agreement-checkbox" type="checkBox" />
+        <input
+          type="checkBox"
+          className="privacy-agreement-checkbox"
+          onClick={setCheck}
+        />
         <label>grön의 개인정보 처리방침 및 이용약관에 동의합니다.</label>
       </div>
-      <button className="signup-btn" onClick={onClick}>
+      <button
+        className="signup-btn"
+        onClick={handleSignupBtn}
+        disabled={!check}
+      >
         계정 만들기
       </button>
     </main>
