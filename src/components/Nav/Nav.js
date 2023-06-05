@@ -17,7 +17,7 @@ const Nav = () => {
       <nav className="navbar">
         <img
           className="logo"
-          src="./images/Nav/gron-logo.png"
+          src={process.env.PUBLIC_URL + '/images/Nav/gron-logo.png'}
           alt="gron-logo"
           onClick={() => navigate('/')}
         />
@@ -40,7 +40,7 @@ const Nav = () => {
         <div className="search">
           <img
             className="search-icon"
-            src="./images/Nav/search.png"
+            src={process.env.PUBLIC_URL + '/images/Nav/search.png'}
             alt="search-icon"
           />
           <input className="search-input" />
@@ -48,7 +48,7 @@ const Nav = () => {
         <div className="icons">
           <img
             className="icon"
-            src="./images/Nav/like.png"
+            src={process.env.PUBLIC_URL + '/images/Nav/like.png'}
             alt="like-icon"
             onClick={() => {
               navigate('/wishlist');
@@ -56,7 +56,7 @@ const Nav = () => {
           />
           <img
             className="icon"
-            src="./images/Nav/cart.png"
+            src={process.env.PUBLIC_URL + '/images/Nav/cart.png'}
             alt="cart-icon"
             onClick={() => navigate('/cart')}
           />

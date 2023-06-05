@@ -22,36 +22,48 @@
     background-color: $primary-color;
     color: $secondary-color;
     &:hover {
+      transition: 0.3s ease-in-out;
+      border: 1px solid $primary-color;
+      background-color: $secondary-color;
+      color: $primary-color;
       cursor: pointer;
     }
   }
 
-  .carousel-btn {
-    display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-    margin-bottom: 15px;
-    &:hover {
-      cursor: pointer;
-    }
+  .carousel {
+    overflow: hidden;
 
-    .left-btn,
-    .right-btn {
-      @include flexCenter;
-      width: 40px;
-      height: 40px;
-      border-radius: 50px;
-      background-color: #e5e5e5;
-      .arrow-left,
-      .arrow-right {
-        width: 8px;
+    .carousel-btn {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      margin-bottom: 15px;
+
+      .left-btn,
+      .right-btn {
+        @include flexCenter;
+        width: 40px;
+        height: 40px;
+        border-radius: 50px;
+        background-color: #e5e5e5;
+        .arrow-left,
+        .arrow-right {
+          width: 8px;
+        }
+        &:hover {
+          transition: 0.4s ease-in-out;
+          background-color: #b4b4b4;
+          cursor: pointer;
+        }
       }
     }
-  }
-  .plant-cards {
-    display: flex;
-  }
 
+    .plant-cards {
+      display: flex;
+      gap: 20px;
+      transition: 0.8s ease-in-out;
+    }
+  }
   .main-interior-image {
     width: 100%;
     aspect-ratio: 2/1;
