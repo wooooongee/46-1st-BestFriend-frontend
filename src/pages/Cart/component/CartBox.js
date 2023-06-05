@@ -1,24 +1,23 @@
 import { useState } from 'react';
 import './CartBox.scss';
 
-const CartBox = ({ product, setProductList, id, setCartList }) => {
-  const { image_url, name, quantity, product_id } = product;
+const CartBox = ({ product, setProductList, setCartList, cartId }) => {
+  const { image_url, name, quantity, product_id, id } = product;
   const [count, setCount] = useState(quantity);
   let totalPrice = Number(product.price * product.quantity).toLocaleString(
     'en'
   );
   const deleteCart = id => {
-    setCartList(prev => prev.filter(product => product.product_id !== id));
+    setCartList(prev => prev.filter(product => product.product_id !== cartId));
   };
   const handleCountMinus = () => {
-    fetch('http://10.58.52.157:3000/carts', {
+    fetch(`http://10.58.52.227:3000/carts/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        productId: product_id,
         quantity: count,
       }),
     })
@@ -34,14 +33,13 @@ const CartBox = ({ product, setProductList, id, setCartList }) => {
       });
   };
   const handleCountUp = () => {
-    fetch('http://10.58.52.157:3000/carts', {
+    fetch(`http://10.58.52.227:3000/carts/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        productId: product_id,
         quantity: count,
       }),
     })
@@ -58,15 +56,12 @@ const CartBox = ({ product, setProductList, id, setCartList }) => {
   };
 
   const handleDelete = () => {
-    fetch('http://10.58.52.157:3000/carts', {
+    fetch(`http://10.58.52.227:3000/carts/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
       },
-      body: JSON.stringify({
-        productId: product_id,
-      }),
     });
   };
 

@@ -28,7 +28,7 @@ const Cart = () => {
   //     });
   // }, []);
   useEffect(() => {
-    fetch('http://10.58.52.157:3000/carts', {
+    fetch('http://10.58.52.227:3000/carts', {
       method: 'GET',
       headers: { Authorization: localStorage.getItem('token') },
     })
@@ -72,7 +72,7 @@ const Cart = () => {
                 key={product.product_id}
                 product={product}
                 setCartList={setCartList}
-                id={product.product_id}
+                cartId={product.product_id}
               />
             );
           })}
