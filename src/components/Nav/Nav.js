@@ -47,7 +47,6 @@ const Nav = () => {
           <input className="search-input" />
         </div>
         <div className="icons">
-          <img className="icon" src="/images/Nav/like.png" alt="like-icon" />
           <img
             className="icon"
             src={process.env.PUBLIC_URL + '/images/Nav/like.png'}
