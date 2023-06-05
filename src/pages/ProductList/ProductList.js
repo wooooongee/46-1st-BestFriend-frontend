@@ -10,56 +10,21 @@ import './ProductList.scss';
 const ProductList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const subCategoryId = searchParams.getAll('subCategoryId');
-  const offset = searchParams.get('offset') || 0;
-  const limit = searchParams.get('limit');
-  const orderBy = searchParams.get('orderBy');
-  const isBerryIncluded = searchParams.get('isBerryIncluded');
-  const isFlowerIncluded = searchParams.get('isFlowerIncluded');
-
   const [card, setCard] = useState([]);
 
-  // API 통신
-  // useEffect(() => {
-  //   fetch(
-  //     `http://10.58.52.227:3000/products?subCategoryId=${subCategoryId}&limit=${limit}&offset=${offset}&isBerryIncluded=${isBerryIncluded}&isFlowerIncluded=${isFlowerIncluded}&orderBy=${orderBy}`
-  //   )
-  //     .then(res => {
-  //       res.json();
-  //     })
-  //     .then(data => {
-  //       console.log(data);
-  //       setCard(data);
-  //     });
-  // }, [
-  //   subCategoryId,
-  //   limit,
-  //   offset,
-  //   isBerryIncluded,
-  //   isFlowerIncluded,
-  //   orderBy,
-  // ]);
-
-  // // Mock data 통신
   useEffect(() => {
-    fetch(
-      `/data/productList.json?subCategoryId=${subCategoryId}&limit=${limit}&offset=${offset}&isBerryIncluded=${isBerryIncluded}&isFlowerIncluded=${isFlowerIncluded}`
-    )
+    fetch(`http://10.58.52.227:3000/products?${searchParams.toString()}`)
       .then(res => res.json())
-      .then(data => setCard(data));
-  }, [
-    subCategoryId,
-    offset,
-    limit,
-    isBerryIncluded,
-    isFlowerIncluded,
-    orderBy,
-  ]);
+      .then(data => setCard(data.list));
+  }, [searchParams]);
+
+  if (!card[0]?.id) return null;
 
   return (
     <div className="product-list">
       <aside className="side-menu">
         <Category />
-        <Filter />
+        {subCategoryId.every(item => parseInt(item) <= 4) && <Filter />}
       </aside>
       <main className="main-product-list">
         <Sort />

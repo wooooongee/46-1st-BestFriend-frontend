@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { LIST_LIMIT } from '../../constants';
 import './Pagination.scss';
 
 const Pagination = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  searchParams.set('limit', LIST_LIMIT);
   const movePage = pageNum => {
-    searchParams.set('limit', 9);
-    searchParams.set('offset', (pageNum - 1) * 9);
+    searchParams.set('offset', (pageNum - 1) * LIST_LIMIT);
     setSearchParams(searchParams);
   };
 

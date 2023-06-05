@@ -5,11 +5,15 @@ import './Filter.scss';
 const Filter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const toggleBerry = e => {
-    searchParams.set('isBerryIncluded', e.target.checked ? 1 : 0);
+    e.target.checked
+      ? searchParams.set('isBerryIncluded', 1)
+      : searchParams.delete('isBerryIncluded');
     setSearchParams(searchParams);
   };
   const toggleFlower = e => {
-    searchParams.set('isFlowerIncluded', e.target.checked ? 1 : 0);
+    e.target.checked
+      ? searchParams.set('isFlowerIncluded', 1)
+      : searchParams.delete('isFlowerIncluded');
     setSearchParams(searchParams);
   };
 
