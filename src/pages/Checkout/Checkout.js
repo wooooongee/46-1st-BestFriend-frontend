@@ -1,33 +1,56 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CheckoutList from './CheckoutList';
 import './Checkout.scss';
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
   const [productList, setProductList] = useState([]);
-  const remainingPoint = parseInt(userInfo.remainingPoint);
 
-  const totalprices = productList.reduce(
-    (acc, cur) => acc + cur.prices * cur.count,
+  const point = parseInt(userInfo.point);
+
+  const totalprice = productList.reduce(
+    (acc, cur) => acc + cur.price * cur.quantity,
     0
   );
+  console.log(totalprice);
+  console.log(typeof productList);
+
+  const remainingPoint = point - totalprice;
 
   const handleCheckOut = () => {
-    fetch('/data/userInfo.json')
+    fetch('http://10.58.52.227:8000/users/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        point: remainingPoint,
+      }),
+    })
       .then(res => res.json())
       .then(data => setUserInfo(data));
   };
 
   useEffect(() => {
-    fetch('/data/userInfo.json')
+    fetch('http://10.58.52.227:8000/users/signup')
       .then(res => res.json())
       .then(data => setUserInfo(data));
   }, []);
 
   useEffect(() => {
-    fetch('/data/productList.json')
+    fetch('http://10.58.52.227:8000/carts')
       .then(res => res.json())
-      .then(data => setProductList(data));
+      .then(data => {
+        if (data.message === 'NEED_ACCESS_TOKEN') {
+          // alert('로그인이 필요합니다.');
+          // navigate('/login');
+          console.log('로그인이필요합니다');
+          return;
+        }
+        setProductList(data);
+      });
   }, []);
 
   return (
@@ -60,16 +83,16 @@ const Checkout = () => {
       </article>
       <aside className="aside-checkout">
         <h2 className="checkout-h2">결제 금액</h2>
-        <div className="product-prices">
-          상품 금액 <span>{totalprices.toLocaleString()} 원</span>
+        <div className="product-price">
+          상품 금액 <span>{totalprice.toLocaleString()} 원</span>
         </div>
         <div className="delivery-fees">
           배송비 <span className="delivery-fees-value">무료</span>
         </div>
-        <div className="total-prices">
+        <div className="total-price">
           총 결제 금액
-          <span className="total-prices-value">
-            {totalprices.toLocaleString()} 원
+          <span className="total-price-value">
+            {totalprice.toLocaleString()} 원
           </span>
         </div>
         <button className="checkout-btn" onClick={handleCheckOut}>

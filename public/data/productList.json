@@ -1,14 +1,10 @@
 [
   {
-    "id": 1,
-    "name": "몬스테라",
-    "prices": 10000,
-    "count": 2
-  },
-  {
-    "id": 2,
-    "name": "카스테라",
-    "prices": 20000,
-    "count": 4
+    "id": 27,
+    "product_id": 2,
+    "name": "산세베리아",
+    "image_url": "https://github.com/HaeJungg/project-image/blob/master/Image - 식물 (60)/plant-2.jpg?raw=true",
+    "price": "8000",
+    "quantity": 5
   }
 ]
