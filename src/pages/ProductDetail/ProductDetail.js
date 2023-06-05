@@ -15,12 +15,14 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const params = useParams();
   const productsId = params.id;
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch(`http://10.58.52.157:3000/products/${productsId}`)
+    fetch(`http://10.58.52.227:8000/products/${productsId}`)
       .then(res => res.json())
       .then(data => setProducts(data.product));
   }, [productsId]);
+
   const [{ description, image_url, name, price, sub_category_name }] = products;
 
   useEffect(() => {
@@ -44,11 +46,11 @@ const ProductDetail = () => {
   };
 
   const shoppingBasket = () => {
-    fetch(`http://10.58.52.157:3000/carts`, {
+    fetch(`http://10.58.52.227:8000/carts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('token'),
+        Authorization: token,
       },
       body: JSON.stringify({
         productId: productsId,
@@ -65,11 +67,11 @@ const ProductDetail = () => {
   };
 
   const addToWishList = () => {
-    fetch(`http://10.58.52.157:3000/likes`, {
+    fetch(`http://10.58.52.227:8000/likes`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('token'),
+        Authorization: token,
       },
       body: JSON.stringify({
         productId: productsId,
@@ -85,11 +87,11 @@ const ProductDetail = () => {
   };
 
   const deleteToWishList = () => {
-    fetch(`http://10.58.52.157:3000/likes`, {
+    fetch(`http://10.58.52.227:8000/likes`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('token'),
+        Authorization: token,
       },
       body: JSON.stringify({
         productId: productsId,
@@ -103,8 +105,21 @@ const ProductDetail = () => {
       })
       .catch(error => console.log(error));
   };
+
   const handleButtonMinus = () => {
     count === 1 ? setCount(1) : setCount(count - 1);
+  };
+
+  const handleWishBtn = () => {
+    setIsWishlistAdd(!isWishlistAdd);
+    if (isWishlistAdd) {
+      setIsWishModalOpen(!isWishlistAdd);
+      deleteToWishList();
+    } else {
+      setIsWishModalOpen(!isWishlistAdd);
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      addToWishList();
+    }
   };
 
   return (
@@ -147,13 +162,7 @@ const ProductDetail = () => {
           <button
             className="btn wishlist-btn"
             onClick={() => {
-              setIsWishlistAdd(!isWishlistAdd);
-              isWishlistAdd
-                ? setIsWishModalOpen(false)
-                : setIsWishModalOpen(true);
-              isWishlistAdd === false &&
-                window.scrollTo({ top: 0, behavior: 'auto' });
-              isWishlistAdd ? deleteToWishList() : addToWishList();
+              handleWishBtn();
             }}
           >
             위시리스트
