@@ -1,22 +1,82 @@
-import { React, useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CartBox from './component/CartBox';
 import './Cart.scss';
 
 const Cart = () => {
+  const [productList, setProductList] = useState([]);
+  const [cartList, setCartList] = useState([]);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const getCart = () => {
+    fetch('http://10.58.52.227:8000/carts', {
+      method: 'GET',
+      headers: { Authorization: localStorage.getItem('token') },
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('통신실패');
+      })
+      .then(data => {
+        setCartList(data.carts);
+      })
+      .catch(error => console.log(error));
+  };
+
+  useEffect(() => {
+    fetch('/data/cartData.json')
+      .then(res => res.json())
+      .then(data => {
+        setProductList(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    getCart();
+  }, []);
+
+  const calculation = cartList.map(product => product.price * product.quantity);
+  const totalPrice = calculation.reduce(function add(sum, currValue) {
+    return sum + currValue;
+  }, 0);
+
   return (
     <div className="cart">
-      <h1 className="title">장바구니</h1>
+      <h1 className="cart-title">장바구니</h1>
       <div className="cart-container">
         <main className="cart-main">
-          <CartBox />
-          <CartBox />
+          {/* TODO : 차후 mock data 통신을 통해 사용할 코드
+            {productList.map(product => {
+            return (
+              <CartBox
+                key={product.id}
+                product={product}
+                setProductList={setProductList}
+                id={product.id}
+              />
+            );
+          })} */}
+          {cartList.map(product => {
+            return (
+              <CartBox
+                key={product.id}
+                cartId={product.product_id}
+                product={product}
+                setCartList={setCartList}
+                getCart={getCart}
+              />
+            );
+          })}
         </main>
         <aside className="cart-aside">
-          <h1 className="title">주문금액</h1>
+          <h1 className="aside-title">주문금액</h1>
           <div className="price">
             <div className="price-sort">
               <p>상품금액</p>
-              <p>40,000원</p>
+              <p>{Number(totalPrice).toLocaleString('en')}원</p>
             </div>
             <div className="price-sort">
               <p>배송비</p>
@@ -26,10 +86,32 @@ const Cart = () => {
           <div className="total-price">
             <div className="price-sort">
               <p>총 결제금액</p>
-              <p>40,000원</p>
+              <p>{Number(totalPrice).toLocaleString('en')}원</p>
             </div>
           </div>
-          <button className="btn">주문하기</button>
+          <button
+            className="btn"
+            onClick={() => {
+              cartList.length === 0
+                ? setIsAlertOpen(true)
+                : navigate('/checkout');
+            }}
+          >
+            주문하기
+          </button>
+          {isAlertOpen && (
+            <div className="alert-box">
+              <p>장바구니가 비어있습니다.</p>
+              <button
+                className="alert-btn"
+                onClick={() => {
+                  setIsAlertOpen(false);
+                }}
+              >
+                X
+              </button>
+            </div>
+          )}
         </aside>
       </div>
     </div>

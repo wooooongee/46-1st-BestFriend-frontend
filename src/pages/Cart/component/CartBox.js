@@ -1,22 +1,116 @@
 import './CartBox.scss';
-const CartBox = () => {
+
+const CartBox = ({ product, getCart }) => {
+  const { image_url, name, quantity, product_id, id } = product;
+
+  const totalPrice = Number(product.price * quantity).toLocaleString('en');
+
+  const handleCountMinus = () => {
+    if (quantity <= 1) return;
+
+    fetch(`http://10.58.52.227:8000/carts/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        quantity: quantity - 1,
+      }),
+    })
+      .then(res => {
+        if (res.ok) {
+          getCart();
+        } else throw new Error('통신실패!');
+      })
+      .catch(error => console.log(error));
+  };
+
+  const handleCountUp = () => {
+    fetch(`http://10.58.52.227:8000/carts/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        quantity: quantity + 1,
+      }),
+    })
+      .then(res => {
+        if (res.ok) {
+          getCart();
+        } else throw new Error('통신실패!');
+      })
+      .catch(error => console.log(error));
+  };
+
+  const handleDelete = () => {
+    if (!window.confirm('정말 삭제하시겠습니까?')) return;
+
+    fetch(`http://10.58.52.227:8000/carts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
+      },
+    }).then(res => {
+      if (res.ok) {
+        getCart();
+      }
+    });
+  };
+
   return (
-    <section className="cart-box">
+    <section className="cart-box" key={product_id}>
       <div className="cart-img">
-        <img
-          src="/images/ProductDetail/plant-21.jpg"
-          alt="product-img"
-          className="img"
-        />
+        <img src={image_url} alt="product-img" className="img" />
       </div>
       <div className="cart-content">
         <div className="content">
-          <h1 className="title">몬스테라</h1>
-          <p>수량 : 2개</p>
-          <button className="btn">삭제</button>
+          <h1>{name}</h1>
+          <div className="count">
+            <button
+              className="btn btn-box"
+              onClick={() => {
+                handleCountMinus();
+              }}
+            >
+              <img
+                src="/images/ProductDetail/arrow-down.png"
+                alt=""
+                className="img"
+              />
+            </button>
+            <p className="content-text">수량 : {quantity}개</p>
+            <button
+              className="btn btn-box"
+              onClick={() => {
+                handleCountUp();
+              }}
+            >
+              <img
+                src="/images/ProductDetail/arrow-up.png"
+                alt=""
+                className="img"
+              />
+            </button>
+          </div>
+          <div />
+          <button
+            className="btn"
+            onClick={() => {
+              handleDelete();
+            }}
+          >
+            삭제
+          </button>
         </div>
         <div className="total">
-          <p>총 가격:20,000원</p>
+          <p className="content-text">
+            총 가격:
+            {totalPrice}원
+          </p>
         </div>
       </div>
     </section>
