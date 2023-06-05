@@ -11,18 +11,8 @@ const Signup = () => {
     phone: '',
     address: '',
   });
-
-  const [errorMessages, setErrorMessages] = useState({
-    nameMessage: '',
-    emailMessage: '',
-    passwordMessage: '',
-    confirmpasswordMessage: '',
-    phoneMessage: '',
-    addressMessage: '',
-  });
-
   const [check, setCheck] = useState(false);
-  const { password } = inputs;
+  const { name, email, password, confirmpassword, phone, address } = inputs;
 
   const navigate = useNavigate();
 
@@ -44,75 +34,36 @@ const Signup = () => {
         }
       });
   };
-
   const onChange = e => {
     const { name, value } = e.target;
     setInputs(prev => ({ ...prev, [name]: value }));
-
-    if (name === 'name') {
-      nameValidation(value)
-        ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
-        : setErrorMessages(prev => ({
-            ...prev,
-            [name + 'Message']: '한글 2~4글자로 입력하세요',
-          }));
-    } else if (name === 'email') {
-      emailValidation(value)
-        ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
-        : setErrorMessages(prev => ({
-            ...prev,
-            [name + 'Message']: '잘못된 이메일 주소입니다',
-          }));
-    } else if (name === 'password') {
-      passwordValidation(value)
-        ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
-        : setErrorMessages(prev => ({
-            ...prev,
-            [name + 'Message']: '영문 대문자를 포함하여 8자이상 입력하세요',
-          }));
-    } else if (name === 'confirmpassword') {
-      confirmpasswordValidation(value)
-        ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
-        : setErrorMessages(prev => ({
-            ...prev,
-            [name + 'Message']: '비밀번호가 일치하지 않습니다',
-          }));
-    } else if (name === 'phone') {
-      phoneValidation(value)
-        ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
-        : setErrorMessages(prev => ({
-            ...prev,
-            [name + 'Message']: '11자리 숫자만 입력하세요',
-          }));
-    } else if (name === 'address') {
-      addressValidation(value)
-        ? setErrorMessages(prev => ({ ...prev, [name + 'Message']: '' }))
-        : setErrorMessages(prev => ({
-            ...prev,
-            [name + 'Message']: '한글,숫자만 입력하세요',
-          }));
-    }
   };
-
-  const nameValidation = name => {
-    return /^[가-힣]{2,4}$/.test(name);
+  const userInfoValid = {
+    name:
+      !/^[가-힣]{2,4}$/.test(name) &&
+      name.length > 0 &&
+      '한글 2~4글자로 입력하세요',
+    email:
+      !/^[a-z0-9\-_]+@([a-z0-9]+\.com)$/.test(email) &&
+      email.length > 0 &&
+      '잘못된 이메일 주소입니다',
+    password:
+      !/^(?=.*[A-Z]).{8,}$/.test(password) &&
+      password.length > 0 &&
+      '영문 대문자를 포함하여 8자이상 입력하세요',
+    confirmpassword:
+      password !== confirmpassword &&
+      confirmpassword.length > 0 &&
+      '비밀번호가 일치하지 않습니다',
+    phone:
+      !/^[0-9]{3}[0-9]{4}[0-9]{4}$/.test(phone) &&
+      phone.length > 0 &&
+      '11자리 숫자만 입력하세요',
+    address:
+      !/^[가-힣0-9 ]+$/.test(address) &&
+      address.length > 0 &&
+      '한글,숫자만 입력하세요',
   };
-  const emailValidation = email => {
-    return /^[a-z0-9\-_]+@([a-z0-9]+\.com)$/.test(email);
-  };
-  const passwordValidation = password => {
-    return /^(?=.*[A-Z]).{8,}$/.test(password);
-  };
-  const confirmpasswordValidation = confirmpassword => {
-    return password === confirmpassword;
-  };
-  const phoneValidation = phone => {
-    return /^[0-9]{3}[0-9]{4}[0-9]{4}$/.test(phone);
-  };
-  const addressValidation = address => {
-    return /^[가-힣0-9 ]+$/.test(address);
-  };
-
   return (
     <main className="signup">
       <img
@@ -134,9 +85,7 @@ const Signup = () => {
                 : 'text'
             }
           />
-          <p className="error-messages-p">
-            {errorMessages[input.id + 'Message']}
-          </p>
+          <p className="error-messages-p">{userInfoValid[input.id]}</p>
         </React.Fragment>
       ))}
       <div className="privacy-agreement-input">
