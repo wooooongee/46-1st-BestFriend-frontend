@@ -2,12 +2,12 @@
 
 .order-list-li {
   display: flex;
-  padding: 0.7em;
+  padding: 25px 0 20px 0;
   border-bottom: 1px solid #dfdfdf;
 
   .order-list-img {
-    width: 6vw;
-    height: 16vh;
+    width: 35%;
+    margin-right: 21px;
   }
 
   .order-list-spans {
@@ -17,6 +17,7 @@
 
     .order-list-name {
       margin: 0.4em 0em 0.4em 2em;
+      font-size: 20px;
     }
 
     .order-list-count {
