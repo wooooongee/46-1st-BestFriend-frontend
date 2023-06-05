@@ -16,10 +16,10 @@ const ProductList = () => {
   useEffect(() => {
     fetch(`http://10.58.52.227:8000/products?${searchParams.toString()}`)
       .then(res => res.json())
-      .then(data => setCard(data.list));
+      .then(data => setCard(data));
   }, [searchParams]);
 
-  if (!card[0]?.id) return null;
+  if (!card.total_count) return null;
 
   return (
     <div className="product-list">
@@ -30,20 +30,20 @@ const ProductList = () => {
       <main className="main-product-list">
         <Sort />
         <div className="product-cards">
-          {card.map(card => {
+          {card.list.map(item => {
             return (
               <ProductCard
-                key={card.id}
-                path={card.id}
-                name={card.name}
-                price={card.price}
-                image_url={card.image_url}
+                key={item.id}
+                path={item.id}
+                name={item.name}
+                price={item.price}
+                image_url={item.image_url}
               />
             );
           })}
         </div>
         <Pagination
-          lastNum={Math.ceil(parseInt(data.total_count)) / LIST_LIMIT}
+          lastNum={Math.ceil(parseInt(card.total_count)) / LIST_LIMIT}
         />
       </main>
     </div>
