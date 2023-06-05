@@ -62,14 +62,14 @@ const Nav = () => {
             onClick={() => navigate('/cart')}
           />
           <button
-            className={tokenValue === undefined ? 'login-btn' : 'display-none'}
+            className={tokenValue === null ? 'login-btn' : 'display-none'}
             type="button"
             onClick={() => navigate('/login')}
           >
             로그인
           </button>
           <img
-            className={tokenValue !== undefined ? 'icon' : 'display-none'}
+            className={tokenValue !== null ? 'icon' : 'display-none'}
             src={process.env.PUBLIC_URL + '/images/Nav/user.png'}
             alt="user-icon"
           />
