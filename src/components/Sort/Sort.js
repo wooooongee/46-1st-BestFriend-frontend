@@ -26,7 +26,7 @@ const Sort = () => {
         <span>
           <img
             className="sort-icon"
-            src="/images/PRoductList/sort.png"
+            src="/images/ProductList/sort.png"
             alt="sort-icon"
           />
         </span>

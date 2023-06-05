@@ -13,14 +13,8 @@ const ProductList = () => {
   const subCategoryId = searchParams.getAll('subCategoryId');
   const [card, setCard] = useState([]);
 
-  // useEffect(() => {
-  //   fetch(`http://10.58.52.227:8000/products?${searchParams.toString()}`)
-  //     .then(res => res.json())
-  //     .then(data => setCard(data));
-  // }, [searchParams]);
-
   useEffect(() => {
-    fetch(`/data/productList.json?subCategoryId=${searchParams.toString()}`)
+    fetch(`http://10.58.52.227:8000/products?${searchParams.toString()}`)
       .then(res => res.json())
       .then(data => setCard(data));
   }, [searchParams]);
