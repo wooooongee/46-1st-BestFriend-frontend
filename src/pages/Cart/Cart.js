@@ -17,16 +17,6 @@ const Cart = () => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   fetch('http://10.58.52.117:3000/carts', {
-  //     method: 'GET',
-  //     headers: { Authorization: localStorage.getItem('token') },
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setCartList(data.carts);
-  //     });
-  // }, []);
   useEffect(() => {
     fetch('http://10.58.52.227:3000/carts', {
       method: 'GET',
@@ -44,8 +34,6 @@ const Cart = () => {
       .catch(error => console.log(error));
   }, []);
 
-  console.log(cartList);
-
   let calculation = cartList.map(product => product.price * product.quantity);
   let totalPrice = calculation.reduce(function add(sum, currValue) {
     return sum + currValue;
@@ -56,7 +44,8 @@ const Cart = () => {
       <h1 className="cart-title">장바구니</h1>
       <div className="cart-container">
         <main className="cart-main">
-          {/* {productList.map(product => {
+          {/* TODO : 차후 mock data 통신을 통해 사용할 코드
+            {productList.map(product => {
             return (
               <CartBox
                 key={product.id}

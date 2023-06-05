@@ -4,12 +4,15 @@ import './CartBox.scss';
 const CartBox = ({ product, setProductList, setCartList, cartId }) => {
   const { image_url, name, quantity, product_id, id } = product;
   const [count, setCount] = useState(quantity);
+
   let totalPrice = Number(product.price * product.quantity).toLocaleString(
     'en'
   );
+
   const deleteCart = id => {
     setCartList(prev => prev.filter(product => product.product_id !== cartId));
   };
+
   const handleCountMinus = () => {
     fetch(`http://10.58.52.227:3000/carts/${id}`, {
       method: 'PATCH',
@@ -32,6 +35,7 @@ const CartBox = ({ product, setProductList, setCartList, cartId }) => {
         console.log(data.message);
       });
   };
+
   const handleCountUp = () => {
     fetch(`http://10.58.52.227:3000/carts/${id}`, {
       method: 'PATCH',
