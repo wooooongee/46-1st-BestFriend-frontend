@@ -6,10 +6,17 @@ const Checkout = () => {
   const [userInfo, setUserInfo] = useState({});
   const [productList, setProductList] = useState([]);
   const remainingPoint = parseInt(userInfo.remainingPoint);
+
   const totalprices = productList.reduce(
     (acc, cur) => acc + cur.prices * cur.count,
     0
   );
+
+  const handleCheckOut = () => {
+    fetch('/data/userInfo.json')
+      .then(res => res.json())
+      .then(data => setUserInfo(data));
+  };
 
   useEffect(() => {
     fetch('/data/userInfo.json')
@@ -32,9 +39,7 @@ const Checkout = () => {
           <div className="user-information-values">
             <span className="user-name-value">{userInfo.name}</span>
             <span className="user-address-value">{userInfo.address}</span>
-            <span className="user-phonenumber-value">
-              {userInfo.phoneNumber}
-            </span>
+            <span className="user-phone-value">{userInfo.phone}</span>
           </div>
         </section>
         <section className="section-payment-point">
@@ -67,7 +72,9 @@ const Checkout = () => {
             {totalprices.toLocaleString()} 원
           </span>
         </div>
-        <button className="checkout-btn">결제 하기</button>
+        <button className="checkout-btn" onClick={handleCheckOut}>
+          결제 하기
+        </button>
       </aside>
     </main>
   );
