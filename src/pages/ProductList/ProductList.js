@@ -10,8 +10,9 @@ import './ProductList.scss';
 const ProductList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const subCategoryId = searchParams.getAll('subCategoryId');
-  const offset = searchParams.get('offset');
+  const offset = searchParams.get('offset') || 0;
   const limit = searchParams.get('limit');
+  const orderBy = searchParams.get('orderBy');
   const isBerryIncluded = searchParams.get('isBerryIncluded');
   const isFlowerIncluded = searchParams.get('isFlowerIncluded');
 
@@ -20,11 +21,23 @@ const ProductList = () => {
   // API 통신
   // useEffect(() => {
   //   fetch(
-  //     `http://10.58.52.117:3000/products?subCategoryId=${subCategoryId}&limit=${limit}&offset=${offset}&isBerryIncluded=${isBerryIncluded}&isFlowerIncluded=${isFlowerIncluded}`
+  //     `http://10.58.52.227:3000/products?subCategoryId=${subCategoryId}&limit=${limit}&offset=${offset}&isBerryIncluded=${isBerryIncluded}&isFlowerIncluded=${isFlowerIncluded}&orderBy=${orderBy}`
   //   )
-  //     .then(res => res.json())
-  //     .then(data => setCard(data));
-  // }, []);
+  //     .then(res => {
+  //       res.json();
+  //     })
+  //     .then(data => {
+  //       console.log(data);
+  //       setCard(data);
+  //     });
+  // }, [
+  //   subCategoryId,
+  //   limit,
+  //   offset,
+  //   isBerryIncluded,
+  //   isFlowerIncluded,
+  //   orderBy,
+  // ]);
 
   // // Mock data 통신
   useEffect(() => {
@@ -33,7 +46,14 @@ const ProductList = () => {
     )
       .then(res => res.json())
       .then(data => setCard(data));
-  }, [subCategoryId, offset, limit, isBerryIncluded, isFlowerIncluded]);
+  }, [
+    subCategoryId,
+    offset,
+    limit,
+    isBerryIncluded,
+    isFlowerIncluded,
+    orderBy,
+  ]);
 
   return (
     <div className="product-list">
