@@ -10,9 +10,13 @@
     min-width: 250px;
   }
 
-  .product-cards {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 30px;
+  .main-product-list {
+    width: 100%;
+
+    .product-cards {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
   }
 }
