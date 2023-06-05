@@ -14,7 +14,6 @@ const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const tokenValue = localStorage.getItem('token');
-  console.log(tokenValue);
 
   return (
     <div className="nav">
@@ -62,14 +61,14 @@ const Nav = () => {
             onClick={() => navigate('/cart')}
           />
           <button
-            className={tokenValue === null ? 'login-btn' : 'display-none'}
+            className={tokenValue ? 'display-none' : 'login-btn'}
             type="button"
             onClick={() => navigate('/login')}
           >
             로그인
           </button>
           <img
-            className={tokenValue !== null ? 'icon' : 'display-none'}
+            className={tokenValue ? 'icon' : 'display-none'}
             src={process.env.PUBLIC_URL + '/images/Nav/user.png'}
             alt="user-icon"
           />
