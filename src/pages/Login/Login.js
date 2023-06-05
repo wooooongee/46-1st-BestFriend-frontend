@@ -7,7 +7,6 @@ const Login = () => {
     email: '',
     password: '',
   });
-
   const navigate = useNavigate();
 
   const { email, password } = userInputs;
