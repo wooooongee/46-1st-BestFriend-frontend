@@ -6,11 +6,15 @@ const Search = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
 
-  const handleKeyPress = e => {
-    if (e.key === 'Enter') {
-      setQuery(e.target.value);
-      e.target.value = '';
+  const handleInput = e => {
+    setQuery(e.target.value);
+  };
+
+  const handleKeyUp = e => {
+    if (query !== '' && e.key === 'Enter') {
+      handleInput(e);
       navigate(`/list?search=${query}`);
+      setQuery('');
     }
   };
 
@@ -21,7 +25,13 @@ const Search = () => {
         src="/images/Nav/search.png"
         alt="search-icon"
       />
-      <input className="search-input" type="text" onKeyUp={handleKeyPress} />
+      <input
+        className="search-input"
+        type="text"
+        onChange={handleInput}
+        onKeyUp={handleKeyUp}
+        value={query}
+      />
     </div>
   );
 };
