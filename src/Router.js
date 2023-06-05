@@ -7,6 +7,7 @@ import Checkout from './pages/Checkout/Checkout';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import ProductList from './pages/ProductList/ProductList';
 import Signup from './pages/Signup/Signup';
+import Wishlist from './pages/Wishlist/Wishlist';
 import Container from './Container';
 
 const Router = () => {
@@ -22,6 +23,7 @@ const Router = () => {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
     </BrowserRouter>
   );
