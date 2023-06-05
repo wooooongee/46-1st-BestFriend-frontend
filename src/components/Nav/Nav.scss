@@ -27,30 +27,6 @@
       }
     }
 
-    .search {
-      display: flex;
-      align-items: center;
-      min-width: 200px;
-      height: 30px;
-      padding: 0 10px;
-      border: none;
-      border-radius: 50px;
-      background-color: #f5f5f5;
-
-      .search-icon {
-        height: 15px;
-        margin-right: 5px;
-      }
-
-      .search-input {
-        border: none;
-        background-color: transparent;
-        &:focus {
-          outline: none;
-        }
-      }
-    }
-
     .icons {
       @include flexSpaceBetween;
       min-width: 170px;
