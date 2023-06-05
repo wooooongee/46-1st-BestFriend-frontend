@@ -8,7 +8,6 @@ const Pagination = ({ lastNum }) => {
   for (let i = 1; i <= lastNum; i++) {
     pages.push(i);
   }
-  console.log(pages);
 
   const [searchParams, setSearchParams] = useSearchParams();
   searchParams.set('limit', LIST_LIMIT);
