@@ -69,25 +69,37 @@ const CartBox = ({ product, getCart }) => {
       <div className="cart-content">
         <div className="content">
           <h1>{name}</h1>
-          <p className="content-text">수량 : {quantity}개</p>
-          <button
-            onClick={() => {
-              handleCountMinus();
-            }}
-          >
-            down
-          </button>
-          <button
-            onClick={() => {
-              handleCountUp();
-            }}
-          >
-            up
-          </button>
+          <div className="count">
+            <button
+              className="btn btn-box"
+              onClick={() => {
+                handleCountMinus();
+              }}
+            >
+              <img
+                src="/images/ProductDetail/arrow-down.png"
+                alt=""
+                className="img"
+              />
+            </button>
+            <p className="content-text">수량 : {quantity}개</p>
+            <button
+              className="btn btn-box"
+              onClick={() => {
+                handleCountUp();
+              }}
+            >
+              <img
+                src="/images/ProductDetail/arrow-up.png"
+                alt=""
+                className="img"
+              />
+            </button>
+          </div>
+          <div />
           <button
             className="btn"
             onClick={() => {
-              // deleteCart(id);
               handleDelete();
             }}
           >

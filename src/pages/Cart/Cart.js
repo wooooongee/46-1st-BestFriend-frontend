@@ -38,8 +38,8 @@ const Cart = () => {
     getCart();
   }, []);
 
-  let calculation = cartList.map(product => product.price * product.quantity);
-  let totalPrice = calculation.reduce(function add(sum, currValue) {
+  const calculation = cartList.map(product => product.price * product.quantity);
+  const totalPrice = calculation.reduce(function add(sum, currValue) {
     return sum + currValue;
   }, 0);
 

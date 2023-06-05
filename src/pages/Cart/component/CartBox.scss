@@ -31,7 +31,17 @@
     justify-content: space-between;
   }
 
+  .count {
+    display: flex;
+    align-items: center;
+  }
+
+  .btn-box {
+    width: 20px;
+  }
+
   .content-text {
+    margin: 0 5px;
     font-size: 17px;
   }
 
