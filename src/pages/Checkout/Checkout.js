@@ -33,14 +33,17 @@ const Checkout = () => {
       .then(data => setUserInfo(data));
   };
 
-  useEffect(() => {
-    fetch('http://10.58.52.227:8000/users/signup')
-      .then(res => res.json())
-      .then(data => setUserInfo(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://10.58.52.227:8000/users/signup')
+  //     .then(res => res.json())
+  //     .then(data => setUserInfo(data));
+  // }, []);
 
   useEffect(() => {
-    fetch('http://10.58.52.227:8000/carts')
+    fetch('http://10.58.52.227:8000/carts', {
+      method: 'GET',
+      headers: { Authorization: localStorage.getItem('token') },
+    })
       .then(res => res.json())
       .then(data => {
         if (data.message === 'NEED_ACCESS_TOKEN') {
@@ -49,7 +52,7 @@ const Checkout = () => {
           console.log('로그인이필요합니다');
           return;
         }
-        setProductList(data);
+        setProductList(data.carts);
       });
   }, []);
 
