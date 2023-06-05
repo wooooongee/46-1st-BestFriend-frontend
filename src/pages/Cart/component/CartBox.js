@@ -1,71 +1,63 @@
-import { useState } from 'react';
 import './CartBox.scss';
 
-const CartBox = ({ product, setProductList, setCartList, cartId }) => {
+const CartBox = ({ product, getCart }) => {
   const { image_url, name, quantity, product_id, id } = product;
-  const [count, setCount] = useState(quantity);
 
-  let totalPrice = Number(product.price * product.quantity).toLocaleString(
-    'en'
-  );
-
-  const deleteCart = id => {
-    setCartList(prev => prev.filter(product => product.product_id !== cartId));
-  };
+  const totalPrice = Number(product.price * quantity).toLocaleString('en');
 
   const handleCountMinus = () => {
-    fetch(`http://10.58.52.227:3000/carts/${id}`, {
+    if (quantity <= 1) return;
+
+    fetch(`http://10.58.52.227:8000/carts/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        quantity: count,
+        quantity: quantity - 1,
       }),
     })
       .then(res => {
         if (res.ok) {
-          return res.json();
-        }
-        throw new Error('통신실패!');
+          getCart();
+        } else throw new Error('통신실패!');
       })
-      .catch(error => console.log(error))
-      .then(data => {
-        console.log(data.message);
-      });
+      .catch(error => console.log(error));
   };
 
   const handleCountUp = () => {
-    fetch(`http://10.58.52.227:3000/carts/${id}`, {
+    fetch(`http://10.58.52.227:8000/carts/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        quantity: count,
+        quantity: quantity + 1,
       }),
     })
       .then(res => {
         if (res.ok) {
-          return res.json();
-        }
-        throw new Error('통신실패!');
+          getCart();
+        } else throw new Error('통신실패!');
       })
-      .catch(error => console.log(error))
-      .then(data => {
-        console.log(data.message);
-      });
+      .catch(error => console.log(error));
   };
 
   const handleDelete = () => {
-    fetch(`http://10.58.52.227:3000/carts/${id}`, {
+    if (!window.confirm('정말 삭제하시겠습니까?')) return;
+
+    fetch(`http://10.58.52.227:8000/carts/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
       },
+    }).then(res => {
+      if (res.ok) {
+        getCart();
+      }
     });
   };
 
@@ -77,10 +69,9 @@ const CartBox = ({ product, setProductList, setCartList, cartId }) => {
       <div className="cart-content">
         <div className="content">
           <h1>{name}</h1>
-          <p className="content-text">수량 : {count}개</p>
+          <p className="content-text">수량 : {quantity}개</p>
           <button
             onClick={() => {
-              setCount(count - 1);
               handleCountMinus();
             }}
           >
@@ -88,7 +79,6 @@ const CartBox = ({ product, setProductList, setCartList, cartId }) => {
           </button>
           <button
             onClick={() => {
-              setCount(count + 1);
               handleCountUp();
             }}
           >
@@ -97,7 +87,7 @@ const CartBox = ({ product, setProductList, setCartList, cartId }) => {
           <button
             className="btn"
             onClick={() => {
-              deleteCart(id);
+              // deleteCart(id);
               handleDelete();
             }}
           >

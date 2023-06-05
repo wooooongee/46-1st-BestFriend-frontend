@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CartBox from './component/CartBox';
 import './Cart.scss';
-import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const [productList, setProductList] = useState([]);
@@ -9,16 +9,8 @@ const Cart = () => {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch('/data/cartData.json')
-      .then(res => res.json())
-      .then(data => {
-        setProductList(data);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch('http://10.58.52.227:3000/carts', {
+  const getCart = () => {
+    fetch('http://10.58.52.227:8000/carts', {
       method: 'GET',
       headers: { Authorization: localStorage.getItem('token') },
     })
@@ -32,6 +24,18 @@ const Cart = () => {
         setCartList(data.carts);
       })
       .catch(error => console.log(error));
+  };
+
+  useEffect(() => {
+    fetch('/data/cartData.json')
+      .then(res => res.json())
+      .then(data => {
+        setProductList(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    getCart();
   }, []);
 
   let calculation = cartList.map(product => product.price * product.quantity);
@@ -58,10 +62,11 @@ const Cart = () => {
           {cartList.map(product => {
             return (
               <CartBox
-                key={product.product_id}
+                key={product.id}
+                cartId={product.product_id}
                 product={product}
                 setCartList={setCartList}
-                cartId={product.product_id}
+                getCart={getCart}
               />
             );
           })}
