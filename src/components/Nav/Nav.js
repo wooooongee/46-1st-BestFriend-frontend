@@ -50,6 +50,9 @@ const Nav = () => {
             className="icon"
             src={process.env.PUBLIC_URL + '/images/Nav/like.png'}
             alt="like-icon"
+            onClick={() => {
+              navigate('/wishlist');
+            }}
           />
           <img
             className="icon"
