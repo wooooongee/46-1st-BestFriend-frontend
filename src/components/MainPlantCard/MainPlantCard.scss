@@ -4,7 +4,6 @@
 .main-plant-card {
   width: 350px;
   min-width: 350px;
-  margin-right: 20px;
 
   .plant-image {
     width: 100%;
@@ -21,6 +20,10 @@
     background-color: $primary-color;
     color: $secondary-color;
     &:hover {
+      transition: 0.3s ease-in-out;
+      border: 1px solid $primary-color;
+      background-color: $secondary-color;
+      color: $primary-color;
       cursor: pointer;
     }
   }
