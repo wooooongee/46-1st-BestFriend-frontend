@@ -3,7 +3,12 @@ import { useSearchParams } from 'react-router-dom';
 import { LIST_LIMIT } from '../../constants';
 import './Pagination.scss';
 
-const Pagination = () => {
+const Pagination = ({ lastNum }) => {
+  const pages = [];
+  for (let i = 1; i <= lastNum; i++) {
+    pages.push(i);
+  }
+
   const [searchParams, setSearchParams] = useSearchParams();
   searchParams.set('limit', LIST_LIMIT);
   const movePage = pageNum => {
@@ -15,10 +20,14 @@ const Pagination = () => {
     <div className="pagination">
       <hr className="page-divider" />
       <div className="page">
-        {PAGE.map(({ id }) => {
+        {pages.map(num => {
           return (
-            <button className="page-btn" key={id} onClick={() => movePage(id)}>
-              {id}
+            <button
+              className="page-btn"
+              key={num}
+              onClick={() => movePage(num)}
+            >
+              {num}
             </button>
           );
         })}
@@ -28,13 +37,3 @@ const Pagination = () => {
 };
 
 export default Pagination;
-
-const PAGE = [
-  { id: 1 },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-  { id: 5 },
-  { id: 6 },
-  { id: 7 },
-];

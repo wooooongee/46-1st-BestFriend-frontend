@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { LIST_LIMIT } from '../../constants';
 import Category from '../../components/Category/Category';
 import Filter from '../../components/Filter/Filter';
 import Sort from '../../components/Sort/Sort';
@@ -13,7 +14,7 @@ const ProductList = () => {
   const [card, setCard] = useState([]);
 
   useEffect(() => {
-    fetch(`http://10.58.52.227:3000/products?${searchParams.toString()}`)
+    fetch(`http://10.58.52.227:8000/products?${searchParams.toString()}`)
       .then(res => res.json())
       .then(data => setCard(data.list));
   }, [searchParams]);
@@ -41,7 +42,9 @@ const ProductList = () => {
             );
           })}
         </div>
-        <Pagination />
+        <Pagination
+          lastNum={Math.ceil(parseInt(data.total_count)) / LIST_LIMIT}
+        />
       </main>
     </div>
   );

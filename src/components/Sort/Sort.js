@@ -20,7 +20,6 @@ const Sort = () => {
         className="sort-btn"
         onClick={() => {
           setIsToggleOn(!isToggleOn);
-          console.log(isToggleOn);
         }}
       >
         <span>정렬 기준</span>
