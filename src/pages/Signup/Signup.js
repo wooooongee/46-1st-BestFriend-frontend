@@ -12,32 +12,8 @@ const Signup = () => {
     address: '',
   });
   const [check, setCheck] = useState(false);
-  const { name, email, password, confirmpassword, phone, address } = inputs;
-
   const navigate = useNavigate();
-
-  const handleSignupBtn = () => {
-    fetch('http://10.58.52.117:3000/users/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(inputs),
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.message === 'user is created') {
-          alert('성공');
-          navigate('/login');
-        } else {
-          alert('실패');
-        }
-      });
-  };
-  const onChange = e => {
-    const { name, value } = e.target;
-    setInputs(prev => ({ ...prev, [name]: value }));
-  };
+  const { name, email, password, confirmpassword, phone, address } = inputs;
   const userInfoValid = {
     name:
       !/^[가-힣]{2,4}$/.test(name) &&
@@ -64,6 +40,30 @@ const Signup = () => {
       address.length > 0 &&
       '한글,숫자만 입력하세요',
   };
+
+  const handleSignupBtn = () => {
+    fetch('http://10.58.52.117:3000/users/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(inputs),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message === 'user is created') {
+          alert('성공');
+          navigate('/login');
+        } else {
+          alert('실패');
+        }
+      });
+  };
+  const onChange = e => {
+    const { name, value } = e.target;
+    setInputs(prev => ({ ...prev, [name]: value }));
+  };
+
   return (
     <main className="signup">
       <img
