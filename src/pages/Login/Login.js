@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Toast from '../../components/Toast/Toast';
 import './Login.scss';
 
 const Login = () => {
@@ -7,17 +8,20 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const emailInput = useRef();
+  const [isToast, setIsToast] = useState(false);
 
   const navigate = useNavigate();
 
   const { email, password } = userInputs;
 
-  const isValid = email.includes('@') && password.length >= 5;
+  const isValid = email.includes('@') && password.length >= 8;
+  //TODO 회원가입에서 쓴 유효성검사와 맞추기
 
   const handleLoginBtn = () => {
     if (!isValid) {
-      alert('이메일 혹은 비밀번호를 확인해주세요');
-
+      setIsToast(true);
+      emailInput.current.focus();
       return;
     }
 
@@ -34,7 +38,8 @@ const Login = () => {
           localStorage.setItem('token', data.accessToken);
           navigate('/main');
         } else if (data.message === 'INVALID_USER') {
-          alert('이메일 혹은 비밀번호를 확인 해 주세요');
+          setIsToast(true);
+          emailInput.current.focus();
         }
       });
   };
@@ -59,8 +64,8 @@ const Login = () => {
         required
         value={email}
         onChange={handleUserInputs}
+        ref={emailInput}
       />
-
       <input
         type="password"
         className="password-input"
@@ -80,6 +85,7 @@ const Login = () => {
       >
         계정 만들기
       </button>
+      {isToast ? <Toast setIsToast={setIsToast} /> : null}
     </main>
   );
 };
