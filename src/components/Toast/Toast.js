@@ -5,7 +5,7 @@ const Toast = ({ isToast, setIsToast }) => {
   useEffect(() => {
     let timer = setTimeout(() => {
       setIsToast(false);
-    }, 10000);
+    }, 3000);
     return () => {
       clearTimeout(timer);
     };
