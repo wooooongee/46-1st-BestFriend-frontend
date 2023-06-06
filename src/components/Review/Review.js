@@ -40,8 +40,8 @@ const Review = () => {
               <div className="review-posted" key={index}>
                 <div className="review-top">
                   <div className="review-info">
-                    <div className="username">홍길동</div>
-                    <div className="timestamp">2023년 6월 6일 21:09</div>
+                    <div className="username">식물왕</div>
+                    <div className="timestamp">2023년 6월 9일 17:09</div>
                   </div>
                   <div className="trash">삭제</div>
                 </div>
