@@ -20,10 +20,14 @@
     .menus {
       @include textStyle(18px, 500);
       @include flexSpaceBetween;
-      gap: 120px;
 
-      .menu:hover {
-        cursor: pointer;
+      .menu {
+        width: 180px;
+        text-align: center;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
 

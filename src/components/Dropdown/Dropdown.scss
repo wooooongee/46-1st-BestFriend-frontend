@@ -10,15 +10,15 @@
   justify-content: flex-start;
   width: 100%;
   min-width: 500px;
-  padding: 30px 30px 30px 240px;
+  padding: 30px 30px 30px 255px;
   border-top: 1px solid rgb(219, 219, 219);
   background-color: $secondary-color;
-  gap: 80px;
 
   .dropdown-sub {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 180px;
     gap: 15px;
     &:hover {
       cursor: pointer;
