@@ -6,12 +6,15 @@ import {
   TOOLS_SUBCATEGORY,
 } from '../Subcategory/Subcategory';
 import Dropdown from '../Dropdown/Dropdown';
-
 import './Nav.scss';
+
 const Nav = () => {
   const navigate = useNavigate();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const tokenValue = localStorage.getItem('token');
+
   return (
     <div className="nav">
       <nav className="navbar">
@@ -50,6 +53,9 @@ const Nav = () => {
             className="icon"
             src={process.env.PUBLIC_URL + '/images/Nav/like.png'}
             alt="like-icon"
+            onClick={() => {
+              navigate('/wishlist');
+            }}
           />
           <img
             className="icon"
@@ -58,12 +64,17 @@ const Nav = () => {
             onClick={() => navigate('/cart')}
           />
           <button
-            className="login-btn"
+            className={tokenValue ? 'display-none' : 'login-btn'}
             type="button"
             onClick={() => navigate('/login')}
           >
             로그인
           </button>
+          <img
+            className={tokenValue ? 'icon' : 'display-none'}
+            src={process.env.PUBLIC_URL + '/images/Nav/user.png'}
+            alt="user-icon"
+          />
         </div>
       </nav>
     </div>

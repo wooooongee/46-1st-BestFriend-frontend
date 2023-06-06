@@ -9,6 +9,8 @@
 
   .pot-image {
     width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
   }
 
   .card-cta-secondary {
@@ -23,6 +25,9 @@
     background-color: $secondary-color;
     color: $primary-color;
     &:hover {
+      transition: 0.4s ease-in-out;
+      background-color: $primary-color;
+      color: $secondary-color;
       cursor: pointer;
     }
   }
