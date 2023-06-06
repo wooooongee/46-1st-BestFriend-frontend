@@ -1,6 +1,12 @@
 @import '../../styles/mixin';
 @import '../../styles/variables';
 
+.checkout-title {
+  margin-bottom: 46px;
+  padding: 40px 40px 0px 40px;
+  font-size: 30px;
+  font-weight: 500;
+}
 .checkout {
   @include textStyle(18px, 500);
   display: flex;
@@ -14,12 +20,6 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 60%;
-    padding: 40px;
-
-    .checkout-article-h1 {
-      margin-bottom: 50px;
-      font-size: 20px;
-    }
 
     .section-delivery-infomation {
       display: flex;
@@ -27,7 +27,7 @@
 
       .user-information-h2 {
         margin-bottom: 50px;
-        font-size: 20px;
+        font-size: 25px;
       }
 
       .user-information-values {
@@ -78,11 +78,10 @@
     display: flex;
     flex-direction: column;
     width: 40%;
-    margin-top: 107px;
 
     .checkout-h2 {
-      margin-bottom: 50px;
-      font-size: 20px;
+      margin-bottom: 42px;
+      font-size: 25px;
     }
 
     .product-prices {
