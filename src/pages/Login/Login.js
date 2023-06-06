@@ -15,8 +15,9 @@ const Login = () => {
 
   const { email, password } = userInputs;
 
-  const isValid = email.includes('@') && password.length >= 8;
-  //TODO 회원가입에서 쓴 유효성검사와 맞추기
+  const isValid =
+    /^[a-z0-9\-_]+@([a-z0-9]+\.com)$/.test(email) &&
+    /^(?=.*[A-Z]).{8,}$/.test(password);
 
   const handleLoginBtn = () => {
     if (!isValid) {
@@ -25,7 +26,7 @@ const Login = () => {
       return;
     }
 
-    fetch('http://10.58.52.227:8000/users/signin', {
+    fetch('http://10.58.52.185:8000/users/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +37,7 @@ const Login = () => {
       .then(data => {
         if (data.accessToken) {
           localStorage.setItem('token', data.accessToken);
-          navigate('/main');
+          navigate('/');
         } else if (data.message === 'INVALID_USER') {
           setIsToast(true);
           emailInput.current.focus();
