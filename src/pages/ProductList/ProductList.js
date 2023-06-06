@@ -30,14 +30,14 @@ const ProductList = () => {
       <main className="main-product-list">
         <Sort />
         <div className="product-cards">
-          {card.list.map(item => {
+          {card.list.map(({ id, sub_category_id, name, price, image_url }) => {
             return (
               <ProductCard
-                key={item.id}
-                path={item.id}
-                name={item.name}
-                price={item.price}
-                image_url={item.image_url}
+                key={id}
+                path={`${id}?subCategoryId=${sub_category_id}&offset=${id}&limit=3`}
+                name={name}
+                price={price}
+                image_url={image_url}
               />
             );
           })}
