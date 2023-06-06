@@ -14,8 +14,6 @@ const Checkout = () => {
     (acc, cur) => acc + cur.price * cur.quantity,
     0
   );
-  console.log(totalprice);
-  console.log(typeof productList);
 
   const remainingPoint = point - totalprice;
 
@@ -42,14 +40,15 @@ const Checkout = () => {
   useEffect(() => {
     fetch('http://10.58.52.227:8000/carts', {
       method: 'GET',
-      headers: { Authorization: localStorage.getItem('token') },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+      },
     })
       .then(res => res.json())
       .then(data => {
         if (data.message === 'NEED_ACCESS_TOKEN') {
-          // alert('로그인이 필요합니다.');
-          // navigate('/login');
-          console.log('로그인이필요합니다');
+          alert('로그인이필요합니다');
           return;
         }
         setProductList(data.carts);
