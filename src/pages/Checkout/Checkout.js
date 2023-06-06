@@ -17,19 +17,26 @@ const Checkout = () => {
 
   const remainingPoint = point - totalprice;
 
-  const handleCheckOut = () => {
-    fetch('http://10.58.52.227:8000/users/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        point: remainingPoint,
-      }),
-    })
+  //TODO MOCKDATA
+  useEffect(() => {
+    fetch('/data/cartData.json')
       .then(res => res.json())
-      .then(data => setUserInfo(data));
-  };
+      .then(data => setProductList(data));
+  });
+
+  // const handleCheckOut = () => {
+  //   fetch('http://10.58.52.227:8000/users/signup', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       point: remainingPoint,
+  //     }),
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => setUserInfo(data));
+  // };
 
   // useEffect(() => {
   //   fetch('http://10.58.52.227:8000/users/signup')
@@ -37,23 +44,23 @@ const Checkout = () => {
   //     .then(data => setUserInfo(data));
   // }, []);
 
-  useEffect(() => {
-    fetch('http://10.58.52.227:8000/carts', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('token'),
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.message === 'NEED_ACCESS_TOKEN') {
-          alert('로그인이필요합니다');
-          return;
-        }
-        setProductList(data.carts);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://10.58.52.227:8000/carts', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: localStorage.getItem('token'),
+  //     },
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       if (data.message === 'NEED_ACCESS_TOKEN') {
+  //         alert('로그인이필요합니다');
+  //         return;
+  //       }
+  //       setProductList(data.carts);
+  //     });
+  // }, []);
 
   return (
     <main className="checkout">
@@ -97,7 +104,8 @@ const Checkout = () => {
             {totalprice.toLocaleString()} 원
           </span>
         </div>
-        <button className="checkout-btn" onClick={handleCheckOut}>
+        <button className="checkout-btn">
+          {/* <button className="checkout-btn" onClick={handleCheckOut}> */}
           결제 하기
         </button>
       </aside>
