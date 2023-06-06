@@ -2,12 +2,13 @@
 @import '../../styles/variables';
 
 .cart {
+  @include textStyle(20px, 500);
+  min-height: 1300px;
   padding: 40px;
-  @include textStyle(18px, 500);
 
-  .title {
-    margin-bottom: 50px;
-    font-size: 20px;
+  .cart-title {
+    margin-bottom: 46px;
+    font-size: 30px;
   }
 
   .cart-container {
@@ -23,6 +24,11 @@
   .cart-aside {
     width: 40%;
     padding-top: 25px;
+
+    .aside-title {
+      margin-bottom: 42px;
+      font-size: 25px;
+    }
 
     .price {
       padding: 10px 0;
@@ -49,5 +55,22 @@
       color: $secondary-color;
       font-size: 20px;
     }
+  }
+}
+
+.alert-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  padding: 25px 0;
+  background-color: #ffe8e8;
+  color: #ff0000;
+  text-align: center;
+
+  .alert-btn {
+    border: none;
+    background-color: #ffe8e8;
+    color: #ff0000;
   }
 }
