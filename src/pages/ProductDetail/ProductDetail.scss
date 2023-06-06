@@ -91,6 +91,11 @@
   }
 }
 
+.recommend-container {
+  display: flex;
+  margin-top: 20px;
+}
+
 .modal-box {
   @include flexCenter;
   @include textStyle(20px, 500);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { AiOutlineHeart, AiTwotoneHeart } from 'react-icons/ai';
 import Recommend from './component/Recommend';
 import './ProductDetail.scss';
@@ -8,45 +8,60 @@ const ProductDetail = () => {
   const [recommendList, setRecommendList] = useState([]);
   const [productList, setProductList] = useState({});
   const [count, setCount] = useState(1);
-  const [products, setProducts] = useState([{}]);
+  const [products, setProducts] = useState({});
+  const [recommends, setRecommends] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWishlistAdd, setIsWishlistAdd] = useState(false);
   const [isWishModalOpen, setIsWishModalOpen] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const params = useParams();
   const productsId = params.id;
+  const subCategoryId = searchParams.get('subCategoryId');
+  // const productId = Number(searchParams.get('id'));
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch(`http://10.58.52.227:8000/products/${productsId}`)
+    fetch(`http://10.58.52.185:8000/products/${productsId}`)
       .then(res => res.json())
-      .then(data => setProducts(data.product));
+      .then(data => setProducts(data.product[0]));
   }, [productsId]);
 
-  const [{ description, image_url, name, price, sub_category_name }] = products;
+  const { description, image_url, name, price, sub_category_name } = products;
 
   useEffect(() => {
-    fetch('/data/recommend.json')
+    fetch(
+      `http://10.58.52.185:8000/products?subCategoryId=${subCategoryId}&limit=3&offset=${productsId}`
+    )
       .then(res => res.json())
       .then(data => {
-        setRecommendList(data);
+        setRecommends(data.list);
       });
-  }, []);
+  }, [subCategoryId, productsId]);
 
-  useEffect(() => {
-    fetch('/data/productDetail.json')
-      .then(res => res.json())
-      .then(data => {
-        setProductList(data);
-      });
-  }, []);
+  // ToDo : 추후 mock Data 통신
+  // useEffect(() => {
+  //   fetch('/data/recommend.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setRecommendList(data);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   fetch('/data/productDetail.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setProductList(data);
+  //     });
+  // }, []);
 
   const handleButtonPlus = () => {
     setCount(count + 1);
   };
 
   const shoppingBasket = () => {
-    fetch(`http://10.58.52.227:8000/carts`, {
+    fetch(`http://10.58.52.185:8000/carts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -56,18 +71,16 @@ const ProductDetail = () => {
         productId: productsId,
         quantity: count,
       }),
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error('에러 발생!');
-      })
-      .catch(error => console.log(error));
+    }).then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('에러 발생!');
+    });
   };
 
   const addToWishList = () => {
-    fetch(`http://10.58.52.227:8000/likes`, {
+    fetch(`http://10.58.52.185:8000/likes`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -76,18 +89,16 @@ const ProductDetail = () => {
       body: JSON.stringify({
         productId: productsId,
       }),
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error('에러 발생!');
-      })
-      .catch(error => console.log(error));
+    }).then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('에러 발생!');
+    });
   };
 
   const deleteToWishList = () => {
-    fetch(`http://10.58.52.227:8000/likes`, {
+    fetch(`http://10.58.52.185:8000/likes`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -96,14 +107,12 @@ const ProductDetail = () => {
       body: JSON.stringify({
         productId: productsId,
       }),
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error('에러 발생!');
-      })
-      .catch(error => console.log(error));
+    }).then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('에러 발생!');
+    });
   };
 
   const handleButtonMinus = () => {
@@ -159,12 +168,7 @@ const ProductDetail = () => {
           >
             장바구니 담기
           </button>
-          <button
-            className="btn wishlist-btn"
-            onClick={() => {
-              handleWishBtn();
-            }}
-          >
+          <button className="btn wishlist-btn" onClick={handleWishBtn}>
             위시리스트
             {isWishlistAdd ? (
               <AiTwotoneHeart className="icon" />
@@ -177,8 +181,17 @@ const ProductDetail = () => {
       <section className="product-recommend">
         <p>이런 식물은 어때요?</p>
         <div className="recommend-container">
-          {recommendList.map(product => {
+          {/* {recommendList.map(product => {
             return <Recommend key={product.id} product={product} />;
+          })} */}
+          {recommends.map(product => {
+            return (
+              <Recommend
+                key={product.id}
+                product={product}
+                path={`${product.id}?subCategoryId=${subCategoryId}&offset=${product.id}&limit=3`}
+              />
+            );
           })}
         </div>
       </section>
