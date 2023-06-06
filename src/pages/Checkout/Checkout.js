@@ -8,51 +8,60 @@ const Checkout = () => {
   const [userInfo, setUserInfo] = useState({});
   const [productList, setProductList] = useState([]);
 
-  const point = parseInt(userInfo.point);
+  const { name, address, phone, point } = userInfo;
 
-  const totalprice = productList.reduce(
+  const postPrice = productList.reduce(
     (acc, cur) => acc + cur.price * cur.quantity,
     0
   );
 
-  const remainingPoint = point - totalprice;
+  useEffect(() => {
+    fetch('http://10.58.52.185:3000/orders', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+      },
+    })
+      .then(res => res.json())
+      .then(data => setUserInfo(data[0]));
+  }, []);
 
   const handleCheckOut = () => {
-    fetch('http://10.58.52.185:8000/users/signup', {
+    fetch('http://10.58.52.185:3000/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        point: remainingPoint,
+        totalPrice: postPrice,
       }),
     })
       .then(res => res.json())
-      .then(data => setUserInfo(data));
+      .then(data => {
+        if (data.message === 'ORDER_COMPLETED') {
+          //토스트, navigate
+          navigate('/');
+          return;
+        }
+      });
   };
 
-  // useEffect(() => {
-  //   fetch('http://10.58.52.227:8000/users/signup')
-  //     .then(res => res.json())
-  //     .then(data => setUserInfo(data));
-  // }, []);
-
   useEffect(() => {
-    fetch('http://10.58.52.185:8000/carts', {
+    fetch('http://10.58.52.185:3000/carts', {
       method: 'GET',
       headers: { Authorization: localStorage.getItem('token') },
     })
       .then(res => res.json())
       .then(data => {
         if (data.message === 'NEED_ACCESS_TOKEN') {
-          // alert('로그인이 필요합니다.');
-          // navigate('/login');
-          console.log('로그인이필요합니다');
+          console.log('로그인이 필요합니다');
           return;
         }
         setProductList(data.carts);
       });
-  }, []);
+  }, []); //카트 받아오기
 
   return (
     <main className="checkout">
@@ -61,18 +70,15 @@ const Checkout = () => {
         <section className="section-delivery-infomation">
           <h2 className="user-information-h2">배송 정보</h2>
           <div className="user-information-values">
-            <span className="user-name-value">{userInfo.name}</span>
-            <span className="user-address-value">{userInfo.address}</span>
-            <span className="user-phone-value">{userInfo.phone}</span>
+            <span className="user-name-value">{name}</span>
+            <span className="user-address-value">{address}</span>
+            <span className="user-phone-value">{phone}</span>
           </div>
         </section>
         <section className="section-payment-point">
-          <h2 className="remaining-point-h2">포인트로 결제하기</h2>
-          <div className="remaining-point-value">
-            잔여 포인트 :
-            <span className="remaining-point-span">
-              {remainingPoint.toLocaleString()} 원
-            </span>
+          <h2 className="totalSum-point-h2">포인트로 결제하기</h2>
+          <div className="totalSum-point-value">
+            잔여 포인트 :<span className="totalSum-point-span">{point} 원</span>
           </div>
         </section>
         <section className="section-order-list">
@@ -85,7 +91,7 @@ const Checkout = () => {
       <aside className="aside-checkout">
         <h2 className="checkout-h2">결제 금액</h2>
         <div className="product-price">
-          상품 금액 <span>{totalprice.toLocaleString()} 원</span>
+          상품 금액 <span>{postPrice.toLocaleString()} 원</span>
         </div>
         <div className="delivery-fees">
           배송비 <span className="delivery-fees-value">무료</span>
@@ -93,7 +99,7 @@ const Checkout = () => {
         <div className="total-price">
           총 결제 금액
           <span className="total-price-value">
-            {totalprice.toLocaleString()} 원
+            {postPrice.toLocaleString()} 원
           </span>
         </div>
         <button className="checkout-btn" onClick={handleCheckOut}>
