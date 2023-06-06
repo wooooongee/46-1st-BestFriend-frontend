@@ -56,7 +56,7 @@
       min-width: 170px;
 
       .icon {
-        height: 27px;
+        height: 25px;
         &:hover {
           cursor: pointer;
         }
@@ -69,10 +69,18 @@
       height: 30px;
       border: 1px solid $primary-color;
       border-radius: 50px;
-      background-color: transparent;
+      background-color: $secondary-color;
+      color: $primary-color;
       &:hover {
+        transition: 0.4s ease-in-out;
+        background-color: $primary-color;
+        color: $secondary-color;
         cursor: pointer;
       }
     }
   }
+}
+
+.display-none {
+  display: none;
 }

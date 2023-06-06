@@ -1,15 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './MainPotCard.scss';
 
-const MainPotCard = () => {
+const MainPotCard = ({ image_url, id }) => {
+  const navigate = useNavigate();
   return (
     <div className="main-pot-card">
-      <img
-        className="pot-image"
-        src="https://github.com/pmpaca/test/blob/main/plant-15.jpg?raw=true"
-        alt="plant-image"
-      />
-      <div className="card-cta-secondary">더 알아보기</div>
+      <img className="pot-image" src={image_url} alt="plant-image" />
+      <div
+        className="card-cta-secondary"
+        onClick={() => navigate(`product/${id}`)}
+      >
+        더 알아보기
+      </div>
     </div>
   );
 };
