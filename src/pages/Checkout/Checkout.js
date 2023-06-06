@@ -41,7 +41,6 @@ const Checkout = () => {
       .then(res => res.json())
       .then(data => {
         if (data.message === 'ORDER_COMPLETED') {
-          //토스트, navigate
           navigate('/');
           return;
         }
@@ -61,7 +60,7 @@ const Checkout = () => {
         }
         setProductList(data.carts);
       });
-  }, []); //카트 받아오기
+  }, []);
 
   return (
     <main className="checkout">
