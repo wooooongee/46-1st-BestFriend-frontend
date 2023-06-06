@@ -18,7 +18,6 @@ const ProductDetail = () => {
   const params = useParams();
   const productsId = params.id;
   const subCategoryId = searchParams.get('subCategoryId');
-  // const productId = Number(searchParams.get('id'));
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -227,7 +226,9 @@ const ProductDetail = () => {
           </div>
         </div>
       </section>
-      <section className={isWishModalOpen ? 'wishlist visible ' : 'wishlist'}>
+      <section
+        className={isWishModalOpen ? 'wishlist-main visible ' : 'wishlist-main'}
+      >
         <div className="wishlist-modal">
           <div className="wishlist-modal-title">
             <p>위시리스트에 추가되었습니다</p>
