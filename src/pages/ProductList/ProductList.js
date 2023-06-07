@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { LIST_LIMIT } from '../../constants';
-import { BASE_URL } from '../../config';
+import { APIS } from '../../config';
 import Category from '../../components/Category/Category';
 import Filter from '../../components/Filter/Filter';
 import Sort from '../../components/Sort/Sort';
@@ -15,10 +15,11 @@ const ProductList = () => {
   const [card, setCard] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/?${searchParams.toString()}`)
+    fetch(`${APIS.products}?${searchParams.toString()}`)
       .then(res => res.json())
       .then(data => setCard(data));
   }, [searchParams]);
+  console.log(card);
 
   if (!card.total_count) return null;
 
