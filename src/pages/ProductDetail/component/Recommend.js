@@ -17,7 +17,7 @@ const Recommend = ({ product, path }) => {
         <img src="" alt="" className="img hidden" /> */}
       </button>
       <p className="title">{name}</p>
-      <p>{price}</p>
+      <p>{Number(price).toLocaleString('en')}원</p>
     </div>
   );
 };
