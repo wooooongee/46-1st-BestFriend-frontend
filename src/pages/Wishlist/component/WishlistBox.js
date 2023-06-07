@@ -1,4 +1,5 @@
 import React from 'react';
+import { BASE_URL } from '../../../config';
 import './WishlistBox.scss';
 
 const WishlistBox = ({ product, getWishlist }) => {
