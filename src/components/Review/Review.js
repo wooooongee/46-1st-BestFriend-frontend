@@ -51,8 +51,11 @@ const Review = ({ productsId, token }) => {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: token,
       },
-    }).then(res => getReview());
-  };
+    }).then(res => {
+    if (res.ok) {
+      getReview();
+    } throw new Error('에러 발생')
+  });
 
   useEffect(() => {
     getReview();
