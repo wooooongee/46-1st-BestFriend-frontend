@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Signup.scss';
-import { BASE_URL } from '../../config';
+import { APIS } from '../../config';
 
 const Signup = () => {
   const [inputs, setInputs] = useState({
@@ -43,7 +43,7 @@ const Signup = () => {
   };
 
   const handleSignupBtn = () => {
-    fetch(`${BASE_URL.users}/signup`, {
+    fetch(`${APIS.users}/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

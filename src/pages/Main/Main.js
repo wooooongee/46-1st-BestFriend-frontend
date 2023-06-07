@@ -37,7 +37,11 @@ const Main = () => {
         />
         <div
           className="message-cta"
-          onClick={() => navigate(`list?category=1,2,3,4`)}
+          onClick={() =>
+            navigate(
+              `list?subCategoryId=1&subCategoryId=2&subCategoryId=3&subCategoryId=4`
+            )
+          }
         >
           식물 살펴보기
         </div>

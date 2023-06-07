@@ -1,12 +1,12 @@
 import React from 'react';
-import { BASE_URL } from '../../../config';
+import { APIS } from '../../../config';
 import './WishlistBox.scss';
 
 const WishlistBox = ({ product, getWishlist }) => {
   const { image_url, name, price } = product;
 
   const handleDeleteBtn = () => {
-    fetch(`${BASE_URL.likes}`, {
+    fetch(`${APIS.likes}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

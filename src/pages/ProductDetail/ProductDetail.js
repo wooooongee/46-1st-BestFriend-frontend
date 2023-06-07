@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { AiOutlineHeart, AiTwotoneHeart } from 'react-icons/ai';
-import { BASE_URL } from '../../config';
+import { APIS } from '../../config';
 import Review from '../../components/Review/Review';
 import Recommend from './component/Recommend';
 import './ProductDetail.scss';
@@ -23,7 +23,7 @@ const ProductDetail = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch(`${BASE_URL.products}/${productsId}`)
+    fetch(`${APIS.products}/${productsId}`)
       .then(res => res.json())
       .then(data => setProducts(data.product[0]));
   }, [productsId]);
@@ -32,7 +32,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     fetch(
-      `${BASE_URL.products}?subCategoryId=${subCategoryId}&limit=3&offset=${productsId}`
+      `${APIS.products}?subCategoryId=${subCategoryId}&limit=3&offset=${productsId}`
     )
       .then(res => res.json())
       .then(data => {
@@ -62,7 +62,7 @@ const ProductDetail = () => {
   };
 
   const shoppingBasket = () => {
-    fetch(`${BASE_URL.carts}`, {
+    fetch(`${APIS.carts}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -81,7 +81,7 @@ const ProductDetail = () => {
   };
 
   const addToWishList = () => {
-    fetch(`${BASE_URL.likes}`, {
+    fetch(`${APIS.likes}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -99,7 +99,7 @@ const ProductDetail = () => {
   };
 
   const deleteToWishList = () => {
-    fetch(`${BASE_URL.likes}`, {
+    fetch(`${APIS.likes}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

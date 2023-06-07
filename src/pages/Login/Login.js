@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BASE_URL } from '../../config';
+import { APIS } from '../../config';
 import './Login.scss';
 
 const Login = () => {
@@ -22,7 +22,7 @@ const Login = () => {
       return;
     }
 
-    fetch(`${BASE_URL.users}`, {
+    fetch(`${APIS.users}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

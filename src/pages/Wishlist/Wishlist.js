@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AiFillWarning } from 'react-icons/ai';
 import WishlistBox from './component/WishlistBox';
 import './Wishlist.scss';
-import { BASE_URL } from '../../config';
+import { APIS } from '../../config';
 
 const Wishlist = () => {
   const [productList, setProductList] = useState([]);
@@ -17,7 +17,7 @@ const Wishlist = () => {
   }, []);
 
   const getWishlist = () => {
-    fetch(`${BASE_URL.likes}`, {
+    fetch(`${APIS.likes}`, {
       headers: {
         Authorization: localStorage.getItem('token'),
       },

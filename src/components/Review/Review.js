@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Review.scss';
-import { BASE_URL } from '../../config';
+import { APIS } from '../../config';
 
 const Review = ({ productsId, token }) => {
   const [isToggleOn, setIsToggleOn] = useState(false);
@@ -13,7 +13,7 @@ const Review = ({ productsId, token }) => {
 
   // // Review GET
   useEffect(() => {
-    fetch(`${BASE_URL.reviews}/${productsId}`)
+    fetch(`${APIS.reviews}/${productsId}`)
       .then(res => res.json())
       .then(data => {
         setReviewList(data.Review);
@@ -22,7 +22,7 @@ const Review = ({ productsId, token }) => {
 
   // Review POST
   const handleReviewPost = e => {
-    fetch(`${BASE_URL.reviews}/${productsId}`, {
+    fetch(`${APIS.reviews}/${productsId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -43,7 +43,7 @@ const Review = ({ productsId, token }) => {
 
   // Review DELETE
   const handleReviewDelete = () => {
-    fetch(`${BASE_URL.reviews}/${reviewList.id}`, {
+    fetch(`${APIS.reviews}/${reviewList.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
