@@ -24,36 +24,43 @@ export const PLANT_CARD = [
     id: 36,
     image_url:
       'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-36.jpg?raw=true',
+    subCategoryId: 3,
   },
   {
     id: 4,
     image_url:
       'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-4.jpg?raw=true',
+    subCategoryId: 1,
   },
   {
     id: 23,
     image_url:
       'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-23.jpg?raw=true',
+    subCategoryId: 2,
   },
   {
     id: 11,
     image_url:
       'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-11.jpg?raw=true',
+    subCategoryId: 1,
   },
   {
     id: 15,
     image_url:
       'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-15.jpg?raw=true',
+    subCategoryId: 1,
   },
   {
     id: 20,
     image_url:
       'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-20.jpg?raw=true',
+    subCategoryId: 2,
   },
   {
     id: 25,
     image_url:
       'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%EC%8B%9D%EB%AC%BC%20(60)/plant-25.jpg?raw=true',
+    subCategoryId: 2,
   },
 ];
 

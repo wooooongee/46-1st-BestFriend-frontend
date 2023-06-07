@@ -61,8 +61,15 @@ const Main = () => {
             className="plant-cards"
             style={{ transform: `translateX(${scroll}vw)` }}
           >
-            {PLANT_CARD.map(({ id, image_url }) => {
-              return <MainPlantCard key={id} id={id} image_url={image_url} />;
+            {PLANT_CARD.map(({ id, image_url, subCategoryId }) => {
+              return (
+                <MainPlantCard
+                  key={id}
+                  id={id}
+                  image_url={image_url}
+                  subCategoryId={subCategoryId}
+                />
+              );
             })}
           </div>
         </div>
