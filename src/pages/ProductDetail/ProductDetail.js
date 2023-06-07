@@ -94,7 +94,6 @@ const ProductDetail = () => {
       if (response.ok) {
         return response.json();
       }
-      throw new Error('에러 발생!');
     });
   };
 
@@ -108,11 +107,6 @@ const ProductDetail = () => {
       body: JSON.stringify({
         productId: productsId,
       }),
-    }).then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error('에러 발생!');
     });
   };
 
@@ -183,7 +177,8 @@ const ProductDetail = () => {
       <section className="product-recommend">
         <p>이런 식물은 어때요?</p>
         <div className="recommend-container">
-          {/* {recommendList.map(product => {
+          {/* ToDo : 추후 mock Data 통신 
+          {recommendList.map(product => {
             return <Recommend key={product.id} product={product} />;
           })} */}
           {recommends.map(product => {
@@ -248,8 +243,8 @@ const ProductDetail = () => {
             <div className="img-box">
               <img src={image_url} alt="wishlist-img" className="img" />
             </div>
-            <div>
-              <p>{name}</p>
+            <div className="wish-content">
+              <p className="wish-content-title">{name}</p>
               <p>{Number(price).toLocaleString('en')}원</p>
             </div>
           </div>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AiFillWarning } from 'react-icons/ai';
 import { APIS } from '../../config';
 import CartBox from './component/CartBox';
+import { APIS } from '../../config';
 import './Cart.scss';
 
 const Cart = () => {
@@ -27,13 +28,14 @@ const Cart = () => {
       });
   };
 
-  useEffect(() => {
-    fetch('/data/cartData.json')
-      .then(res => res.json())
-      .then(data => {
-        setProductList(data);
-      });
-  }, []);
+  // 차후 mock data 통신
+  // useEffect(() => {
+  //   fetch('/data/cartData.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setProductList(data);
+  //     });
+  // }, []);
 
   useEffect(() => {
     getCart();
