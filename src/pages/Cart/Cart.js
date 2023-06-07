@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { AiFillWarning } from 'react-icons/ai';
 import { APIS } from '../../config';
 import CartBox from './component/CartBox';
-import { APIS } from '../../config';
 import './Cart.scss';
 
 const Cart = () => {
