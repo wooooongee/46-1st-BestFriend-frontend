@@ -57,14 +57,8 @@ const Main = () => {
             className="plant-cards"
             style={{ transform: `translateX(${scroll}vw)` }}
           >
-            {PLANT_CARD.map(plant => {
-              return (
-                <MainPlantCard
-                  key={plant.id}
-                  id={plant.id}
-                  image_url={plant.image_url}
-                />
-              );
+            {PLANT_CARD.map(({ id, image_url }) => {
+              return <MainPlantCard key={id} id={id} image_url={image_url} />;
             })}
           </div>
         </div>
@@ -89,8 +83,8 @@ const Main = () => {
           description={MESSAGE[2].description}
         />
         <div className="pot-cards">
-          {POT_CARD.map(pot => {
-            return <MainPotCard id={pot.id} image_url={pot.image_url} />;
+          {POT_CARD.map(({ id, image_url }) => {
+            return <MainPotCard id={id} image_url={image_url} />;
           })}
         </div>
       </section>

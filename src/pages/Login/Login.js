@@ -26,7 +26,7 @@ const Login = () => {
       return;
     }
 
-    fetch('http://10.58.52.185:8000/users/signin', {
+    fetch('http://10.58.52.248:8000/users/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

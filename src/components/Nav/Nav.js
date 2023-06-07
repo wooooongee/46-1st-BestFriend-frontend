@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  PLANTS_SUBCATEGORY,
-  POTS_SUBCATEGORY,
-  TOOLS_SUBCATEGORY,
-} from '../Subcategory/Subcategory';
+import { CATEGORIES } from '../Category/Category';
+import Search from '../Search/Search';
 import Dropdown from '../Dropdown/Dropdown';
 import './Nav.scss';
+
+const NAV_MENU = Object.values(CATEGORIES);
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -20,46 +19,32 @@ const Nav = () => {
       <nav className="navbar">
         <img
           className="logo"
-          src={process.env.PUBLIC_URL + '/images/Nav/gron-logo.png'}
+          src="/images/Nav/gron-logo.png"
           alt="gron-logo"
           onClick={() => navigate('/')}
         />
         <ul className="menus">
-          {NAV_MENU.map(menu => {
+          {NAV_MENU.map(({ title }) => {
             return (
               <li
                 className="menu"
-                key={menu.id}
+                key={title}
                 onMouseOver={() => {
                   setIsMenuOpen(true);
                 }}
               >
-                {menu.name}
+                {title}
               </li>
             );
           })}
           {isMenuOpen && <Dropdown setIsMenuOpen={setIsMenuOpen} />}
         </ul>
-        <div className="search">
-          <img
-            className="search-icon"
-            src={process.env.PUBLIC_URL + '/images/Nav/search.png'}
-            alt="search-icon"
-          />
-          <input className="search-input" />
-        </div>
+        <Search />
         <div className="icons">
+          <img className="icon" src="/images/Nav/like.png" alt="like-icon" />
           <img
             className="icon"
-            src={process.env.PUBLIC_URL + '/images/Nav/like.png'}
-            alt="like-icon"
-            onClick={() => {
-              navigate('/wishlist');
-            }}
-          />
-          <img
-            className="icon"
-            src={process.env.PUBLIC_URL + '/images/Nav/cart.png'}
+            src="/images/Nav/cart.png"
             alt="cart-icon"
             onClick={() => navigate('/cart')}
           />
@@ -82,14 +67,3 @@ const Nav = () => {
 };
 
 export default Nav;
-
-const NAV_MENU = [
-  { id: '1', path: '/products', name: '식물', subcategory: PLANTS_SUBCATEGORY },
-  { id: '2', path: '/products', name: '화분', subcategory: POTS_SUBCATEGORY },
-  {
-    id: '3',
-    path: '/products',
-    name: '관리상품',
-    subcategory: TOOLS_SUBCATEGORY,
-  },
-];
