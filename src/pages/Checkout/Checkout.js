@@ -27,7 +27,7 @@ const Checkout = () => {
     0
   );
   useEffect(() => {
-    fetch('http://10.58.52.248:3000/users/order', {
+    fetch('http://10.58.52.248:8000/users/order', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const Checkout = () => {
       setIsToastOpen(true);
       return;
     }
-    fetch('http://10.58.52.248:3000/orders', {
+    fetch('http://10.58.52.248:8000/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.248:3000/carts', {
+    fetch('http://10.58.52.248:8000/carts', {
       method: 'GET',
       headers: { Authorization: localStorage.getItem('token') },
     })
