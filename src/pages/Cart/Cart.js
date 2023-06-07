@@ -22,8 +22,7 @@ const Cart = () => {
       })
       .then(data => {
         setCartList(data.carts);
-      })
-      .catch(error => console.log(error));
+      });
   };
 
   useEffect(() => {
