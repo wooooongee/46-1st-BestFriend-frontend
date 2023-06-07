@@ -1,3 +1,4 @@
+import { APIS } from '../../../config';
 import './CartBox.scss';
 
 const CartBox = ({ product, getCart }) => {
@@ -8,7 +9,7 @@ const CartBox = ({ product, getCart }) => {
   const handleCountMinus = () => {
     if (quantity <= 1) return;
 
-    fetch(`http://10.58.52.248:8000/carts/${id}`, {
+    fetch(`${APIS.carts}/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -17,17 +18,15 @@ const CartBox = ({ product, getCart }) => {
       body: JSON.stringify({
         quantity: quantity - 1,
       }),
-    })
-      .then(res => {
-        if (res.ok) {
-          getCart();
-        } else throw new Error('통신실패!');
-      })
-      .catch(error => console.log(error));
+    }).then(res => {
+      if (res.ok) {
+        getCart();
+      }
+    });
   };
 
   const handleCountUp = () => {
-    fetch(`http://10.58.52.248:8000/carts/${id}`, {
+    fetch(`${APIS.carts}/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -36,19 +35,17 @@ const CartBox = ({ product, getCart }) => {
       body: JSON.stringify({
         quantity: quantity + 1,
       }),
-    })
-      .then(res => {
-        if (res.ok) {
-          getCart();
-        } else throw new Error('통신실패!');
-      })
-      .catch(error => console.log(error));
+    }).then(res => {
+      if (res.ok) {
+        getCart();
+      }
+    });
   };
 
   const handleDelete = () => {
     if (!window.confirm('정말 삭제하시겠습니까?')) return;
 
-    fetch(`http://10.58.52.248:8000/carts/${id}`, {
+    fetch(`${APIS.carts}/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
