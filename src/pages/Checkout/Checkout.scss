@@ -1,8 +1,14 @@
 @import '../../styles/mixin';
 @import '../../styles/variables';
 
+.checkout-title {
+  margin-bottom: 46px;
+  padding: 40px 40px 0px 40px;
+  font-size: 30px;
+  font-weight: 500;
+}
 .checkout {
-  @include textStyle(1em, 500);
+  @include textStyle(18px, 500);
   display: flex;
   justify-content: center;
   width: 100vw;
@@ -14,26 +20,19 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 60%;
-    padding: 40px;
-
-    .checkout-article-h1 {
-      margin-bottom: 2em;
-      font-size: 1.7em;
-    }
 
     .section-delivery-infomation {
       display: flex;
       flex-direction: column;
 
       .user-information-h2 {
-        margin-bottom: 0.7em;
-        font-size: 1.4em;
+        margin-bottom: 50px;
+        font-size: 25px;
       }
 
       .user-information-values {
         display: flex;
         flex-direction: column;
-        font-size: 0.9em;
 
         .user-name-value {
           margin: 0.4em 0em;
@@ -56,12 +55,10 @@
 
       .remaining-point-h2 {
         margin-bottom: 0.8em;
-        font-size: 1.4em;
       }
 
       .remaining-point-value {
         margin-bottom: 0.4em;
-        font-size: 0.9em;
       }
     }
 
@@ -69,7 +66,6 @@
       margin-top: 2em;
 
       .order-list-h2 {
-        font-size: 1.4em;
       }
 
       .order-list-ul {
@@ -82,42 +78,37 @@
     display: flex;
     flex-direction: column;
     width: 40%;
-    margin-top: 6em;
-    padding: 40px;
 
     .checkout-h2 {
-      margin-bottom: 0.7em;
-      font-size: 1.4em;
+      margin-bottom: 42px;
+      font-size: 25px;
     }
 
     .product-price {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 1em;
-      font-size: 0.9em;
+      margin: 15px 0;
     }
 
     .delivery-fees {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 1em;
-      font-size: 0.9em;
+      margin: 15px 0;
     }
 
     .total-price {
       display: flex;
       justify-content: space-between;
-      margin: 1em 0em;
-      padding-top: 1em;
-      border-top: 3px solid $primary-color;
-      font-size: 0.9em;
+      margin: 15px 0;
+      padding-top: 30px;
+      border-top: 1px solid #dfdfdf;
     }
 
     .checkout-btn {
       width: 100%;
-      height: 3em;
-      margin-top: 2em;
-      border-radius: 3em;
+      height: 60px;
+      margin-top: 30px;
+      border-radius: 50px;
       background-color: $primary-color;
       color: $secondary-color;
     }
