@@ -65,10 +65,6 @@
       .trash {
         @include textStyle(15px, 500);
         color: rgb(117, 117, 117);
-
-        &:hover {
-          cursor: pointer;
-        }
       }
     }
 
