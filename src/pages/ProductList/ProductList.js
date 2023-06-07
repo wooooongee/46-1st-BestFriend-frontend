@@ -19,7 +19,6 @@ const ProductList = () => {
       .then(res => res.json())
       .then(data => setCard(data));
   }, [searchParams]);
-  console.log(card);
 
   if (!card.total_count) return null;
 

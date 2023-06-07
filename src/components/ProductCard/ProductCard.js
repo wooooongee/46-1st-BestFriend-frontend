@@ -4,7 +4,6 @@ import './ProductCard.scss';
 
 const ProductCard = ({ name, price, image_url, path }) => {
   const navigate = useNavigate();
-  console.log(path);
   return (
     <div className="product-card">
       <img
