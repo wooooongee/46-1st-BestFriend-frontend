@@ -9,10 +9,15 @@ import {
   POT_CARD,
 } from '../../components/MainContent/MainContent';
 import './Main.scss';
+import { useEffect } from 'react';
 
 const Main = () => {
   const navigate = useNavigate();
-
+  const [galleriesData, setGalleriesData] = useState([]);
+  const [current, setCurrent] = useState(0);
+  const [carouselMove, setCarouselMove] = useState({
+    transform: `translateX(-${current}00vw)`,
+  });
   const [scroll, setScroll] = useState(0);
   const handleRight = () => {
     scroll === -85 ? setScroll(-85) : setScroll(prev => prev - 17);
@@ -20,6 +25,32 @@ const Main = () => {
   const handleLeft = () => {
     scroll === 0 ? setScroll(0) : setScroll(prev => prev + 17);
   };
+
+  const carouselLeft = e => {
+    if (current === 0) {
+      e.preventDefault();
+    } else {
+      setCurrent(current - 1);
+    }
+  };
+
+  const carouselRight = e => {
+    if (current < 13) {
+      setCurrent(current + 1);
+    } else if (current === 13) {
+      e.preventDefault();
+    }
+  };
+
+  useEffect(() => {
+    fetch('http://10.58.52.248:8000/galleries')
+      .then(res => res.json())
+      .then(data => setGalleriesData(data.galleries));
+  }, []);
+
+  useEffect(() => {
+    setCarouselMove({ transform: `translateX(-${current})00vw` });
+  }, [current]);
 
   return (
     <main className="main">
@@ -44,12 +75,17 @@ const Main = () => {
         <div className="carousel">
           <div className="carousel-btn">
             <div className="left-btn" onClick={handleLeft}>
-              <img className="arrow-left" src="./images/Main/arrow-left.png" />
+              <img
+                className="arrow-left"
+                src="./images/Main/arrow-left.png"
+                alt="arrow-img"
+              />
             </div>
             <div className="right-btn" onClick={handleRight}>
               <img
                 className="arrow-right"
                 src="./images/Main/arrow-right.png"
+                alt="arrow-img"
               />
             </div>
           </div>
@@ -74,14 +110,48 @@ const Main = () => {
           title={MESSAGE[1].title}
           description={MESSAGE[1].description}
         />
-        <img
-          className="main-interior-image"
-          src="https://ik.imagekit.io/zawntqhuq/interior-01.png?updatedAt=1685718153515"
-          alt="plant-interior"
-          onClick={() => {
-            navigate('/list');
-          }}
-        />
+      </section>
+      <section className="interior-image-container">
+        <div
+          className="interior-image-flex"
+          style={{ transform: `translateX(-${current}00vw)` }}
+        >
+          {galleriesData.map((image, i) => {
+            return (
+              <div className="interior-image-box" key={i}>
+                <button
+                  className="interior-left-btn"
+                  onClick={e => {
+                    carouselLeft(e);
+                  }}
+                >
+                  <img
+                    className="arrow-box"
+                    src="./images/Main/arrow-left.png"
+                    alt="arrow-img"
+                  />
+                </button>
+                <button
+                  className="interior-right-btn"
+                  onClick={e => {
+                    carouselRight(e);
+                  }}
+                >
+                  <img
+                    className="arrow-box"
+                    src="./images/Main/arrow-right.png"
+                    alt="arrow-img"
+                  />
+                </button>
+                <img
+                  className="main-interior-image"
+                  src={image.image_url}
+                  alt="plant-interior"
+                />
+              </div>
+            );
+          })}
+        </div>
       </section>
       <section className="pots-container">
         <MainMessage
