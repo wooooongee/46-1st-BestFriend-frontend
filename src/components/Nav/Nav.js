@@ -41,17 +41,10 @@ const Nav = () => {
         </ul>
         <Search />
         <div className="icons">
+          <img className="icon" src="/images/Nav/like.png" alt="like-icon" />
           <img
             className="icon"
-            src={process.env.PUBLIC_URL + '/images/Nav/like.png'}
-            alt="like-icon"
-            onClick={() => {
-              navigate('/wishlist');
-            }}
-          />
-          <img
-            className="icon"
-            src={process.env.PUBLIC_URL + '/images/Nav/cart.png'}
+            src="/images/Nav/cart.png"
             alt="cart-icon"
             onClick={() => navigate('/cart')}
           />
