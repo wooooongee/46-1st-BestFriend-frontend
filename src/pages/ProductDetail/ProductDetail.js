@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { AiOutlineHeart, AiTwotoneHeart } from 'react-icons/ai';
+import Review from '../../components/Review/Review';
 import Recommend from './component/Recommend';
 import './ProductDetail.scss';
 
@@ -177,6 +178,7 @@ const ProductDetail = () => {
           </button>
         </section>
       </main>
+      <Review />
       <section className="product-recommend">
         <p>이런 식물은 어때요?</p>
         <div className="recommend-container">
