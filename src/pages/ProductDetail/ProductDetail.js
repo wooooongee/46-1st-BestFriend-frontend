@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { AiOutlineHeart, AiTwotoneHeart } from 'react-icons/ai';
+import { BASE_URL, APIS } from '../../config';
 import Review from '../../components/Review/Review';
 import Recommend from './component/Recommend';
 import './ProductDetail.scss';
@@ -22,7 +23,7 @@ const ProductDetail = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch(`http://10.58.52.248:8000/products/${productsId}`)
+    fetch(`${APIS.products}/${productsId}`)
       .then(res => res.json())
       .then(data => setProducts(data.product[0]));
   }, [productsId]);
@@ -31,7 +32,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     fetch(
-      `http://10.58.52.248:8000/products?subCategoryId=${subCategoryId}&limit=3&offset=${productsId}`
+      `${APIS.products}?subCategoryId=${subCategoryId}&limit=3&offset=${productsId}`
     )
       .then(res => res.json())
       .then(data => {
@@ -61,7 +62,7 @@ const ProductDetail = () => {
   };
 
   const shoppingBasket = () => {
-    fetch(`http://10.58.52.248:8000/carts`, {
+    fetch(`${APIS.carts}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -80,7 +81,7 @@ const ProductDetail = () => {
   };
 
   const addToWishList = () => {
-    fetch(`http://10.58.52.248:8000/likes`, {
+    fetch(`${APIS.likes}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -93,12 +94,11 @@ const ProductDetail = () => {
       if (response.ok) {
         return response.json();
       }
-      throw new Error('에러 발생!');
     });
   };
 
   const deleteToWishList = () => {
-    fetch(`http://10.58.52.248:8000/likes`, {
+    fetch(`${APIS.likes}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -107,11 +107,6 @@ const ProductDetail = () => {
       body: JSON.stringify({
         productId: productsId,
       }),
-    }).then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error('에러 발생!');
     });
   };
 
@@ -182,7 +177,8 @@ const ProductDetail = () => {
       <section className="product-recommend">
         <p>이런 식물은 어때요?</p>
         <div className="recommend-container">
-          {/* {recommendList.map(product => {
+          {/* ToDo : 추후 mock Data 통신 
+          {recommendList.map(product => {
             return <Recommend key={product.id} product={product} />;
           })} */}
           {recommends.map(product => {
@@ -247,8 +243,8 @@ const ProductDetail = () => {
             <div className="img-box">
               <img src={image_url} alt="wishlist-img" className="img" />
             </div>
-            <div>
-              <p>{name}</p>
+            <div className="wish-content">
+              <p className="wish-content-title">{name}</p>
               <p>{Number(price).toLocaleString('en')}원</p>
             </div>
           </div>
