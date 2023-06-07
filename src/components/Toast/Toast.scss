@@ -1,0 +1,33 @@
+.toast {
+  display: flex;
+  position: fixed;
+  right: 20px;
+  bottom: 100px;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 120px;
+  padding: 5px;
+  animation-name: fadeout;
+  animation-duration: 3s;
+  border: 1px solid rgba(255, 68, 0, 0.1);
+  border-radius: 10px;
+  background-color: tomato;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+
+  @keyframes fadeout {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+.toast p {
+  padding: 10px;
+}
