@@ -8,7 +8,7 @@ const CartBox = ({ product, getCart }) => {
   const handleCountMinus = () => {
     if (quantity <= 1) return;
 
-    fetch(`http://10.58.52.227:8000/carts/${id}`, {
+    fetch(`http://10.58.52.248:8000/carts/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -25,7 +25,7 @@ const CartBox = ({ product, getCart }) => {
   };
 
   const handleCountUp = () => {
-    fetch(`http://10.58.52.227:8000/carts/${id}`, {
+    fetch(`http://10.58.52.248:8000/carts/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -44,7 +44,7 @@ const CartBox = ({ product, getCart }) => {
   const handleDelete = () => {
     if (!window.confirm('정말 삭제하시겠습니까?')) return;
 
-    fetch(`http://10.58.52.227:8000/carts/${id}`, {
+    fetch(`http://10.58.52.248:8000/carts/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -66,12 +66,7 @@ const CartBox = ({ product, getCart }) => {
         <div className="content">
           <h1>{name}</h1>
           <div className="count">
-            <button
-              className="btn btn-box"
-              onClick={() => {
-                handleCountMinus();
-              }}
-            >
+            <button className="btn btn-box" onClick={handleCountMinus}>
               <img
                 src="/images/ProductDetail/arrow-down.png"
                 alt=""
@@ -79,12 +74,7 @@ const CartBox = ({ product, getCart }) => {
               />
             </button>
             <p className="content-text">수량 : {quantity}개</p>
-            <button
-              className="btn btn-box"
-              onClick={() => {
-                handleCountUp();
-              }}
-            >
+            <button className="btn btn-box" onClick={handleCountUp}>
               <img
                 src="/images/ProductDetail/arrow-up.png"
                 alt=""
@@ -93,12 +83,7 @@ const CartBox = ({ product, getCart }) => {
             </button>
           </div>
           <div />
-          <button
-            className="btn"
-            onClick={() => {
-              handleDelete();
-            }}
-          >
+          <button className="btn" onClick={handleDelete}>
             삭제
           </button>
         </div>

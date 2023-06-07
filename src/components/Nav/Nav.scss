@@ -20,33 +20,13 @@
     .menus {
       @include textStyle(18px, 500);
       @include flexSpaceBetween;
-      gap: 100px;
 
-      .menu:hover {
-        cursor: pointer;
-      }
-    }
+      .menu {
+        width: 180px;
+        text-align: center;
 
-    .search {
-      display: flex;
-      align-items: center;
-      min-width: 200px;
-      height: 30px;
-      padding: 0 10px;
-      border: none;
-      border-radius: 50px;
-      background-color: #f5f5f5;
-
-      .search-icon {
-        height: 15px;
-        margin-right: 5px;
-      }
-
-      .search-input {
-        border: none;
-        background-color: transparent;
-        &:focus {
-          outline: none;
+        &:hover {
+          cursor: pointer;
         }
       }
     }

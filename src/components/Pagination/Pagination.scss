@@ -1,0 +1,29 @@
+@import '../../styles/mixin';
+@import '../../styles/variables';
+
+.pagination {
+  .page-divider {
+    height: 1px;
+    border: none;
+    background-color: rgb(240, 240, 240);
+  }
+
+  .page {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 40px;
+
+    .page-btn {
+      @include textStyle(15px, 400);
+      width: 30px;
+      border: none;
+      border-radius: 5px;
+      background-color: #f4f4f4;
+      &:hover {
+        background-color: $primary-color;
+        color: $secondary-color;
+      }
+    }
+  }
+}
