@@ -10,7 +10,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const getCart = () => {
-    fetch('http://10.58.52.227:8000/carts', {
+    fetch('http://10.58.52.248:8000/carts', {
       method: 'GET',
       headers: { Authorization: localStorage.getItem('token') },
     })
