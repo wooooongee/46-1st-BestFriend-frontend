@@ -20,28 +20,26 @@ const Review = ({ productsId, token }) => {
       });
   };
 
-  useEffect(() => {
-    getReview();
-  }, []);
-
   // Review POST
   const handleReviewPost = e => {
-    fetch(`${APIS.reviews}/${productsId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: token,
-      },
-      body: JSON.stringify({
-        product_id: productsId,
-        comment: reviewText,
-      }),
-    })
-      .then(res => res.json())
-      .then(data => {
-        getReview();
-        setReviewText('');
-      });
+    if (e.key === 'Enter' && reviewText !== '') {
+      fetch(`${APIS.reviews}/${productsId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: token,
+        },
+        body: JSON.stringify({
+          product_id: productsId,
+          comment: reviewText,
+        }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          getReview();
+          setReviewText('');
+        });
+    } else return;
   };
 
   // Review DELETE
@@ -55,6 +53,10 @@ const Review = ({ productsId, token }) => {
       },
     }).then(res => getReview());
   };
+
+  useEffect(() => {
+    getReview();
+  }, []);
 
   return (
     <div className="review">
@@ -102,9 +104,7 @@ const Review = ({ productsId, token }) => {
             type="text"
             placeholder="리뷰 내용을 작성한 후 엔터키를 누르세요."
             onChange={handleText}
-            onKeyUp={e => {
-              e.key === 'Enter' && reviewText !== '' && handleReviewPost();
-            }}
+            onKeyUp={handleReviewPost}
             value={reviewText}
           />
         </div>
