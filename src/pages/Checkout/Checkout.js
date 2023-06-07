@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import CheckoutList from './CheckoutList';
-import './Checkout.scss';
 import CheckoutModal from './CheckoutModal';
 import CheckoutToast from './CheckoutToast';
+import './Checkout.scss';
 
 const Checkout = () => {
-  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     name: '',
     address: '',
@@ -14,17 +12,22 @@ const Checkout = () => {
     point: '',
   });
   const [productList, setProductList] = useState([]);
-  const [orderNumber, setOrderNumber] = useState('');
+  const [orderList, setOrderList] = useState({
+    message: '',
+    orderNumber: '',
+    changePoint: '',
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isToastOpen, setIsToastOpen] = useState(false);
 
   const { name, address, phone, point } = userInfo;
+  const { orderNumber, changePoint } = orderList;
   const postPrice = productList.reduce(
     (acc, cur) => acc + cur.price * cur.quantity,
     0
   );
   useEffect(() => {
-    fetch('http://10.58.52.248:8000/users/order', {
+    fetch('http://10.58.52.248:3000/users/order', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -33,14 +36,14 @@ const Checkout = () => {
     })
       .then(res => res.json())
       .then(data => setUserInfo(data[0]));
-  }, []);
+  }, [setUserInfo]);
 
   const handleCheckOut = () => {
     if (point < postPrice) {
       setIsToastOpen(true);
       return;
     }
-    fetch('http://10.58.52.248:8000/orders', {
+    fetch('http://10.58.52.248:3000/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +56,7 @@ const Checkout = () => {
       .then(res => res.json())
       .then(data => {
         if (data.message === 'ORDER_COMPLETED') {
-          setOrderNumber(data.orderNumber);
+          setOrderList(data);
           setIsModalOpen(true);
           return;
         }
@@ -61,7 +64,7 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.248:8000/carts', {
+    fetch('http://10.58.52.248:3000/carts', {
       method: 'GET',
       headers: { Authorization: localStorage.getItem('token') },
     })
@@ -123,6 +126,12 @@ const Checkout = () => {
           <button className="checkout-btn" onClick={handleCheckOut}>
             결제 하기
           </button>
+          {isToastOpen && (
+            <CheckoutToast
+              isToastOpen={isToastOpen}
+              setIsToastOpen={setIsToastOpen}
+            />
+          )}
         </aside>
       </main>
       {isModalOpen && (
@@ -130,13 +139,7 @@ const Checkout = () => {
           orderNumber={orderNumber}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
-          point={point}
-        />
-      )}
-      {isToastOpen && (
-        <CheckoutToast
-          isToastOpen={isToastOpen}
-          setIsToastOpen={setIsToastOpen}
+          changePoint={changePoint}
         />
       )}
     </>

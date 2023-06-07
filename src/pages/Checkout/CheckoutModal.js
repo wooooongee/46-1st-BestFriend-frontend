@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CheckoutModal.scss';
 
-const CheckoutModal = ({ orderNumber, setIsModalOpen, point }) => {
+const CheckoutModal = ({ orderNumber, setIsModalOpen, changePoint }) => {
   const navigate = useNavigate();
   const [timeCountDown, setTimeCountDown] = useState(5);
 
@@ -32,7 +32,9 @@ const CheckoutModal = ({ orderNumber, setIsModalOpen, point }) => {
         <div className="p-div">
           <p className="checkout-info center">결제 완료됐습니다.</p>
           <p className="checkout-info">주문번호:{orderNumber}</p>
-          <p className="checkout-info">잔여포인트:{point}</p>
+          <p className="checkout-info">
+            잔여포인트:{changePoint.toLocaleString()}
+          </p>
           <p className="checkout-info">{timeCountDown}초 후 이동합니다</p>
         </div>
       </div>
