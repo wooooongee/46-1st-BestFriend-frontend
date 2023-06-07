@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainMessage from '../../components/MainMessage/MainMessage';
 import MainPlantCard from '../../components/MainPlantCard/MainPlantCard';
@@ -9,16 +9,14 @@ import {
   POT_CARD,
 } from '../../components/MainContent/MainContent';
 import './Main.scss';
-import { useEffect } from 'react';
 
 const Main = () => {
   const navigate = useNavigate();
   const [galleriesData, setGalleriesData] = useState([]);
   const [current, setCurrent] = useState(0);
-  const [carouselMove, setCarouselMove] = useState({
-    transform: `translateX(-${current}00vw)`,
-  });
   const [scroll, setScroll] = useState(0);
+  const slideRef = useRef(null);
+
   const handleRight = () => {
     scroll === -85 ? setScroll(-85) : setScroll(prev => prev - 17);
   };
@@ -49,7 +47,7 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    setCarouselMove({ transform: `translateX(-${current})00vw` });
+    slideRef.current.style.transform = `translateX(-${current}00vw)`;
   }, [current]);
 
   return (
@@ -106,10 +104,7 @@ const Main = () => {
         />
       </section>
       <section className="interior-image-container">
-        <div
-          className="interior-image-flex"
-          style={{ transform: `translateX(-${current}00vw)` }}
-        >
+        <div className="interior-image-flex" ref={slideRef}>
           {galleriesData.map((image, i) => {
             return (
               <div className="interior-image-box" key={i}>
