@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 import './Login.scss';
 
 const Login = () => {
@@ -21,7 +22,7 @@ const Login = () => {
       return;
     }
 
-    fetch('http://10.58.52.227:8000/users/signin', {
+    fetch(`${BASE_URL.users}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

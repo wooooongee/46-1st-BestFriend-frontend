@@ -5,7 +5,7 @@ const WishlistBox = ({ product, getWishlist }) => {
   const { image_url, name, price } = product;
 
   const handleDeleteBtn = () => {
-    fetch('http://10.58.52.185:8000/likes', {
+    fetch(`${BASE_URL.likes}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

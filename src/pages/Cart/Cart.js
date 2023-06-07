@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiFillWarning } from 'react-icons/ai';
+import { BASE_URL } from '../../config';
 import CartBox from './component/CartBox';
 import './Cart.scss';
 
@@ -11,7 +12,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const getCart = () => {
-    fetch('http://10.58.52.227:8000/carts', {
+    fetch(`${BASE_URL.carts}`, {
       method: 'GET',
       headers: { Authorization: localStorage.getItem('token') },
     })

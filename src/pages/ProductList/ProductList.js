@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { LIST_LIMIT } from '../../constants';
+import { BASE_URL } from '../../config';
 import Category from '../../components/Category/Category';
 import Filter from '../../components/Filter/Filter';
 import Sort from '../../components/Sort/Sort';
@@ -14,7 +15,7 @@ const ProductList = () => {
   const [card, setCard] = useState([]);
 
   useEffect(() => {
-    fetch(`http://10.58.52.248:3000/?${searchParams.toString()}`)
+    fetch(`${BASE_URL}/?${searchParams.toString()}`)
       .then(res => res.json())
       .then(data => setCard(data));
   }, [searchParams]);
