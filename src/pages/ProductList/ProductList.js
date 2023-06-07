@@ -14,7 +14,7 @@ const ProductList = () => {
   const [card, setCard] = useState([]);
 
   useEffect(() => {
-    fetch(`/data/productList.json?${searchParams.toString()}`)
+    fetch(`http://10.58.52.248:3000/?${searchParams.toString()}`)
       .then(res => res.json())
       .then(data => setCard(data));
   }, [searchParams]);

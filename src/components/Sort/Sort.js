@@ -6,11 +6,9 @@ const Sort = () => {
   const [isToggleOn, setIsToggleOn] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const sortPage = option => {
-    searchParams.set('orderBy', option);
-    setSearchParams(searchParams);
-  };
-  const sortDefault = () => {
-    searchParams.delete('orderBy');
+    option === 'newest'
+      ? searchParams.delete('orderBy')
+      : searchParams.set('orderBy', option);
     setSearchParams(searchParams);
   };
 
@@ -33,33 +31,28 @@ const Sort = () => {
       </div>
       {isToggleOn && (
         <ul className="sort-options">
-          <li
-            className="sort-option"
-            onClick={() => {
-              sortDefault();
-            }}
-          >
-            최신순
-          </li>
-          <li
-            className="sort-option"
-            onClick={() => {
-              sortPage('priceASC');
-            }}
-          >
-            낮은가격순
-          </li>
-          <li
-            className="sort-option"
-            onClick={() => {
-              sortPage('priceDESC');
-            }}
-          >
-            높은가격순
-          </li>
+          {SORT_OPTIONS.map(({ id, title, sort }) => {
+            return (
+              <li
+                key={id}
+                className="sort-option"
+                onClick={() => {
+                  sortPage({ sort });
+                }}
+              >
+                {title}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
   );
 };
 export default Sort;
+
+const SORT_OPTIONS = [
+  { id: 1, title: '최신순', sort: 'newest' },
+  { id: 2, title: '낮은가격순', sort: 'priceASC' },
+  { id: 3, title: '높은가격순', sort: 'priceDESC' },
+];
