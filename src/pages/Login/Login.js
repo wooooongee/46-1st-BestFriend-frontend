@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Toast from '../../components/Toast/Toast';
 import './Login.scss';
 
 const Login = () => {
@@ -7,17 +8,21 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const emailInput = useRef();
+  const [isToast, setIsToast] = useState(false);
 
   const navigate = useNavigate();
 
   const { email, password } = userInputs;
 
-  const isValid = email.includes('@') && password.length >= 5;
+  const isValid =
+    /^[a-z0-9\-_]+@([a-z0-9]+\.com)$/.test(email) &&
+    /^(?=.*[A-Z]).{8,}$/.test(password);
 
   const handleLoginBtn = () => {
     if (!isValid) {
-      alert('이메일 혹은 비밀번호를 확인해주세요');
-
+      setIsToast(true);
+      emailInput.current.focus();
       return;
     }
 
@@ -32,9 +37,10 @@ const Login = () => {
       .then(data => {
         if (data.accessToken) {
           localStorage.setItem('token', data.accessToken);
-          navigate('/main');
+          navigate('/');
         } else if (data.message === 'INVALID_USER') {
-          alert('이메일 혹은 비밀번호를 확인 해 주세요');
+          setIsToast(true);
+          emailInput.current.focus();
         }
       });
   };
@@ -59,8 +65,8 @@ const Login = () => {
         required
         value={email}
         onChange={handleUserInputs}
+        ref={emailInput}
       />
-
       <input
         type="password"
         className="password-input"
@@ -80,6 +86,7 @@ const Login = () => {
       >
         계정 만들기
       </button>
+      {isToast ? <Toast setIsToast={setIsToast} /> : null}
     </main>
   );
 };
