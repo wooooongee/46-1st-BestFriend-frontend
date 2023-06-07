@@ -21,7 +21,7 @@ const ProductDetail = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch(`http://10.58.52.185:8000/products/${productsId}`)
+    fetch(`http://10.58.52.248:8000/products/${productsId}`)
       .then(res => res.json())
       .then(data => setProducts(data.product[0]));
   }, [productsId]);
@@ -30,7 +30,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     fetch(
-      `http://10.58.52.185:8000/products?subCategoryId=${subCategoryId}&limit=3&offset=${productsId}`
+      `http://10.58.52.248:8000/products?subCategoryId=${subCategoryId}&limit=3&offset=${productsId}`
     )
       .then(res => res.json())
       .then(data => {
@@ -60,7 +60,7 @@ const ProductDetail = () => {
   };
 
   const shoppingBasket = () => {
-    fetch(`http://10.58.52.185:8000/carts`, {
+    fetch(`http://10.58.52.248:8000/carts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -79,7 +79,7 @@ const ProductDetail = () => {
   };
 
   const addToWishList = () => {
-    fetch(`http://10.58.52.185:8000/likes`, {
+    fetch(`http://10.58.52.248:8000/likes`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -97,7 +97,7 @@ const ProductDetail = () => {
   };
 
   const deleteToWishList = () => {
-    fetch(`http://10.58.52.185:8000/likes`, {
+    fetch(`http://10.58.52.248:8000/likes`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
