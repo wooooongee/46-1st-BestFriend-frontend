@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AiFillWarning } from 'react-icons/ai';
 import CartBox from './component/CartBox';
 import './Cart.scss';
 
@@ -10,7 +11,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const getCart = () => {
-    fetch('http://10.58.52.227:8000/carts', {
+    fetch('http://10.58.52.248:8000/carts', {
       method: 'GET',
       headers: { Authorization: localStorage.getItem('token') },
     })
@@ -22,8 +23,7 @@ const Cart = () => {
       })
       .then(data => {
         setCartList(data.carts);
-      })
-      .catch(error => console.log(error));
+      });
   };
 
   useEffect(() => {
@@ -59,6 +59,14 @@ const Cart = () => {
               />
             );
           })} */}
+          {cartList.length === 0 && (
+            <div className="cart-warning">
+              <div>
+                <AiFillWarning className="warning-icon" />
+                <p>장바구니가 비어 있습니다.</p>
+              </div>
+            </div>
+          )}
           {cartList.map(product => {
             return (
               <CartBox
