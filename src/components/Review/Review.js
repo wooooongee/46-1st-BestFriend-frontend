@@ -12,8 +12,7 @@ const Review = () => {
 
   const handleKeyup = e => {
     if (e.key === 'Enter' && reviewText !== '') {
-      handleText(e);
-      setReviewList([...reviewList, reviewText]);
+      setReviewList(reviewList => [...reviewList, reviewText]);
       setReviewText('');
     }
   };
