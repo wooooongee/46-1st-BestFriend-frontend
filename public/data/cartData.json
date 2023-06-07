@@ -22,5 +22,21 @@
     "name": "몬스테라",
     "quantity": 4,
     "price": 10000
+  },
+  {
+    "id": 4,
+    "image_url": "/images/ProductDetail/plant-21.jpg",
+    "image_alt": "plant-21",
+    "name": "몬스테라",
+    "quantity": 4,
+    "price": 10000
+  },
+  {
+    "id": 5,
+    "image_url": "/images/ProductDetail/plant-21.jpg",
+    "image_alt": "plant-21",
+    "name": "몬스테라",
+    "quantity": 4,
+    "price": 10000
   }
 ]

@@ -1,9 +1,11 @@
 import React from 'react';
 import { APIS } from '../../../config';
+import { useNavigate } from 'react-router-dom';
 import './WishlistBox.scss';
 
-const WishlistBox = ({ product, getWishlist }) => {
+const WishlistBox = ({ product, getWishlist, path }) => {
   const { image_url, name, price } = product;
+  const navigate = useNavigate();
 
   const handleDeleteBtn = () => {
     fetch(`${APIS.likes}`, {
@@ -18,13 +20,17 @@ const WishlistBox = ({ product, getWishlist }) => {
     }).then(res => {
       if (res.ok) {
         getWishlist();
-      } else throw new Error('통신실패!');
+      }
     });
   };
-
   return (
     <div className="wishlist-box">
-      <button className="img-box">
+      <button
+        className="img-box"
+        onClick={() => {
+          navigate(`/product/${path}`);
+        }}
+      >
         <img src={image_url} alt="product-img" className="img" />
       </button>
       <div className="content">
