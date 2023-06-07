@@ -51,7 +51,6 @@ const Wishlist = () => {
         setWish(data.list);
       });
   }, [subCategoryId, productsId]);
-  console.log(wish);
 
   return (
     <main className="wishlist">
@@ -65,7 +64,8 @@ const Wishlist = () => {
             </div>
           </div>
         )}
-        {/* {productList.map(product => {
+        {/* ToDo : 추후 mock data 통신 
+        {productList.map(product => {
           return <WishlistBox key={product.id} product={product} />;
         })} */}
         {wishlist.map(product => {
