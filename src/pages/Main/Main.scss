@@ -64,14 +64,49 @@
       transition: 0.8s ease-in-out;
     }
   }
+
+  .interior-image-container {
+    overflow: hidden;
+  }
+
+  .interior-image-flex {
+    display: flex;
+    width: 1400vw;
+    transition: all 1s;
+  }
+
+  .interior-image-box {
+    position: relative;
+    width: 100vw;
+  }
+
   .main-interior-image {
-    width: 100%;
+    width: 93.5%;
     aspect-ratio: 2/1;
     object-fit: cover;
-    &:hover {
-      cursor: pointer;
-      filter: brightness(70%);
-    }
+  }
+
+  .interior-left-btn {
+    position: absolute;
+    top: 45%;
+    width: 50px;
+    height: 50px;
+    border: none;
+    background-color: transparent;
+  }
+
+  .interior-right-btn {
+    position: absolute;
+    top: 45%;
+    right: 100px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    background-color: transparent;
+  }
+
+  .arrow-box {
+    width: 50%;
   }
 
   .pot-cards {
