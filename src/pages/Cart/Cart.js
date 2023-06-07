@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AiFillWarning } from 'react-icons/ai';
 import CartBox from './component/CartBox';
 import { APIS } from '../../config';
 import './Cart.scss';
@@ -60,6 +61,14 @@ const Cart = () => {
               />
             );
           })} */}
+          {cartList.length === 0 && (
+            <div className="cart-warning">
+              <div>
+                <AiFillWarning className="warning-icon" />
+                <p>장바구니가 비어 있습니다.</p>
+              </div>
+            </div>
+          )}
           {cartList.map(product => {
             return (
               <CartBox

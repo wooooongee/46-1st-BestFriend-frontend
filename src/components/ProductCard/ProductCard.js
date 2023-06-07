@@ -1,16 +1,24 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ProductCard.scss';
 
-const ProductCard = () => {
+const ProductCard = ({ name, price, image_url, path }) => {
+  const navigate = useNavigate();
   return (
     <div className="product-card">
       <img
         className="product-image"
-        src="https://github.com/pmpaca/test/blob/main/plant-15.jpg?raw=true"
-        alt="product-image"
+        src={image_url}
+        alt={name}
+        onClick={() => navigate(`/product/${path}`)}
       />
-      <div className="product-name">쉬베리아나</div>
-      <div className="product-price">10,000원</div>
+      <div
+        className="product-name"
+        onClick={() => navigate(`/product/${path}`)}
+      >
+        {name}
+      </div>
+      <div className="product-price">{price}원</div>
     </div>
   );
 };
