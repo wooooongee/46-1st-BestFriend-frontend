@@ -11,14 +11,18 @@ const Review = ({ productsId, token }) => {
     setReviewText(e.target.value);
   };
 
-  // // Review GET
-  useEffect(() => {
+  // Review GET
+  const getReview = () => {
     fetch(`${APIS.reviews}/${productsId}`)
       .then(res => res.json())
       .then(data => {
         setReviewList(data.Review);
       });
-  }, [productsId]);
+  };
+
+  useEffect(() => {
+    getReview();
+  }, []);
 
   // Review POST
   const handleReviewPost = e => {
@@ -35,23 +39,21 @@ const Review = ({ productsId, token }) => {
     })
       .then(res => res.json())
       .then(data => {
-        setReviewList(prev => [...prev, reviewText]);
+        getReview();
         setReviewText('');
-        window.location.reload();
       });
   };
 
   // Review DELETE
-  const handleReviewDelete = () => {
-    fetch(`${APIS.reviews}/${reviewList.id}`, {
+  const handleReviewDelete = id => {
+    if (!window.confirm('댓글을 삭제하시겠습니까?')) return;
+    fetch(`${APIS.reviews}/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: token,
       },
-    })
-      .then(res => res.json())
-      .then(window.location.reload());
+    }).then(res => getReview());
   };
 
   return (
@@ -72,24 +74,12 @@ const Review = ({ productsId, token }) => {
       {isToggleOn && (
         <div className="reviews-container">
           {reviewList.map(({ id, name, created_at, comment }) => {
-            const convertedTime = Date(created_at * 1000).toLocaleString(
-              'en-US',
-              {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false,
-              }
-            );
-
+            const convertedTime = Date(created_at);
             const [weekday, month, day, year, timePart, timezone] =
               convertedTime.split(' ');
             const [hour, minute] = timePart.split(':');
 
-            const formattedTime = `${month} ${day} ${year}, ${hour}:${minute}`;
+            const formattedTime = `${month} ${day} ${year} ${hour}:${minute}`;
 
             return (
               <div className="review-posted" key={id}>
@@ -98,7 +88,7 @@ const Review = ({ productsId, token }) => {
                     <div className="username">{name}</div>
                     <div className="timestamp">{formattedTime}</div>
                   </div>
-                  <div className="trash" onClick={handleReviewDelete}>
+                  <div className="trash" onClick={() => handleReviewDelete(id)}>
                     삭제
                   </div>
                 </div>
