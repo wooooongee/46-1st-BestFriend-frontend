@@ -17,28 +17,31 @@ const Nav = () => {
   return (
     <div className="nav">
       <nav className="navbar">
-        <img
-          className="logo"
-          src="/images/Nav/gron-logo.png"
-          alt="gron-logo"
-          onClick={() => navigate('/')}
-        />
-        <ul className="menus">
-          {NAV_MENU.map(({ title }) => {
-            return (
-              <li
-                className="menu"
-                key={title}
-                onMouseOver={() => {
-                  setIsMenuOpen(true);
-                }}
-              >
-                {title}
-              </li>
-            );
-          })}
-          {isMenuOpen && <Dropdown setIsMenuOpen={setIsMenuOpen} />}
-        </ul>
+        <div className="nav-left">
+          <img
+            className="logo"
+            src="/images/Nav/gron-logo.png"
+            alt="gron-logo"
+            onClick={() => navigate('/')}
+          />
+          <ul className="menus">
+            {NAV_MENU.map(({ title }) => {
+              return (
+                <li
+                  className="menu"
+                  key={title}
+                  onMouseOver={() => {
+                    setIsMenuOpen(true);
+                  }}
+                >
+                  {title}
+                </li>
+              );
+            })}
+            {isMenuOpen && <Dropdown setIsMenuOpen={setIsMenuOpen} />}
+          </ul>
+        </div>
+
         <Search />
         <div className="icons">
           <img

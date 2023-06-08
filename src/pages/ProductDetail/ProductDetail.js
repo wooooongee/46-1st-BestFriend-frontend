@@ -133,10 +133,12 @@ const ProductDetail = () => {
           <img src={image_url} alt="product-img" className="img" />
         </figure>
         <section className="product-content">
-          <p className="p-tag">{sub_category_name}</p>
+          <p className="p-tag hashtag">#{sub_category_name}</p>
           <h1 className="title">{name}</h1>
-          <p className="p-tag">{Number(price).toLocaleString('en')}원</p>
-          <p className="p-tag">{description}</p>
+          <p className="p-tag product-price">
+            {Number(price).toLocaleString('en')}원
+          </p>
+          <p className="p-tag description">{description}</p>
           <div className="count-container">
             <button className="btn" onClick={handleButtonMinus}>
               <img
@@ -186,7 +188,7 @@ const ProductDetail = () => {
               <Recommend
                 key={product.id}
                 product={product}
-                path={`${product.id}?subCategoryId=${subCategoryId}&offset=${product.id}&limit=3`}
+                path={`${product.id}?subCategoryId=${subCategoryId}&offset=2&limit=3`}
               />
             );
           })}

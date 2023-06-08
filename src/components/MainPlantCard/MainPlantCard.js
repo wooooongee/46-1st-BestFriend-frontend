@@ -10,9 +10,7 @@ const MainPlantCard = ({ id, image_url, subCategoryId }) => {
       <div
         className="card-cta-primary"
         onClick={() =>
-          navigate(
-            `product/${id}?subCategoryId=${subCategoryId}&offset=${id}&limit=3`
-          )
+          navigate(`/product/${id}?subCategoryId=1&offset=1&limit=3`)
         }
       >
         더 알아보기

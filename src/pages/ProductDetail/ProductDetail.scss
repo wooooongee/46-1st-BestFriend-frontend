@@ -16,27 +16,43 @@
   }
 
   .p-tag {
-    margin-bottom: 70px;
+    margin-bottom: 80px;
+  }
+
+  .product-price {
+    margin-bottom: 120px;
   }
 
   .product-content {
     width: 40%;
     margin-top: 20px;
 
+    .hashtag {
+      @include textStyle(18px, 400);
+      color: rgb(189, 189, 189);
+    }
+
     .count-container {
       display: flex;
+      gap: 8px;
       align-items: center;
       margin-top: 110px;
     }
 
     .title {
-      margin: 100px 0 40px 0;
-      font-size: 30px;
+      @include textStyle(34px, 500);
+      margin: 100px 0 30px 0;
+    }
+
+    .description {
+      @include textStyle(18px, 400);
+      line-height: 25px;
     }
 
     .btn {
-      width: 35px;
-      height: 35px;
+      @include flexCenter;
+      width: 25px;
+      height: 25px;
       border: none;
       border-radius: 50%;
 
@@ -47,7 +63,7 @@
 
     .count-box {
       @include flexCenter;
-      width: 100px;
+      width: 80px;
       height: 50px;
       margin: 0 5px;
       border: 1px solid #e3e3e3;
@@ -58,19 +74,22 @@
     .cart-btn {
       @include flexCenter;
       width: 100%;
-      margin: 40px auto;
+      margin: 40px 0 20px 0;
       padding: 35px;
-      border: none;
+      border: 1px solid $primary-color;
       border-radius: 40px;
       background-color: $primary-color;
       color: $secondary-color;
       font-size: 20px;
+
+      &:hover {
+        background-color: rgb(107, 107, 107);
+      }
     }
 
     .wishlist-btn {
       @include flexCenter;
       width: 100%;
-      margin-top: 20px;
       padding: 35px;
       border: 1px solid #e3e3e3;
       border-radius: 40px;

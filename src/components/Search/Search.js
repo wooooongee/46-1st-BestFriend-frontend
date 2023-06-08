@@ -13,7 +13,9 @@ const Search = () => {
   const handleKeyUp = e => {
     if (query !== '' && e.key === 'Enter') {
       handleInput(e);
-      navigate(`/list?search=${query}`);
+      navigate(
+        `/list?subCategoryId=1&subCategoryId=2&subCategoryId=3&subCategoryId=4&search=${query}`
+      );
       setQuery('');
     }
   };

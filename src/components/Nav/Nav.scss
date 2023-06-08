@@ -11,6 +11,11 @@
     height: 60px;
     padding: 0 50px;
 
+    .nav-left {
+      display: flex;
+      width: 635px;
+    }
+
     .logo {
       height: 30px;
       &:hover {
@@ -39,6 +44,9 @@
         height: 25px;
         &:hover {
           cursor: pointer;
+          &:last-child {
+            cursor: default;
+          }
         }
       }
     }

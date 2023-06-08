@@ -15,8 +15,8 @@ const CheckoutList = ({ productList }) => {
             <span className="order-list-name">{list.name}</span>
             <span className="order-list-count">수량 : {list.quantity}개</span>
             <span className="order-list-totalprices">
-              총 가격 :{(parseInt(list.price) * list.quantity).toLocaleString()}
-              원
+              총 가격 :{' '}
+              {(parseInt(list.price) * list.quantity).toLocaleString()}원
             </span>
           </div>
         </li>

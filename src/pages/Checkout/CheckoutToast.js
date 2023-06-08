@@ -5,7 +5,7 @@ const CheckoutToast = ({ setIsToastOpen }) => {
   useEffect(() => {
     let timer = setTimeout(() => {
       closeToast();
-    }, 3000);
+    }, 500);
     return () => {
       clearTimeout(timer);
     };

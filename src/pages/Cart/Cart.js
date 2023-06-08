@@ -27,6 +27,15 @@ const Cart = () => {
       });
   };
 
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setIsAlertOpen(false);
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    };
+  });
+
   // 차후 mock data 통신
   // useEffect(() => {
   //   fetch('/data/cartData.json')
@@ -100,7 +109,7 @@ const Cart = () => {
             </div>
           </div>
           <button
-            className="btn"
+            className="btn order-btn"
             onClick={() => {
               cartList.length === 0
                 ? setIsAlertOpen(true)
@@ -109,19 +118,9 @@ const Cart = () => {
           >
             주문하기
           </button>
-          {isAlertOpen && (
-            <div className="alert-box">
-              <p>장바구니가 비어있습니다.</p>
-              <button
-                className="alert-btn"
-                onClick={() => {
-                  setIsAlertOpen(false);
-                }}
-              >
-                X
-              </button>
-            </div>
-          )}
+          <div className={isAlertOpen ? 'alert-box' : 'alert-box hidden-alert'}>
+            <p>상품을 먼저 담아주세요.</p>
+          </div>
         </aside>
       </div>
     </div>

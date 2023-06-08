@@ -27,7 +27,7 @@ const Login = () => {
       return;
     }
 
-    fetch(`${APIS.users}`, {
+    fetch(`${APIS.users}/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -57,6 +57,9 @@ const Login = () => {
         className="gron-logo"
         src="/images/Login/gron-logo.png"
         alt="gronLogo"
+        onClick={() => {
+          navigate('/');
+        }}
       />
       <input
         type="email"

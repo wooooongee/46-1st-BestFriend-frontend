@@ -54,8 +54,7 @@ const Review = ({ productsId, token }) => {
     }).then(res => {
       if (res.ok) {
         getReview();
-      }
-      throw new Error('에러 발생');
+      } else throw new Error('에러 발생');
     });
   };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CheckoutList from './CheckoutList';
 import CheckoutModal from './CheckoutModal';
 import CheckoutToast from './CheckoutToast';
+import { APIS } from '../../config';
 import './Checkout.scss';
 
 const Checkout = () => {
@@ -27,7 +28,7 @@ const Checkout = () => {
     0
   );
   useEffect(() => {
-    fetch('http://10.58.52.248:8000/users/order', {
+    fetch(`${APIS.users}/order`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +44,7 @@ const Checkout = () => {
       setIsToastOpen(true);
       return;
     }
-    fetch('http://10.58.52.248:8000/orders', {
+    fetch(`${APIS.orders}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -64,7 +65,7 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.248:8000/carts', {
+    fetch(`${APIS.carts}`, {
       method: 'GET',
       headers: { Authorization: localStorage.getItem('token') },
     })
@@ -82,49 +83,50 @@ const Checkout = () => {
     <>
       <main className="checkout">
         <article className="article-checkout">
-          <h1 className="checkout-article-h1">결제 하기</h1>
+          <h1 className="checkout-article-h1">결제하기</h1>
           <section className="section-delivery-infomation">
-            <h2 className="user-information-h2">배송 정보</h2>
+            <h2 className="user-information-h2">배송정보</h2>
             <div className="user-information-values">
-              <span className="user-name-value">{name}</span>
-              <span className="user-address-value">{address}</span>
+              <span className="user-name-value">주문자 : {name}</span>
+              <span className="user-address-value">주소 : {address}</span>
               <span className="user-phone-value">
+                연락처 :{' '}
                 {phone.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)}
               </span>
             </div>
           </section>
           <section className="section-payment-point">
-            <h2 className="totalSum-point-h2">포인트로 결제하기</h2>
-            <div className="totalSum-point-value">
-              잔여 포인트 :
-              <span className="totalSum-point-span">
-                {parseInt(point).toLocaleString()} 원
+            <h2 className="totalsum-point-h2">포인트로 결제하기</h2>
+            <div className="totalsum-point-value">
+              잔여 포인트 :{' '}
+              <span className="totalsum-point-span">
+                {parseInt(point).toLocaleString()}원
               </span>
             </div>
           </section>
           <section className="section-order-list">
-            <h2 className="order-list-h2">주문 내역</h2>
+            <h2 className="order-list-h2">주문내역</h2>
             <ul className="order-list-ul">
               <CheckoutList productList={productList} />
             </ul>
           </section>
         </article>
         <aside className="aside-checkout">
-          <h2 className="checkout-h2">결제 금액</h2>
+          <h2 className="checkout-h2">결제금액</h2>
           <div className="product-price">
-            상품 금액 <span>{postPrice.toLocaleString()} 원</span>
+            상품금액 <span>{postPrice.toLocaleString()} 원</span>
           </div>
           <div className="delivery-fees">
             배송비 <span className="delivery-fees-value">무료</span>
           </div>
           <div className="total-price">
-            총 결제 금액
+            총 결제금액
             <span className="total-price-value">
               {postPrice.toLocaleString()} 원
             </span>
           </div>
           <button className="checkout-btn" onClick={handleCheckOut}>
-            결제 하기
+            결제하기
           </button>
           {isToastOpen && (
             <CheckoutToast

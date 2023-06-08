@@ -19,7 +19,9 @@ const ProductCard = ({ name, price, image_url, path }) => {
       >
         {name}
       </div>
-      <div className="product-price">{price}원</div>
+      <div className="product-price">
+        {Number(price).toLocaleString('en')}원
+      </div>
     </div>
   );
 };
