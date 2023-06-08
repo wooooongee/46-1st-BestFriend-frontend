@@ -1,4 +1,5 @@
 import React from 'react';
+import { APIS } from '../../../config';
 import { useNavigate } from 'react-router-dom';
 import './WishlistBox.scss';
 
@@ -7,7 +8,7 @@ const WishlistBox = ({ product, getWishlist, path }) => {
   const navigate = useNavigate();
 
   const handleDeleteBtn = () => {
-    fetch('http://10.58.52.248:8000/likes', {
+    fetch(`${APIS.likes}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

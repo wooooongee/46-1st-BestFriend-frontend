@@ -37,7 +37,7 @@ const Sort = () => {
                 key={id}
                 className="sort-option"
                 onClick={() => {
-                  sortPage({ sort });
+                  sortPage(sort);
                 }}
               >
                 {title}

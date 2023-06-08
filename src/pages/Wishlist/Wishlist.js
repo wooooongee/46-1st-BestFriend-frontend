@@ -3,6 +3,7 @@ import { AiFillWarning } from 'react-icons/ai';
 import { useParams, useSearchParams } from 'react-router-dom';
 import WishlistBox from './component/WishlistBox';
 import './Wishlist.scss';
+import { APIS } from '../../config';
 
 const Wishlist = () => {
   const [productList, setProductList] = useState([]);
@@ -22,7 +23,7 @@ const Wishlist = () => {
   }, []);
 
   const getWishlist = () => {
-    fetch('http://10.58.52.248:8000/likes', {
+    fetch(`${APIS.likes}`, {
       headers: {
         Authorization: localStorage.getItem('token'),
       },

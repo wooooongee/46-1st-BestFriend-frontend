@@ -21,7 +21,7 @@ const CartBox = ({ product, getCart }) => {
     }).then(res => {
       if (res.ok) {
         getCart();
-      }
+      } else throw new Error('통신실패!');
     });
   };
 
@@ -38,7 +38,7 @@ const CartBox = ({ product, getCart }) => {
     }).then(res => {
       if (res.ok) {
         getCart();
-      }
+      } else throw new Error('통신실패!');
     });
   };
 

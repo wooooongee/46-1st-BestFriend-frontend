@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { APIS } from '../../config';
 import Toast from '../../components/Toast/Toast';
 import './Login.scss';
 
@@ -26,7 +27,7 @@ const Login = () => {
       return;
     }
 
-    fetch('http://10.58.52.248:8000/users/signin', {
+    fetch(`${APIS.users}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

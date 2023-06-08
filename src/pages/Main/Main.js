@@ -66,7 +66,11 @@ const Main = () => {
         />
         <div
           className="message-cta"
-          onClick={() => navigate(`list?category=1,2,3,4`)}
+          onClick={() =>
+            navigate(
+              `list?subCategoryId=1&subCategoryId=2&subCategoryId=3&subCategoryId=4`
+            )
+          }
         >
           식물 살펴보기
         </div>
@@ -91,8 +95,15 @@ const Main = () => {
             className="plant-cards"
             style={{ transform: `translateX(${scroll}vw)` }}
           >
-            {PLANT_CARD.map(({ id, image_url }) => {
-              return <MainPlantCard key={id} id={id} image_url={image_url} />;
+            {PLANT_CARD.map(({ id, image_url, subCategoryId }) => {
+              return (
+                <MainPlantCard
+                  key={id}
+                  id={id}
+                  image_url={image_url}
+                  subCategoryId={subCategoryId}
+                />
+              );
             })}
           </div>
         </div>
