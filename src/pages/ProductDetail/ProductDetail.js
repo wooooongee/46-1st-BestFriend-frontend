@@ -173,7 +173,7 @@ const ProductDetail = () => {
           </button>
         </section>
       </main>
-      <Review />
+      <Review productsId={productsId} token={token} />
       <section className="product-recommend">
         <p>이런 식물은 어때요?</p>
         <div className="recommend-container">
