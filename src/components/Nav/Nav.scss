@@ -11,6 +11,11 @@
     height: 60px;
     padding: 0 50px;
 
+    .nav-left {
+      display: flex;
+      width: 635px;
+    }
+
     .logo {
       height: 30px;
       &:hover {

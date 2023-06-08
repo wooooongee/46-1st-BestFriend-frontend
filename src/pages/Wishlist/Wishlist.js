@@ -44,7 +44,7 @@ const Wishlist = () => {
 
   useEffect(() => {
     fetch(
-      `http://10.58.52.248:8000/products?subCategoryId=${subCategoryId}&limit=3&offset=${productsId}`,
+      `${APIS.products}?subCategoryId=${subCategoryId}&limit=3&offset=${productsId}`,
       { headers: { Authorization: localStorage.getItem('token') } }
     )
       .then(res => res.json())

@@ -52,10 +52,11 @@ const Review = ({ productsId, token }) => {
         Authorization: token,
       },
     }).then(res => {
-    if (res.ok) {
-      getReview();
-    } throw new Error('에러 발생')
-  });
+      if (res.ok) {
+        getReview();
+      } else throw new Error('에러 발생');
+    });
+  };
 
   useEffect(() => {
     getReview();

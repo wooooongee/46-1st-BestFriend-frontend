@@ -69,15 +69,18 @@ export const POT_CARD = [
     id: 62,
     image_url:
       'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%ED%99%94%EB%B6%84(10)/pot-62.jpg?raw=true',
+    subCategoryId: 5,
   },
   {
     id: 65,
     image_url:
       'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%ED%99%94%EB%B6%84(10)/pot-65.jpg?raw=true',
+    subCategoryId: 6,
   },
   {
     id: 68,
     image_url:
       'https://github.com/HaeJungg/project-image/blob/master/Image%20-%20%ED%99%94%EB%B6%84(10)/pot-68.jpg?raw=true',
+    subCategoryId: 6,
   },
 ];

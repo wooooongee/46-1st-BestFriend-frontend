@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CheckoutList from './CheckoutList';
 import CheckoutModal from './CheckoutModal';
 import CheckoutToast from './CheckoutToast';
+import { APIS } from '../../config';
 import './Checkout.scss';
 
 const Checkout = () => {
@@ -27,7 +28,7 @@ const Checkout = () => {
     0
   );
   useEffect(() => {
-    fetch('http://10.58.52.248:8000/users/order', {
+    fetch(`${APIS.users}/order`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +44,7 @@ const Checkout = () => {
       setIsToastOpen(true);
       return;
     }
-    fetch('http://10.58.52.248:8000/orders', {
+    fetch(`${APIS.orders}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -64,7 +65,7 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.248:8000/carts', {
+    fetch(`${APIS.carts}`, {
       method: 'GET',
       headers: { Authorization: localStorage.getItem('token') },
     })

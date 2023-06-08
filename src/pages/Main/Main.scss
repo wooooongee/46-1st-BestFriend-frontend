@@ -60,12 +60,14 @@
 
     .plant-cards {
       display: flex;
-      gap: 20px;
+      width: 130vw;
       transition: 0.8s ease-in-out;
+      gap: 20px;
     }
   }
 
   .interior-image-container {
+    position: relative;
     overflow: hidden;
   }
 
@@ -76,37 +78,51 @@
   }
 
   .interior-image-box {
-    position: relative;
     width: 100vw;
   }
 
   .main-interior-image {
-    width: 93.5%;
+    width: 100%;
     aspect-ratio: 2/1;
     object-fit: cover;
   }
 
   .interior-left-btn {
+    @include flexCenter;
     position: absolute;
+    z-index: 10;
     top: 45%;
+    left: 10px;
     width: 50px;
     height: 50px;
     border: none;
-    background-color: transparent;
+    background-color: $secondary-color;
+
+    &:hover {
+      transition: 0.4s ease-in-out;
+      background-color: rgb(163, 161, 161);
+    }
   }
 
   .interior-right-btn {
+    @include flexCenter;
     position: absolute;
+    z-index: 10;
     top: 45%;
-    right: 100px;
+    right: 10px;
     width: 50px;
     height: 50px;
     border: none;
-    background-color: transparent;
+    background-color: $secondary-color;
+
+    &:hover {
+      transition: 0.4s ease-in-out;
+      background-color: rgb(163, 161, 161);
+    }
   }
 
   .arrow-box {
-    width: 50%;
+    width: 30%;
   }
 
   .pot-cards {

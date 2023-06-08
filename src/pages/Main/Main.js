@@ -8,6 +8,7 @@ import {
   PLANT_CARD,
   POT_CARD,
 } from '../../components/MainContent/MainContent';
+import { APIS } from '../../config';
 import './Main.scss';
 
 const Main = () => {
@@ -18,10 +19,10 @@ const Main = () => {
   const slideRef = useRef(null);
 
   const handleRight = () => {
-    scroll === -85 ? setScroll(-85) : setScroll(prev => prev - 17);
+    scroll === -40 ? setScroll(-40) : setScroll(prev => prev - 20);
   };
   const handleLeft = () => {
-    scroll === 0 ? setScroll(0) : setScroll(prev => prev + 17);
+    scroll === 0 ? setScroll(0) : setScroll(prev => prev + 20);
   };
 
   const carouselLeft = e => {
@@ -41,7 +42,7 @@ const Main = () => {
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.248:8000/galleries')
+    fetch(`${APIS.galleries}`)
       .then(res => res.json())
       .then(data => setGalleriesData(data.galleries));
   }, []);
@@ -115,6 +116,30 @@ const Main = () => {
         />
       </section>
       <section className="interior-image-container">
+        <button
+          className="interior-left-btn"
+          onClick={e => {
+            carouselLeft(e);
+          }}
+        >
+          <img
+            className="arrow-box"
+            src="./images/Main/arrow-left.png"
+            alt="arrow-img"
+          />
+        </button>
+        <button
+          className="interior-right-btn"
+          onClick={e => {
+            carouselRight(e);
+          }}
+        >
+          <img
+            className="arrow-box"
+            src="./images/Main/arrow-right.png"
+            alt="arrow-img"
+          />
+        </button>
         <div className="interior-image-flex" ref={slideRef}>
           {galleriesData.map((image, i) => {
             return (
