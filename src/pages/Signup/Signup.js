@@ -60,13 +60,13 @@ const Signup = () => {
           .then(res => res.json())
           .then(data => {
             if (data.message === 'user is created') {
-              alert('성공');
+              alert('회원가입이 완료되었습니다.');
               navigate('/login');
             } else {
-              alert('실패');
+              alert('통신 실패');
             }
           })
-      : alert('올바르게 입력하지 않은 칸이 있어요');
+      : alert('올바르게 입력하지 않은 칸이 있어요.');
   };
 
   const onChange = e => {
