@@ -2,6 +2,7 @@
 
 .toast {
   @include flexCenter;
+  @include textStyle(15, 400);
   position: absolute;
   top: 460px;
   width: 470px;
