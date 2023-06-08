@@ -1,15 +1,23 @@
+import { useNavigate } from 'react-router-dom';
 import './Recommend.scss';
 
-const Recommend = ({ product }) => {
-  const { id, img_url, img_alt, detail_img_url, name, price } = product;
+const Recommend = ({ product, path }) => {
+  const { id, image_url, name, price } = product;
+  const navigate = useNavigate();
   return (
     <div className="recommend" key={id}>
-      <button className="img-box">
-        <img src={img_url} alt={img_alt} className="img" />
-        <img src={detail_img_url} alt={img_alt} className="img hidden" />
+      <button
+        className="img-box"
+        onClick={() => {
+          navigate(`/product/${path}`);
+        }}
+      >
+        <img src={image_url} alt="" className="img" />
+        {/* ToDo : 추후 hover시 디테일 이미지 추가 
+        <img src="" alt="" className="img hidden" /> */}
       </button>
       <p className="title">{name}</p>
-      <p>{price}</p>
+      <p>{Number(price).toLocaleString('en')}원</p>
     </div>
   );
 };

@@ -1,19 +1,45 @@
 import React from 'react';
+import { APIS } from '../../../config';
+import { useNavigate } from 'react-router-dom';
 import './WishlistBox.scss';
 
-const WishlistBox = ({ product }) => {
+const WishlistBox = ({ product, getWishlist, path }) => {
+  const { image_url, name, price } = product;
+  const navigate = useNavigate();
+
+  const handleDeleteBtn = () => {
+    fetch(`${APIS.likes}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        productId: product.id,
+      }),
+    }).then(res => {
+      if (res.ok) {
+        getWishlist();
+      }
+    });
+  };
   return (
     <div className="wishlist-box">
-      <button className="img-box">
-        <img src={product.image_url} alt="product-img" className="img" />
+      <button
+        className="img-box"
+        onClick={() => {
+          navigate(`/product/${path}`);
+        }}
+      >
+        <img src={image_url} alt="product-img" className="img" />
       </button>
       <div className="content">
-        <p className="name">{product.name}</p>
-        <button className="btn" onClick={() => {}}>
+        <p className="name">{name}</p>
+        <button className="btn" onClick={handleDeleteBtn}>
           삭제
         </button>
       </div>
-      <p className="price">{Number(product.price).toLocaleString('en')}원</p>
+      <p className="price">{Number(price).toLocaleString('en')}원</p>
     </div>
   );
 };

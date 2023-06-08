@@ -1,0 +1,44 @@
+@import '../../styles/mixin';
+@import '../../styles/variables';
+
+.sort {
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  .sort-btn {
+    @include textStyle(17px, 500);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    &:hover {
+      cursor: pointer;
+    }
+    .sort-icon {
+      height: 17px;
+      margin-left: 7px;
+    }
+  }
+
+  .sort-options {
+    display: flex;
+    position: absolute;
+    top: 30px;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid $primary-color;
+    border-radius: 20px;
+    background-color: $secondary-color;
+    gap: 15px;
+
+    .sort-option {
+      @include textStyle(16px, 400);
+      color: #585858;
+      &:hover {
+        @include textStyle(16px, 500);
+        color: $primary-color;
+        cursor: pointer;
+      }
+    }
+  }
+}

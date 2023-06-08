@@ -4,14 +4,18 @@
   @include textStyle(20px, 500);
   padding: 40px;
 
+  .recommend {
+    width: 33%;
+    margin-right: 10px;
+
+    .title {
+      margin: 10px 0;
+    }
+  }
+
   .img-box {
-    position: relative;
     padding: 0;
     border: none;
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 
   .img {
@@ -21,25 +25,12 @@
   .hidden {
     position: absolute;
     left: 0;
+    transition: all 0.8s;
     opacity: 0;
 
     &:hover {
-      transition: all 1s;
+      transition: all 0.8s;
       opacity: 1;
-    }
-  }
-
-  .recommend-container {
-    display: flex;
-    margin-top: 20px;
-
-    .recommend {
-      width: 30%;
-      margin-right: 60px;
-
-      .title {
-        margin: 10px 0;
-      }
     }
   }
 }

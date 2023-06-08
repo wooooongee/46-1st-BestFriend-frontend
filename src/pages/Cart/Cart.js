@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AiFillWarning } from 'react-icons/ai';
+import { APIS } from '../../config';
 import CartBox from './component/CartBox';
 import './Cart.scss';
 
@@ -10,7 +12,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const getCart = () => {
-    fetch('http://10.58.52.227:8000/carts', {
+    fetch(`${APIS.carts}`, {
       method: 'GET',
       headers: { Authorization: localStorage.getItem('token') },
     })
@@ -22,17 +24,17 @@ const Cart = () => {
       })
       .then(data => {
         setCartList(data.carts);
-      })
-      .catch(error => console.log(error));
+      });
   };
 
-  useEffect(() => {
-    fetch('/data/cartData.json')
-      .then(res => res.json())
-      .then(data => {
-        setProductList(data);
-      });
-  }, []);
+  // 차후 mock data 통신
+  // useEffect(() => {
+  //   fetch('/data/cartData.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setProductList(data);
+  //     });
+  // }, []);
 
   useEffect(() => {
     getCart();
@@ -59,6 +61,14 @@ const Cart = () => {
               />
             );
           })} */}
+          {cartList.length === 0 && (
+            <div className="cart-warning">
+              <div>
+                <AiFillWarning className="warning-icon" />
+                <p>장바구니가 비어 있습니다.</p>
+              </div>
+            </div>
+          )}
           {cartList.map(product => {
             return (
               <CartBox

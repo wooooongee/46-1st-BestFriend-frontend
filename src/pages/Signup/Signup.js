@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Signup.scss';
+import { APIS } from '../../config';
 
 const Signup = () => {
   const [inputs, setInputs] = useState({
@@ -49,7 +50,7 @@ const Signup = () => {
 
   const handleSignupBtn = () => {
     Object.values(userInfoValid).every(allTrue)
-      ? fetch('http://10.58.52.117:3000/users/signup', {
+      ? fetch(`${APIS.users}/signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

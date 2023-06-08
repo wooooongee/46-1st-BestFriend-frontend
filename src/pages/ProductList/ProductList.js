@@ -1,55 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { LIST_LIMIT } from '../../constants';
+import { APIS } from '../../config';
+import Category from '../../components/Category/Category';
+import Filter from '../../components/Filter/Filter';
+import Sort from '../../components/Sort/Sort';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { PLANTS_SUBCATEGORY } from '../../components/Subcategory/Subcategory';
-
+import Pagination from '../../components/Pagination/Pagination';
 import './ProductList.scss';
 
 const ProductList = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const subCategoryId = searchParams.getAll('subCategoryId');
+  const [card, setCard] = useState([]);
+
+  useEffect(() => {
+    fetch(`${APIS.products}?${searchParams.toString()}`)
+      .then(res => res.json())
+      .then(data => setCard(data));
+  }, [searchParams]);
+
+  if (!card.total_count) return null;
+
   return (
     <div className="product-list">
       <aside className="side-menu">
-        <h1 className="category-title">식물</h1>
-        <ul className="subcategories">
-          {PLANTS_SUBCATEGORY.map(sub => {
-            return (
-              <li className="subcategory" key={sub.id}>
-                {sub.name}
-              </li>
-            );
-          })}
-        </ul>
-        <h2 className="filter-title">필터</h2>
-        <ul className="filters">
-          {PLANTS_FILTER.map(filter => {
-            return (
-              <li className="filter" key={filter.id}>
-                <input className="filter-checkbox" type="checkbox" />
-                {filter.filterName}
-              </li>
-            );
-          })}
-        </ul>
+        <Category />
+        {subCategoryId.every(item => parseInt(item) <= 4) && <Filter />}
       </aside>
       <main className="main-product-list">
-        <div className="sorting">
-          <h2 className="sorting-btn">정렬 기준</h2>
-        </div>
+        <Sort />
         <div className="product-cards">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {card.list.map(({ id, sub_category_id, name, price, image_url }) => {
+            return (
+              <ProductCard
+                key={id}
+                path={`${id}?subCategoryId=${sub_category_id}&offset=${id}&limit=3`}
+                name={name}
+                price={price}
+                image_url={image_url}
+              />
+            );
+          })}
         </div>
+        {card.total_count > 9 && (
+          <Pagination
+            lastNum={Math.ceil(parseInt(card.total_count) / LIST_LIMIT)}
+          />
+        )}
       </main>
     </div>
   );
 };
 
 export default ProductList;
-
-const PLANTS_FILTER = [
-  { id: '꽃', filterName: '꽃이 피는 식물' },
-  { id: '열매', filterName: '열매가 열리는 식물' },
-];
