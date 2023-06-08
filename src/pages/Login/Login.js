@@ -27,7 +27,7 @@ const Login = () => {
       return;
     }
 
-    fetch(`${APIS.users}`, {
+    fetch(`${APIS.users}/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

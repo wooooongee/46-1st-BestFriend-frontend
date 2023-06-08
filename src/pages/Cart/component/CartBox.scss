@@ -1,20 +1,22 @@
 @import '../../../styles/mixin';
-
+@import '../../../styles/variables';
 .cart-box {
   display: flex;
   padding: 25px 0 20px 0;
   border-bottom: 1px solid #dfdfdf;
 
   .cart-img {
-    width: 35%;
+    width: 200px;
     margin-right: 21px;
   }
 
-  .btn {
+  .cart-btn {
     @include textStyle(17px, 500);
+    width: 30px;
+    height: 30px;
     padding: 0;
     border: none;
-    background-color: white;
+    background-color: #e5e5e5;
   }
 
   .cart-content {
@@ -22,6 +24,10 @@
     justify-content: space-between;
     width: 100%;
     padding: 10px;
+  }
+
+  .cart-name {
+    @include textStyle(20px, 500);
   }
 
   .content {
@@ -34,10 +40,20 @@
   .count {
     display: flex;
     align-items: center;
+    gap: 4px;
+  }
+
+  .delete-btn {
+    @include textStyle(16px, 500);
+    border: none;
+    background-color: $secondary-color;
+    color: #969696;
   }
 
   .btn-box {
-    width: 20px;
+    @include flexCenter;
+    width: 25px;
+    height: 25px;
   }
 
   .content-text {
@@ -47,6 +63,10 @@
 
   .img {
     width: 100%;
+  }
+
+  .arrow-img {
+    width: 50%;
   }
 
   .total {

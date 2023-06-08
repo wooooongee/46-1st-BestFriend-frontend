@@ -10,7 +10,7 @@ const MainPotCard = ({ image_url, id, subCategoryId }) => {
       <div
         className="card-cta-secondary"
         onClick={() =>
-          navigate(`/product/${id}?subCategoryId=1&offset=1&limit=3`)
+          navigate(`/product/${id}?subCategoryId=1&offset=2&limit=3`)
         }
       >
         더 알아보기

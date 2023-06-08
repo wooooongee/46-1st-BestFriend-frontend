@@ -65,33 +65,33 @@ const CartBox = ({ product, getCart }) => {
       </div>
       <div className="cart-content">
         <div className="content">
-          <h1>{name}</h1>
+          <h1 className="cart-name">{name}</h1>
           <div className="count">
-            <button className="btn btn-box" onClick={handleCountMinus}>
+            <button className="cart-btn btn-box" onClick={handleCountMinus}>
               <img
                 src="/images/ProductDetail/arrow-down.png"
                 alt=""
-                className="img"
+                className="img arrow-img"
               />
             </button>
             <p className="content-text">수량 : {quantity}개</p>
-            <button className="btn btn-box" onClick={handleCountUp}>
+            <button className="cart-btn btn-box" onClick={handleCountUp}>
               <img
                 src="/images/ProductDetail/arrow-up.png"
                 alt=""
-                className="img"
+                className="img arrow-img"
               />
             </button>
           </div>
           <div />
-          <button className="btn" onClick={handleDelete}>
+          <button className="delete-btn" onClick={handleDelete}>
             삭제
           </button>
         </div>
         <div className="total">
           <p className="content-text">
-            총 가격:
-            {totalPrice}원
+            {`총 가격 : 
+            ${totalPrice}원`}
           </p>
         </div>
       </div>

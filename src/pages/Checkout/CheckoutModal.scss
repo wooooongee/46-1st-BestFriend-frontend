@@ -17,15 +17,17 @@
     width: 500px;
     height: 500px;
     padding: 60px;
-    border-radius: 50px;
-    background-color: $primary-color;
-    color: $secondary-color;
+    border: 2px solid $primary-color;
+    border-radius: 30px;
+    background-color: $secondary-color;
+    color: $primary-color;
 
     .modal-btn {
       width: 200px;
       height: 40px;
+      margin-top: 100px;
       margin-left: 90px;
-      border: 1px solid #dfdfdf;
+      border: none;
       border-radius: 50px;
       background-color: $primary-color;
       color: $secondary-color;
@@ -37,16 +39,23 @@
       align-items: flex-start;
 
       .checkout-info {
-        margin: 10px;
+        margin: 5px auto;
 
         &:first-child {
-          margin-bottom: 30px;
-          margin-left: 90px;
+          margin-bottom: 50px;
           font-size: 30px;
         }
 
+        &:nth-child(2) {
+          font-weight: 700;
+        }
+        &:nth-child(4) {
+          margin-top: 25px;
+          font-weight: 700;
+        }
+
         &:last-child {
-          margin: 100px 0px 0px 90px;
+          margin: 10px auto;
         }
       }
     }

@@ -65,6 +65,12 @@
       color: $secondary-color;
       font-size: 20px;
     }
+
+    .order-btn {
+      &:hover {
+        background-color: rgb(107, 107, 107);
+      }
+    }
   }
 }
 
@@ -72,10 +78,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
-  padding: 25px 0;
+  margin-top: 20px;
+  padding: 10px 0;
+  opacity: 1;
   background-color: #ffe8e8;
   color: #ff0000;
+  font-size: 15px;
   text-align: center;
 
   .alert-btn {
@@ -83,4 +91,9 @@
     background-color: #ffe8e8;
     color: #ff0000;
   }
+}
+
+.hidden-alert {
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
 }
