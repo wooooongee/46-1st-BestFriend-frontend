@@ -1,20 +1,16 @@
+@import '../../styles/mixin';
+
 .toast {
-  display: flex;
-  position: fixed;
-  right: 20px;
-  bottom: 100px;
-  align-items: center;
-  justify-content: center;
-  width: 500px;
-  height: 120px;
-  padding: 5px;
+  @include flexCenter;
+  position: absolute;
+  top: 460px;
+  width: 470px;
+  padding: 10px 0;
   animation-name: fadeout;
-  animation-duration: 3s;
-  border: 1px solid rgba(255, 68, 0, 0.1);
-  border-radius: 10px;
-  background-color: tomato;
-  color: white;
-  font-size: 1rem;
+  animation-duration: 3.1s;
+  background-color: #ffe8e8;
+  color: #ff0000;
+  font-size: 15px;
   font-weight: bold;
   text-align: center;
 
@@ -26,8 +22,4 @@
       opacity: 0;
     }
   }
-}
-
-.toast p {
-  padding: 10px;
 }

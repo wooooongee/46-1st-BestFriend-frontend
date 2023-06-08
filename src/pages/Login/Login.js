@@ -57,6 +57,9 @@ const Login = () => {
         className="gron-logo"
         src="/images/Login/gron-logo.png"
         alt="gronLogo"
+        onClick={() => {
+          navigate('/');
+        }}
       />
       <input
         type="email"

@@ -80,6 +80,9 @@ const Signup = () => {
         className="gron-logo"
         src="/images/Login/gron-logo.png"
         alt="gronLogo"
+        onClick={() => {
+          navigate('/');
+        }}
       />
       {USER_INFO_INPUTS.map(input => (
         <React.Fragment key={input.id}>
