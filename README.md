@@ -33,8 +33,20 @@
 ## ⚡️ 구현 기능
 
 1. 내비게이션 바 드롭다운 메뉴
+   ![1-1 메인 동영상 _ Nav 드롭다운](https://github.com/wecode-bootcamp-korea/46-1st-BestFriend-frontend/assets/123567359/ba0e2bec-df47-4ce3-aa32-dd405bfcec2b)
+   <p>✅ useState hook과 조건부 렌더링을 통해 내비게이션 바 각 메뉴에 onMouseOver 이벤트 발생시 Dropdown 메뉴 노출</p>
+   <p>✅ video 태그로 동영상 URL을 삽입하고 반복재생, 자동재생, 음소거 설정</p>
+   <p>✅ useState hook을 활용하여 상품 카드 캐러셀 우측 상단의 버튼을 누를 때마다 좌우로 이동</p>
+
 2. 회원가입/로그인
+   ![signup](https://github.com/wecode-bootcamp-korea/46-1st-BestFriend-frontend/assets/123567359/21243327-5971-4bd0-b34d-1ea888ab5324)
+   <p>✅ 유효성 검사 후 API 요청 분기 처리</p>
+
+   <p>로그인이 성공하면 토큰 저장 후 메인으로 이동</p>
+   <p>로그인이 실패하면 토스트 팝업으로 알림</p>
+
 3. 상품 카테고리, 필터, 정렬, 페이지네이션, 검색
+
 4. 상품 상세페이지 동적 라우팅
 5. 위시리스트, 장바구니
 6. 결제
